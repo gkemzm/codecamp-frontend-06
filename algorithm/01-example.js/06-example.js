@@ -8,9 +8,39 @@ const school = {
 	teacher: "다람이",
 }
 
-student.school = student
-
+//student.school = school 
+//둘다가능
+student["school"] = school
 console.log(student)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
