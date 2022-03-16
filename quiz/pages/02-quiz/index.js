@@ -1,6 +1,6 @@
 import {Wrapper, Title, Email, Emailerror, Name, Nameerror, Pw, Pwerror, Pwcheck, PhoneWrapper,
 PhoneInput,TokenWrapper, Token, TokenBtn, LocationWrapper, Location, Option, Locationerror,
-GenderWrapper, Gender, GenderRadio, Gendererror, Footer, SignBtn} from '../../styles/emotion'
+GenderWrapper, Gender, GenderRadio, Gendererror, Footer, SignBtn} from '../../styles/02quiz'
 import { useState } from 'react'
 
 export default function FinalPage(){
@@ -15,20 +15,32 @@ export default function FinalPage(){
     function signup(){
         if(email.includes("@") === false){
             setEmailError("이메일이 올바르지 않습니다!! @가 없음!!")
-        } else if(pw !== pwcheck){
+        } 
+        
+        if(pw !== pwcheck){
             setPwerror("비밀번호가 다릅니다.")
-        } else if(pw === ""){
+        }
+        
+        if(pw === ""){
             setPwerror("비밀번호를 입력하세요")
-        } else if(email.includes("@") && pw === pwcheck && pw !== ""){
+        }
+         if(email.includes("@") && pw === pwcheck && pw !== ""){
             alert("회원가입을 축하합니다!!!")
             setEmailError("")
             setPwerror("")
+            setEmail("")
+            setPw("")
+            setPwcheck("")
         }
     
     }
 
     function ChangeEmail(event){
         setEmail(event.target.value)
+
+        // if(event.target.value ==! ""){
+        //     setEmailError("")
+        // }
     }
 
     function ChangePw(event){
