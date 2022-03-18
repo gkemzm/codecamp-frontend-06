@@ -19,6 +19,18 @@ export const Title = styled.text`
     padding-bottom: 50px;
 `
 
+export const Error = styled.div`
+    display: flex;
+    flex-direction: row;
+    padding-top: 11px;
+    width: 500px;
+    font-size: 15px;
+    color: red;
+    justify-content: center;
+    align-items: center;
+`
+
+
 export const Top = styled.div`
     width: 1000px;
     height: 90px;
