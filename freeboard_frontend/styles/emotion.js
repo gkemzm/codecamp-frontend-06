@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 
 export const Wrapper = styled.div`
     width: 1200px;
-    height: 1847px;
     border: 1px solid yellow;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
@@ -33,7 +32,7 @@ export const Error = styled.div`
 
 export const Top = styled.div`
     width: 1000px;
-    height: 90px;
+    //height: 90px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -83,8 +82,8 @@ export const MiddleInput = styled.input`
 `
 export const PostNum = styled.div`
     width: 250px;
-    height: 100px;
     display: flex;
+    padding-bottom: 40px;
     flex-direction: row;
 `
 
@@ -111,18 +110,18 @@ export const Bottom =  styled.div`
     display: flex;
     flex-direction: column;
     padding-top: 30px;
+    
 `
 
 export const YouTube = styled.input`
     width: 1000px;
     height: 37px;
-    margin-bottom: 25px;
     border: 1px solid #BDBDBD;
     
 `
 export const PostArea = styled.div`
     width: 1000px;
-    margin-bottom: 25px;
+    padding-bottom: 40px;
     display: flex;
     flex-direction: row;
 `
@@ -159,11 +158,12 @@ export const RegistBtn = styled.button`
     height: 60px;
     font-size: 15px;
     font-weight: 700;
+    margin-top:  50px;
+    margin-bottom: 70px;
     background-color: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 90px;
     border: 1px solid yellow;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 `

@@ -73,21 +73,28 @@ export default function BoardSignPage() {
         if (contents === ""){
             setContentsError("내용을 입력하세요")
         }
-        if (writer !== "" && pw !== "" && title !== "" && contents !== ""){
-            alert("게시물 등록이 성공했습니다.")
-        }
-        const result = await callApi({
-            variables: {
-                createBoardInput: {
-                    writer: writer,
-                    password: pw,
-                    title: title,
-                    contents: contents
+
+        // if (writer !== "" && pw !== "" && title !== "" && contents !== ""){
+        //     alert("게시물 등록이 성공했습니다.")
+        // }
+        try{
+            const result = await callApi({
+                variables: {
+                    createBoardInput: {
+                        writer: writer,
+                        password: pw,
+                        title: title,
+                        contents: contents
+                    }
                 }
+            })
+            console.log(result)
+            if (writer !== "" && pw !== "" && title !== "" && contents !== ""){
+                alert("게시물 등록이 성공했습니다.")
             }
-        })
-        console.log(result)
-        console.log(result.data.createBoard.writer)
+        }catch(error){
+            alert(error.message)
+        }
     }
 
     const onChangeWriter = (event) => {
@@ -117,8 +124,6 @@ export default function BoardSignPage() {
             setContentsError("");
         }
     }
-
-    
 
   return (
     <Wrapper>

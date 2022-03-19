@@ -12,3 +12,18 @@ function makeOdd(num){
 
 makeOdd(5) // 135
 makeOdd(7) // 1357
+
+
+
+function makeOdd(num){
+  let answer = "";
+  
+  for(let i = 1; i <= num; i++){
+    if(i % 2 !== 0){
+      answer += i;
+    }
+  }
+  return answer;
+}
+
+makeOdd(9);

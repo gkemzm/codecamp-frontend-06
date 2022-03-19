@@ -19,7 +19,6 @@ const NEW_PRODUCT = gql`
         }
     }
 ` 
-
 const NEW_HARDCODING = gql`
     mutation{createBoard(writer:"박범수" title:"하드코딩" contents:"하드하드"){
     _id
@@ -44,35 +43,70 @@ export default function GraphqlMutationPage(){
     const [callApi3] =useMutation(NEW_HARDCODING)
 
     const submit = async() => {
-        const result = await callApi({
-            variables:{
-                writer: mywriter, 
-                title: mytitle, 
-                contents: mycontents
-            }
-        })
-        console.log(result)
-        console.log(result.data.createBoard.message)
-    }
-    const submit2 = async() => {
-        const result = await callApi2({
-            variables:{
-                seller: seller,
-                createProductInput:{
-                    name: name,
-                    detail: detail,
-                    price: price
+        try{
+            const result = await callApi({
+                variables:{
+                    writer: mywriter, 
+                    title: mytitle, 
+                    contents: mycontents
                 }
-            }
-        })
-        console.log(result)
+            })
+            console.log(result)
+            console.log(result.data.createBoard.message)
+        } catch(error){
+            alert(error.message)
+        }
+        // const result = await callApi({
+        //     variables:{
+        //         writer: mywriter, 
+        //         title: mytitle, 
+        //         contents: mycontents
+        //     }
+        // })
+        // console.log(result)
         // console.log(result.data.createBoard.message)
     }
 
-    const submit3 = async() => {
-        const result = await callApi3()
-        console.log(result)
+    const submit2 = async() => {
+        try{
+            const result = await callApi2({
+                variables:{
+                    seller: seller,
+                    createProductInput:{
+                        name: name,
+                        detail: detail,
+                        price: price
+                    }
+                }
+            })
+            console.log(result)
+        } catch(error){
+            alert(error.message)
+        }
+        // const result = await callApi2({
+        //     variables:{
+        //         seller: seller,
+        //         createProductInput:{
+        //             name: name,
+        //             detail: detail,
+        //             price: price
+        //         }
+        //     }
+        // })
+        // console.log(result)
+        // console.log(result.data.createBoard.message)
     }
+    const submit3 = async() => {
+        try{
+            const result = await callApi3()
+            console.log(result)
+        } catch(error){
+            alert(error.message)
+        }
+        // const result = await callApi3()
+        // console.log(result)
+    } 
+
 
     const onChangeWriter = (event) =>{
         setMyWriter(event.target.value)
@@ -84,8 +118,6 @@ export default function GraphqlMutationPage(){
         setMyContents(event.target.value)
     }
 
-
-
     const onChangeSeller = (event) =>{
         setSeller(event.target.value)
     }
@@ -96,7 +128,7 @@ export default function GraphqlMutationPage(){
         setDetail(event.target.value)
     }
     const onChangeCPrice = (event) =>{
-        setPrice(Number(event.target.value))
+        setPrice(Number(event.target.value)) // 
     }
 
     return(

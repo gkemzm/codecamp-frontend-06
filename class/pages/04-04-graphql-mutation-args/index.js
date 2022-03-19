@@ -20,7 +20,11 @@ export default function GraphqlMutationPage(){
     const callGraphqlApi = async() => {
         //const result = await axios.get("https://koreanjson.com/posts/1") //rest-api 방식
         const result = await callApi({
-            variables:{writer:"박범수", title:"제목", contents:"123"}// 위쪽createBoard에 전달해서 실행
+            variables:{
+                writer:"박범수"
+              , title:"제목"
+              , contents:"123"
+            }// 위쪽createBoard에 전달해서 실행
         }) //graphql-api방식
         console.log(result)
         console.log(result.data.createBoard.message)
