@@ -1,79 +1,120 @@
-import {Wrapper, Title, Top, Text, TopArea, TopInput, MainTitle, 
-    TitleInput, Middle, MiddleInput, PostNum, PostInput, PostBtn, Address,
-    Bottom, YouTube, PostArea, ImgBtn, SelectInput, SelectArea, SelectText, 
-    RegistBtn, Error} from '../../styles/emotion'
-  import {useState} from 'react'
-  import {useMutation, gql} from '@apollo/client'
+import {Wrapper, Top_Wrapper, ProfileImage, Profile, Clip,
+     Position, Top_Wrapper_Inner, Name, Date, Pdetail, 
+    Middle_Wrapper, Middle_Wrapper_top, Title, Contents, ImageBox,
+    Vidio, Like_disLike, Like_disLike_btn, Like_disLikes,
+    Wrapper2, Btns} from '../../../styles/DetailPage'
+import { useRouter } from 'next/router'
+import { useQuery,gql } from '@apollo/client'
+import Image from "next/Image"
+import icon from "../../../public/fetchBoard/icon1.PNG"
+import position from "../../../public/fetchBoard/position.PNG"
+import cripboard from "../../../public/fetchBoard/cripboard.PNG"
+import positionDetail from "../../../public/fetchBoard/positiondetail.PNG"
+import like from "../../../public/fetchBoard/like.PNG"
+import dislike from "../../../public/fetchBoard/dislike.PNG"
 
-  export default function BoardSignPage() {
-  
-    return (
-      <Wrapper>
-          <Title>
-              게시물 등록
-          </Title>
-  
-          <Top>
-              <TopArea>
-                  <Text>작성자</Text>
-                  <TopInput  placeholder= '  이름을 적어주세요.' onChange={onChangeWriter}></TopInput>
-                  <Error>{writerError}</Error>
-              </TopArea>
-              <TopArea>
-                  <Text>비밀번호</Text> 
-                  <TopInput  placeholder= '  비밀번호를 입력해 주세요.' type={"password"} onChange={onChangePw}></TopInput>
-                  <Error>{pwError}</Error>
-              </TopArea>
-          </Top>
-  
-          <MainTitle>
-              <Text>제목</Text>
-              <TitleInput  placeholder= '  제목을 작성해주세요.' onChange={onChangeTitle}></TitleInput>
-              <Error>{titleError}</Error>
-          </MainTitle>
-  
-          <Middle>
-              <Text>내용</Text>
-              <MiddleInput   placeholder= '  내용을 작성해주세요.' onChange={onChangeContents}></MiddleInput>
-              <Error>{contentsError}</Error>
-          </Middle>
-  
-          <Middle>
-              <Text>주소</Text>
-              <PostNum>
-                  <PostInput   placeholder= '         07250'></PostInput>
-                  <PostBtn>우편번호 검색</PostBtn>
-              </PostNum>
-              <Address></Address>
-              <Address></Address>
-          </Middle>
-  
-          <Bottom>
-              <Text>유튜브</Text>
-              <YouTube  placeholder= '  링크를 복사해주세요.'></YouTube>
-          </Bottom>
-  
-          <Bottom>
-              <Text>사진첨부</Text>
-              <PostArea>
-                <ImgBtn>+<br></br>Upload</ImgBtn>
-                <ImgBtn>+<br></br>Upload</ImgBtn>
-                <ImgBtn>+<br></br>Upload</ImgBtn>
-              </PostArea>
-          </Bottom>
-  
-          <Bottom>
-              <Text>메인설정</Text>
-              <SelectArea>
-                  <SelectInput type = "radio"></SelectInput><SelectText>유튜브</SelectText>
-                  <SelectInput type = "radio"></SelectInput><SelectText>사진</SelectText>
-              </SelectArea>
-          </Bottom>
-  
+const FETCH_BOARD = gql`
+    query fetchboard($boardId: ID!){
+        fetchBoard(boardId: $boardId){
+            writer
+            title
+            contents
+            likeCount
+            dislikeCount
+        }
+    }
+`
+export default function FetchBoardPage(){
+    const router = useRouter()
+    const { data } = useQuery(FETCH_BOARD, {
+        variables:{boardId: router.query.boardId}
+    })
     
-              <RegistBtn onClick={submit}>등록하기</RegistBtn>
-  
-      </Wrapper>
+    const MoveMainpage = () => {
+       router.push("/board") 
+    }
+    
+    const Today = () =>{
+        let now = new Date();
+    }
+    return(
+        <>
+        {data ? <>
+            <Wrapper>
+                <Pdetail>
+                    <Image src={positionDetail} width="260px" height="50px"></Image>
+                </Pdetail>
+
+                <Top_Wrapper>
+                    <Top_Wrapper_Inner>
+                        <ProfileImage>
+                            <Image src={icon} width="38px" height="38px"></Image>
+                        </ProfileImage>
+                        <Profile>
+                            <Name>{data?.fetchBoard.writer}</Name>
+                            <Date onLoad={Today}>Today : </Date>
+                        </Profile>
+                    </Top_Wrapper_Inner>
+                    <Top_Wrapper_Inner>
+                        <>
+                            <Clip>
+                                <Image src={cripboard} width="30px" height="30px"></Image>
+                            </Clip>
+                            <Position>
+                                <Image src={position} width="30px" height="30px"></Image>
+                            </Position>
+                        </>
+                    </Top_Wrapper_Inner>
+                </Top_Wrapper>
+                <Middle_Wrapper>
+                    <Middle_Wrapper_top>
+                        <Title>
+                            <div>{data?.fetchBoard.title}</div>
+                        </Title>
+
+                        <ImageBox>
+                            이미지가 들어갈 구간
+                        </ImageBox>
+
+                        <Contents>
+                        <div>{data?.fetchBoard.contents}</div>
+                        </Contents>
+                    </Middle_Wrapper_top>
+
+                    <Vidio>
+                        비디오가 들어갈 구간
+                    </Vidio>
+
+                    <Like_disLikes>
+                        <Like_disLike_btn>
+                                <Image src={like} width="35px" height="30px"></Image>
+                        </Like_disLike_btn>
+                        
+                        <Like_disLike_btn>
+                                <Image src={dislike} width="35px" height="30px"></Image>
+                        </Like_disLike_btn>
+                    </Like_disLikes>
+
+                    <Like_disLikes>
+                        <Like_disLike>
+                            <div>{data?.fetchBoard.likeCount}</div>
+                        </Like_disLike>
+                        <Like_disLike>
+                            <div>{data?.fetchBoard.dislikeCount}</div>
+                        </Like_disLike>
+                    </Like_disLikes>
+                </Middle_Wrapper>
+            </Wrapper>
+
+            <Wrapper2>
+                <Btns>
+                    <button onClick={MoveMainpage}>돌아가기</button>
+                    <button onClick={MoveMainpage}>수정하기</button>
+                    <button onClick={MoveMainpage}>삭제하기</button>
+                </Btns>
+            </Wrapper2>
+            
+        </> : <div>Loading</div>}
+        </>
     )
-  }
-  
+}

@@ -4,6 +4,7 @@ import {Wrapper, Title, Top, Text, TopArea, TopInput, MainTitle,
   RegistBtn, Error} from '../../styles/emotion'
 import {useState} from 'react'
 import {useMutation, gql} from '@apollo/client'
+import {useRouter} from 'next/router'
 
 const SIGN_BOARD = gql`
     mutation signBoard($createBoardInput: CreateBoardInput!){
@@ -48,6 +49,8 @@ const SIGN_BOARD = gql`
         }
 `
 export default function BoardSignPage() {
+    const router = useRouter()
+
     const [writer, setWriter] = useState("");
     const [pw, setPw] = useState("");
     const [title, setTitle] = useState("");
@@ -92,6 +95,7 @@ export default function BoardSignPage() {
             if (writer !== "" && pw !== "" && title !== "" && contents !== ""){
                 alert("게시물 등록이 성공했습니다.")
             }
+            router.push(`/board/${result.data.createBoard._id}`)
         }catch(error){
             alert(error.message)
         }
