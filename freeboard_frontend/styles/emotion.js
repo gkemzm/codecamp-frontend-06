@@ -78,7 +78,6 @@ export const MiddleInput = styled.input`
     text-align: left;
     padding-bottom: 460px;
     border: 1px solid #BDBDBD;
-    
 `
 export const PostNum = styled.div`
     width: 250px;

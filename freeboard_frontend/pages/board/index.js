@@ -55,6 +55,7 @@ export default function BoardSignPage() {
     const [pw, setPw] = useState("");
     const [title, setTitle] = useState("");
     const [contents, setContents] = useState("");
+    const [youTube, setYouTube] = useState("");
 
     const [writerError, setWriterError] = useState("")
     const [pwError, setPwError] = useState("")
@@ -87,7 +88,8 @@ export default function BoardSignPage() {
                         writer: writer,
                         password: pw,
                         title: title,
-                        contents: contents
+                        contents: contents,
+                        youtubeUrl: youTube
                     }
                 }
             })
@@ -127,6 +129,10 @@ export default function BoardSignPage() {
         if(event.target.value !== ""){
             setContentsError("");
         }
+    }
+
+    const onChangeYouTube = (event) => {
+        setYouTube(event.target.value);
     }
 
   return (
@@ -172,7 +178,7 @@ export default function BoardSignPage() {
 
         <Bottom>
             <Text>유튜브</Text>
-            <YouTube  placeholder= '  링크를 복사해주세요.'></YouTube>
+            <YouTube onChange={onChangeYouTube} placeholder= '  링크를 입력해주세요'></YouTube>
         </Bottom>
 
         <Bottom>
