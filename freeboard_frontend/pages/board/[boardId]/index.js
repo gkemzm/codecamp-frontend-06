@@ -6,12 +6,14 @@ import {Wrapper, Top_Wrapper, ProfileImage, Profile, Clip,
 import { useRouter } from 'next/router'
 import { useQuery,gql, useMutation } from '@apollo/client'
 import Image from "next/Image"
-import icon from "../../../public/fetchBoard/icon1.PNG"
-import position from "../../../public/fetchBoard/position.PNG"
-import cripboard from "../../../public/fetchBoard/cripboard.PNG"
-import positionDetail from "../../../public/fetchBoard/positiondetail.PNG"
-import like from "../../../public/fetchBoard/like.PNG"
-import dislike from "../../../public/fetchBoard/dislike.PNG"
+// import icon from "../../../public/fetchBoard/icon1.PNG"
+// import position from "../../../public/fetchBoard/position.PNG"
+// import cripboard from "../../../public/fetchBoard/cripboard.PNG"
+// import positionDetail from "../../../public/fetchBoard/positiondetail.PNG"
+// import like from "../../../public/fetchBoard/like.PNG"
+// import dislike from "../../../public/fetchBoard/dislike.PNG"
+import { renderToStringWithData } from '@apollo/client/react/ssr'
+import { useState } from 'react'
 // import { YouTube } from '../../../styles/emotion'
 
 const FETCH_BOARD = gql`
@@ -45,11 +47,12 @@ export default function FetchBoardPage(){
     const [callLikeApi] = useMutation(UP_LIKE)
     const [callDisLikeApi] = useMutation(UP_DISLIKE)
 
+    const [likeCountup, setLikeCountup] = useState("");
+    const [dislikeCountup, setDisLikeCountup] = useState("");
+
     const { data } = useQuery(FETCH_BOARD, {
         variables:{boardId: router.query.boardId}
     })
-
-    // const now = new Date();
 
     const MoveMainpage = () => {
        router.push("/board") 
@@ -62,6 +65,7 @@ export default function FetchBoardPage(){
                     boardId: router.query.boardId
                 }
             })
+            // setLikeCountup(resultLike.data.callLikeApi)
             location.reload();
         }catch(error){
             alert(error.message)
@@ -81,18 +85,19 @@ export default function FetchBoardPage(){
         }
     }
 
+
     return(
         <>
         {data ? <>
             <Wrapper>
                 <Pdetail>
-                    <Image src={positionDetail} width="260px" height="50px"></Image>
+                    <img src='/fetchBoard/positiondetail.PNG' width="260px" height="50px"></img>
                 </Pdetail>
 
                 <Top_Wrapper>
                     <Top_Wrapper_Inner>
                         <ProfileImage>
-                            <Image src={icon} width="38px" height="38px"></Image>
+                            <img src='/fetchBoard/icon1.PNG' width="40px" height="40px"></img>
                         </ProfileImage>
                         <ProfileHover>
                             <Name>{data?.fetchBoard.writer}</Name>
@@ -102,10 +107,10 @@ export default function FetchBoardPage(){
                     <Top_Wrapper_Inner>
                         <>
                             <Clip>
-                                <Image src={cripboard} width="30px" height="30px"></Image>
+                                <img src='/fetchBoard/cripboard.PNG' width="30px" height="30px"></img>
                             </Clip>
                             <Position>
-                                <Image src={position} width="30px" height="30px"></Image>
+                                <img src='/fetchBoard/position.PNG' width="30px" height="30px"></img>
                             </Position>
                         </>
                     </Top_Wrapper_Inner>
@@ -130,11 +135,11 @@ export default function FetchBoardPage(){
                         </Vidio>
                         <Like_disLikes>
                             <Like_disLike_btn>
-                                    <Image onClick={upLike} src={like} width="35px" height="30px"></Image>
+                                    <img src='/fetchBoard/like.PNG' onClick={upLike} width="35px" height="30px"></img>
                             </Like_disLike_btn>
                             
                             <Like_disLike_btn>
-                                    <Image onClick={upDisLike} src={dislike} width="35px" height="30px"></Image>
+                                    <img src='/fetchBoard/dislike.PNG' onClick={upDisLike}  width="35px" height="30px"></img>
                             </Like_disLike_btn>
                         </Like_disLikes>
 
