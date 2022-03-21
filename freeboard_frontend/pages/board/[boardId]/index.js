@@ -25,6 +25,7 @@ const FETCH_BOARD = gql`
             likeCount
             dislikeCount
             youtubeUrl
+            createdAt
         }
     }
 `
@@ -101,7 +102,7 @@ export default function FetchBoardPage(){
                         </ProfileImage>
                         <ProfileHover>
                             <Name>{data?.fetchBoard.writer}</Name>
-                            <Date>Today :</Date>
+                            <Date>{data?.fetchBoard.createdAt}</Date>
                         </ProfileHover>
                     </Top_Wrapper_Inner>
                     <Top_Wrapper_Inner>
@@ -131,7 +132,7 @@ export default function FetchBoardPage(){
                     </Middle_Wrapper_top>
                     <Middle_Wrapper_bottom>
                         <Vidio>
-                            <iframe width="460" height="275" src={data?.fetchBoard.youtubeUrl} frameBorder="0" allow='accelerometer'></iframe>
+                            <iframe width="460" height="275" src={data?.fetchBoard.youtubeUrl} frameBorder="0" allow='accelerometer'></iframe> 
                         </Vidio>
                         <Like_disLikes>
                             <Like_disLike_btn>

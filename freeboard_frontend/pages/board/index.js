@@ -5,46 +5,12 @@ import {Wrapper, Title, Top, Text, TopArea, TopInput, MainTitle,
 import {useState} from 'react'
 import {useMutation, gql} from '@apollo/client'
 import {useRouter} from 'next/router'
-
+import * as S from '../../styles/emotion'
 const SIGN_BOARD = gql`
     mutation signBoard($createBoardInput: CreateBoardInput!){
             createBoard(createBoardInput: $createBoardInput){       
                 _id
-                writer
-                title
-                contents
-                youtubeUrl
-                likeCount
-                dislikeCount
-                images
-                boardAddress{
-                _id
-                zipcode
-                address
-                addressDetail
-                createdAt
-                updatedAt
-                deletedAt
-                }
-                user{
-                _id
-                email
-                name
-                picture
-                userPoint{
-                    _id
-                    amount
-                    createdAt
-                    updatedAt
-                    deletedAt
-                }
-                createdAt
-                updatedAt
-                deletedAt
-                }
-                createdAt
-                updatedAt
-                deletedAt
+                
             }
         }
 `
@@ -136,10 +102,10 @@ export default function BoardSignPage() {
     }
 
   return (
-    <Wrapper>
-        <Title>
+    <S.Wrapper>
+        <S.Title>
             게시물 등록
-        </Title>
+        </S.Title>
 
         <Top>
             <TopArea>
@@ -201,6 +167,6 @@ export default function BoardSignPage() {
   
             <RegistBtn onClick={submit}>등록하기</RegistBtn>
 
-    </Wrapper>
+    </S.Wrapper>
   )
 }
