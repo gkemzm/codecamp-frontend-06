@@ -23,7 +23,7 @@ export default function BoardDetailHTML(props){
                        </S.ProfileImage>
                        <S.ProfileHover>
                            <S.Name>{props.data?.fetchBoard.writer}</S.Name>
-                           <S.Date>{props.data?.fetchBoard.createdAt}</S.Date>
+                           <S.Date>{props.data?.fetchBoard.createdAt.slice(0,10)}</S.Date>
                        </S.ProfileHover>
                    </S.Top_Wrapper_Inner>
                    <S.Top_Wrapper_Inner>
