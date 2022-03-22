@@ -19,6 +19,7 @@ export default function BoardSignFunction() {
     const [titleError, setTitleError] = useState("")
     const [contentsError, setContentsError] = useState("")
 
+    const [isActive, setIsActive] = useState(false);
     const [callApi] =useMutation(SIGN_BOARD)
     
     const submit = async(event) => {
@@ -61,6 +62,12 @@ export default function BoardSignFunction() {
         if(event.target.value !== ""){
             setWriterError("");
         }
+        // if (event.target.value !== "" && pw !== "" && title !== "" && contents !== "")    
+        if (event.target.value  && pw && title && contents) {
+            setIsActive(true);
+          } else {
+            setIsActive(false);
+          }
     }
 
     const onChangePw = (event) => {
@@ -68,6 +75,12 @@ export default function BoardSignFunction() {
         if(event.target.value !== ""){
             setPwError("");
         }
+
+        if (writer && event.target.value && title && contents) {
+            setIsActive(true);
+          } else {
+            setIsActive(false);
+          }
     }
 
     const onChangeTitle = (event) => {
@@ -75,6 +88,12 @@ export default function BoardSignFunction() {
         if(event.target.value !== ""){
             setTitleError("");
         }
+
+        if (writer && pw && event.target.value && contents) {
+            setIsActive(true);
+          } else {
+            setIsActive(false);
+          }
     }
 
     const onChangeContents = (event) => {
@@ -82,6 +101,12 @@ export default function BoardSignFunction() {
         if(event.target.value !== ""){
             setContentsError("");
         }
+
+        if (writer && pw && title && event.target.value) {
+            setIsActive(true);
+          } else {
+            setIsActive(false);
+          }
     }
 
     const onChangeYouTube = (event) => {
@@ -90,6 +115,7 @@ export default function BoardSignFunction() {
 
   return (
     <BoardSignHTML
+    isActive={isActive}
     writerError = {writerError}
     pwError = {pwError}
     titleError = {titleError}

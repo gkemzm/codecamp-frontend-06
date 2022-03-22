@@ -7,7 +7,6 @@ import * as S from '../boardDetail/BoardDetail.styles'
 
 
 export default function BoardDetailHTML(props){
-   
    return(
        <>
        {props.data ? <>
@@ -53,7 +52,9 @@ export default function BoardDetailHTML(props){
                    </S.Middle_Wrapper_top>
                    <S.Middle_Wrapper_bottom>
                        <S.Vidio>
-                           <iframe width="460" height="275" src={props.data?.fetchBoard.youtubeUrl} frameBorder="0" allow='accelerometer'></iframe> 
+                       {props.data?.fetchBoard.youtubeUrl}
+                       <iframe width="560" height="315" src={props.data?.fetchBoard?.youtubeUrl} title="YouTube video player" 
+                       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                        </S.Vidio>
                        <S.Like_disLikes>
                            <S.Like_disLike_btn>

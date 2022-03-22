@@ -159,10 +159,11 @@ export const RegistBtn = styled.button`
     font-weight: 700;
     margin-top:  50px;
     margin-bottom: 70px;
-    background-color: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid yellow;
+    border: none;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+    background-color: ${(props) => (props.isActive ? "yellow" : "none")};
 `

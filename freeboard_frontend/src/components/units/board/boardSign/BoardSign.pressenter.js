@@ -65,8 +65,8 @@ export default function BoardSignHTML(props) {
             </S.SelectArea>
         </S.Bottom>
 
-  
-            <S.RegistBtn onClick={props.submit}>등록하기</S.RegistBtn>
+            
+            <S.RegistBtn onClick={props.submit} isActive={props.isActive}>등록하기</S.RegistBtn>
 
     </S.Wrapper>
   )
