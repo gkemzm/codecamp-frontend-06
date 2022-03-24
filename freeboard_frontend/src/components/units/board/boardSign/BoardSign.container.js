@@ -58,29 +58,17 @@ export default function BoardSignFunction(props) {
         }
     }
     const updateBoard = async() => {
-        // if (pw === ""){
-        //     setPwError("비밀번호를 입력하세요")
-        // }
-        // if (title === ""){
-        //     setTitleError("제목을 입력하세요")
-        // }
-        // if (contents === ""){
-        //     setContentsError("내용을 입력하세요")
-        // }
         try{
             const resultUpdate = await callUpdateBoard({
                 variables: {
                     updateBoardInput: {
                         title : title,
-                        contents : String(contents)
+                        contents : contents
                     }, password : pw,
                     boardId: router.query.boardId
                 }
             })
-            console.log(result)
-            // if (pw !== "" && title !== "" && contents !== ""){
-            //     alert("게시물 수정이 성공했습니다.")
-            // }
+            alert("게시물 수정에 성공하였습니다!");
             router.push(`/board/${router.query.boardId}`)
         }catch(error){
             alert(error.message)
