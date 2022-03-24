@@ -8,6 +8,8 @@ import BoardDetailHTML from './BoardDetail.pressenter'
 
 
 export default function BoardDetailFunction(){
+    
+      
    const router = useRouter()
 
    const [callLikeApi] = useMutation(UP_LIKE)
@@ -25,6 +27,7 @@ export default function BoardDetailFunction(){
    }
 
    const deleteOneBoard = async() => {
+    
        try{
            const resultOneDelete = await callDeleteBoard({
                variables: {
@@ -33,17 +36,17 @@ export default function BoardDetailFunction(){
            })
            router.push("/board") 
        }catch(error){
-           alert(error.message)
+        if(error instanceof Error)alert(error.message)
        }
    }
    const updateBoard = async() => {
     try{
         router.push(`/board/${router.query.boardId}/edit`)
     }catch(error){
-        alert(error.message)
+        if(error instanceof Error)alert(error.message)
     }
 }
-   const upLike = async(event) =>{
+   const upLike = async() =>{
        try{
            const resultLike = await callLikeApi({
                variables: {
@@ -53,11 +56,11 @@ export default function BoardDetailFunction(){
            // setLikeCountup(resultLike.data.callLikeApi)
            location.reload();
        }catch(error){
-           alert(error.message)
+        if(error instanceof Error)alert(error.message)
        }
    }
 
-   const upDisLike = async(event) =>{
+   const upDisLike = async() =>{
        try{
            const resultDisLike = await callDisLikeApi({
                variables: {
@@ -66,7 +69,7 @@ export default function BoardDetailFunction(){
            })
            location.reload();
        }catch(error){
-           alert(error.message)
+        if(error instanceof Error)alert(error.message)
        }
    }
 

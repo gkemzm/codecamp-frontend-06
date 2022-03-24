@@ -10,8 +10,7 @@ export default function BoardSignPage() {
     
 
   return (
-      <BoardSignFunction
-      isEdit={false}>
+      <BoardSignFunction isEdit={false}>
       </BoardSignFunction>
   )
 }

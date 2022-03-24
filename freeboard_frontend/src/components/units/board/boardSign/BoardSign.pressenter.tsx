@@ -1,7 +1,8 @@
 import * as S from '../boardSign/BoardSign.styles'
+import { BoardSignHTMLProps } from './BoardSing.types'
 
-export default function BoardSignHTML(props) {
-    
+export default function BoardSignHTML(props : BoardSignHTMLProps) {
+
   return (
     <S.Wrapper>
         <S.Title>

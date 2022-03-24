@@ -4,9 +4,11 @@
 //    Vidio, Like_disLike, Like_disLike_btn, Like_disLikes,
 //    Wrapper2, Btns, Btn_Contents, Wrapper_Waiting, Middle_Wrapper_bottom, ProfileHover} from '../../../styles/DetailPage'
 import * as S from '../boardDetail/BoardDetail.styles'
+import { BoardDetailHTMLProps } from './BoardDetail.types'
 
 
-export default function BoardDetailHTML(props){
+export default function BoardDetailHTML(props : BoardDetailHTMLProps){
+
    return(
        <>
        {props.data ? <>
@@ -54,7 +56,7 @@ export default function BoardDetailHTML(props){
                        <S.Vidio>
                        {props.data?.fetchBoard.youtubeUrl}
                        <iframe width="560" height="315" src={props.data?.fetchBoard?.youtubeUrl} title="YouTube video player" 
-                       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                       frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                        </S.Vidio>
                        <S.Like_disLikes>
                            <S.Like_disLike_btn>

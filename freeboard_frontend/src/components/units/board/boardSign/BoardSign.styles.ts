@@ -1,4 +1,6 @@
 import styled from '@emotion/styled'
+import { ISubmitButtonProps } from './BoardSing.types';
+
 
 export const Wrapper = styled.div`
     width: 1200px;
@@ -168,5 +170,5 @@ export const RegistBtn = styled.button`
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 
-    background-color: ${(props) => (props.isActive ? "yellow" : "none")};
+    background-color: ${(props: ISubmitButtonProps) => (props.isActive ? "yellow" : "none")};
 `

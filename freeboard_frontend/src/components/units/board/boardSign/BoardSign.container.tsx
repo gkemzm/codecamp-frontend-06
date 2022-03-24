@@ -1,11 +1,13 @@
-import {useState} from 'react'
-import {useMutation, gql} from '@apollo/client'
+import {useState, ChangeEvent, MouseEvent} from 'react'
+import {useMutation} from '@apollo/client'
 import {useRouter} from 'next/router'
 import BoardSignHTML from './BoardSign.pressenter';
 import { SIGN_BOARD, UPDATE_BOARD } from './BoardSign.query';
+import { BoardSignFunctionProps } from './BoardSing.types';
 
 
-export default function BoardSignFunction(props) {
+export default function BoardSignFunction(props : BoardSignFunctionProps) {
+
     const router = useRouter()
 
     const [writer, setWriter] = useState("");
@@ -23,7 +25,8 @@ export default function BoardSignFunction(props) {
     const [callApi] =useMutation(SIGN_BOARD)
     const [callUpdateBoard] =useMutation(UPDATE_BOARD)
     
-    const submit = async(event) => {
+    const submit = async(event: MouseEvent<HTMLButtonElement>) => {
+ 
         if (writer === ""){
             setWriterError("작성자를 입력하세요")
         }
@@ -54,7 +57,7 @@ export default function BoardSignFunction(props) {
             }
             router.push(`/board/${result.data.createBoard._id}`)
         }catch(error){
-            alert(error.message)
+            if(error instanceof Error)alert(error.message)
         }
     }
     const updateBoard = async() => {
@@ -64,18 +67,19 @@ export default function BoardSignFunction(props) {
                     updateBoardInput: {
                         title : title,
                         contents : contents
-                    }, password : pw,
+                    }, 
+                    password : pw,
                     boardId: router.query.boardId
                 }
             })
             alert("게시물 수정에 성공하였습니다!");
             router.push(`/board/${router.query.boardId}`)
         }catch(error){
-            alert(error.message)
+            if(error instanceof Error)alert(error.message)
         }
     }
 
-    const onChangeWriter = (event) => {
+    const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
         setWriter(event.target.value);
         if(event.target.value !== ""){
             setWriterError("");
@@ -88,7 +92,7 @@ export default function BoardSignFunction(props) {
           }
     }
 
-    const onChangePw = (event) => {
+    const onChangePw = (event: ChangeEvent<HTMLInputElement>) => {
         setPw(event.target.value);
         if(event.target.value !== ""){
             setPwError("");
@@ -101,7 +105,7 @@ export default function BoardSignFunction(props) {
           }
     }
 
-    const onChangeTitle = (event) => {
+    const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
         if(event.target.value !== ""){
             setTitleError("");
@@ -114,7 +118,7 @@ export default function BoardSignFunction(props) {
           }
     }
 
-    const onChangeContents = (event) => {
+    const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
         setContents(event.target.value);
         if(event.target.value !== ""){
             setContentsError("");
@@ -127,7 +131,7 @@ export default function BoardSignFunction(props) {
           }
     }
 
-    const onChangeYouTube = (event) => {
+    const onChangeYouTube = (event: ChangeEvent<HTMLInputElement>) => {
         setYouTube(event.target.value);
     }
 
