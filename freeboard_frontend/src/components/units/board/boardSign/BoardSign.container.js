@@ -2,10 +2,10 @@ import {useState} from 'react'
 import {useMutation, gql} from '@apollo/client'
 import {useRouter} from 'next/router'
 import BoardSignHTML from './BoardSign.pressenter';
-import { SIGN_BOARD } from './BoardSign.query';
+import { SIGN_BOARD, UPDATE_BOARD } from './BoardSign.query';
 
 
-export default function BoardSignFunction() {
+export default function BoardSignFunction(props) {
     const router = useRouter()
 
     const [writer, setWriter] = useState("");
@@ -21,6 +21,7 @@ export default function BoardSignFunction() {
 
     const [isActive, setIsActive] = useState(false);
     const [callApi] =useMutation(SIGN_BOARD)
+    const [callUpdateBoard] =useMutation(UPDATE_BOARD)
     
     const submit = async(event) => {
         if (writer === ""){
@@ -52,6 +53,35 @@ export default function BoardSignFunction() {
                 alert("게시물 등록이 성공했습니다.")
             }
             router.push(`/board/${result.data.createBoard._id}`)
+        }catch(error){
+            alert(error.message)
+        }
+    }
+    const updateBoard = async() => {
+        // if (pw === ""){
+        //     setPwError("비밀번호를 입력하세요")
+        // }
+        // if (title === ""){
+        //     setTitleError("제목을 입력하세요")
+        // }
+        // if (contents === ""){
+        //     setContentsError("내용을 입력하세요")
+        // }
+        try{
+            const resultUpdate = await callUpdateBoard({
+                variables: {
+                    updateBoardInput: {
+                        title : title,
+                        contents : String(contents)
+                    }, password : pw,
+                    boardId: router.query.boardId
+                }
+            })
+            console.log(result)
+            // if (pw !== "" && title !== "" && contents !== ""){
+            //     alert("게시물 수정이 성공했습니다.")
+            // }
+            router.push(`/board/${router.query.boardId}`)
         }catch(error){
             alert(error.message)
         }
@@ -116,6 +146,7 @@ export default function BoardSignFunction() {
   return (
     <BoardSignHTML
     isActive={isActive}
+    isEdit={props.isEdit}
     writerError = {writerError}
     pwError = {pwError}
     titleError = {titleError}
@@ -125,6 +156,7 @@ export default function BoardSignFunction() {
     onChangeTitle = {onChangeTitle}
     onChangeContents = {onChangeContents}
     onChangeYouTube = {onChangeYouTube}
+    updateBoard={updateBoard}
     submit = {submit}
     ></BoardSignHTML>
   )

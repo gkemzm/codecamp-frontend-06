@@ -2,7 +2,7 @@
 import { useRouter } from 'next/router'
 import { useQuery, useMutation } from '@apollo/client'
 import { useState } from 'react'
-import { UP_DISLIKE, FETCH_BOARD, UP_LIKE } from './BoardDetail.query'
+import { UP_DISLIKE, FETCH_BOARD, UP_LIKE, DELETE_BOARD} from './BoardDetail.query'
 import BoardDetailHTML from './BoardDetail.pressenter'
 
 
@@ -12,18 +12,37 @@ export default function BoardDetailFunction(){
 
    const [callLikeApi] = useMutation(UP_LIKE)
    const [callDisLikeApi] = useMutation(UP_DISLIKE)
-
-   const [likeCountup, setLikeCountup] = useState("");
-   const [dislikeCountup, setDisLikeCountup] = useState("");
+   const [callDeleteBoard] = useMutation(DELETE_BOARD)
 
    const { data } = useQuery(FETCH_BOARD, {
-       variables:{boardId: router.query.boardId}
+       variables:{
+           boardId: router.query.boardId
+        }
    })
 
    const MoveMainpage = () => {
       router.push("/board") 
    }
-   
+
+   const deleteOneBoard = async() => {
+       try{
+           const resultOneDelete = await callDeleteBoard({
+               variables: {
+                   boardId: String(router.query.boardId)
+               }
+           })
+           router.push("/board") 
+       }catch(error){
+           alert(error.message)
+       }
+   }
+   const updateBoard = async() => {
+    try{
+        router.push(`/board/${router.query.boardId}/edit`)
+    }catch(error){
+        alert(error.message)
+    }
+}
    const upLike = async(event) =>{
        try{
            const resultLike = await callLikeApi({
@@ -58,6 +77,8 @@ export default function BoardDetailFunction(){
        upLike = {upLike}
        upDisLike = {upDisLike}
        MoveMainpage = {MoveMainpage}
+       deleteOneBoard= {deleteOneBoard}
+       updateBoard= {updateBoard}
        ></BoardDetailHTML>
    )
 }

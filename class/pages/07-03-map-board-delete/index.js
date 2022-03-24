@@ -42,6 +42,8 @@ export default function StaticRoutedPage(){
     }
     
     console.log(data)
+
+    
     return(
         <div>
             {data?.fetchBoards.map((el, index)=>(

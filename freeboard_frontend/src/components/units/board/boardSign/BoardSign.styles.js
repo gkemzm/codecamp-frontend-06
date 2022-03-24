@@ -97,6 +97,7 @@ export const PostBtn = styled.button`
     height: 55px;
     background-color: black;
     color: white;
+    cursor: pointer;
 `
 export const Address = styled.input`
     width: 1000px;
@@ -132,6 +133,7 @@ export const ImgBtn = styled.button`
     font-size: 20px;
     font-weight: 700;
     border: 1px solid white;
+    cursor: pointer;
 `
 
 export const SelectInput = styled.input`
@@ -164,6 +166,7 @@ export const RegistBtn = styled.button`
     align-items: center;
     border: none;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 
     background-color: ${(props) => (props.isActive ? "yellow" : "none")};
 `

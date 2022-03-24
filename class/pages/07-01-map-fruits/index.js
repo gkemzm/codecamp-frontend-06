@@ -1,3 +1,4 @@
+//리렌더링되도 새로 안만들어짐
 export default function mapFruitsPage(){
     // const aaa = [<div>1 레드향</div>, <div>2 샤인머스켓</div>, <div>3 산청딸기</div>]
 
@@ -18,7 +19,15 @@ export default function mapFruitsPage(){
       ];
       
     // const ccc = FRUITS.map((el)=>(<div>{el.number} {el.title}</div>))
-
-    return <div>{FRUITS.map((el)=>(<div>{el.number} {el.title}</div>))}
+    const a = FRUITS.filter((el) => (el.number%2 === 0))
+    return (
+      
+    <div>
+        <div>{FRUITS.map((el)=>(<div>{el.number} {el.title}</div>))}</div>
+        <div>위는 map 아래는 map+filter</div>
+        <div>{a.map((el)=>(<div>{el.number}{el.title}</div>))}</div>
     </div>
+    )
+
+    //실무에선 return에 바로 식을 입력해주는게 많이 쓰인다.
 }

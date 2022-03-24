@@ -5,10 +5,15 @@ export default function BoardSignHTML(props) {
   return (
     <S.Wrapper>
         <S.Title>
-            게시물 등록
+            게시물 {props.isEdit ? "수정" : "등록"}
         </S.Title>
-
-        <S.Top>
+        {props.isEdit ? <S.Top>
+            <S.TopArea>
+                <S.Text>비밀번호</S.Text> 
+                <S.TopInput  placeholder= '  비밀번호를 입력해 주세요.' type={"password"} onChange={props.onChangePw}></S.TopInput>
+                <S.Error>{props.pwError}</S.Error>
+            </S.TopArea>
+        </S.Top> : <S.Top>
             <S.TopArea>
                 <S.Text>작성자</S.Text>
                 <S.TopInput  placeholder= '  이름을 적어주세요.' onChange={props.onChangeWriter}></S.TopInput>
@@ -19,7 +24,19 @@ export default function BoardSignHTML(props) {
                 <S.TopInput  placeholder= '  비밀번호를 입력해 주세요.' type={"password"} onChange={props.onChangePw}></S.TopInput>
                 <S.Error>{props.pwError}</S.Error>
             </S.TopArea>
-        </S.Top>
+        </S.Top>}
+        {/* <S.Top>
+            <S.TopArea>
+                <S.Text>작성자</S.Text>
+                <S.TopInput  placeholder= '  이름을 적어주세요.' onChange={props.onChangeWriter}></S.TopInput>
+                <S.Error>{props.writerError}</S.Error>
+            </S.TopArea>
+            <S.TopArea>
+                <S.Text>비밀번호</S.Text> 
+                <S.TopInput  placeholder= '  비밀번호를 입력해 주세요.' type={"password"} onChange={props.onChangePw}></S.TopInput>
+                <S.Error>{props.pwError}</S.Error>
+            </S.TopArea>
+        </S.Top> */}
 
         <S.MainTitle>
             <S.Text>제목</S.Text>
@@ -66,7 +83,8 @@ export default function BoardSignHTML(props) {
         </S.Bottom>
 
             
-            <S.RegistBtn onClick={props.submit} isActive={props.isActive}>등록하기</S.RegistBtn>
+            <S.RegistBtn onClick={props.isEdit ? props.updateBoard  : props.submit} isActive={props.isActive}>
+            {props.isEdit ? "수정" : "등록"}하기</S.RegistBtn>
 
     </S.Wrapper>
   )

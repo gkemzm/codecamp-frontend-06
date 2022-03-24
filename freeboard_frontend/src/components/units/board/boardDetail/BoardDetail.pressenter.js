@@ -81,8 +81,8 @@ export default function BoardDetailHTML(props){
            <S.Wrapper2>
                <S.Btns>
                    <S.Btn_Contents onClick={props.MoveMainpage}>돌아가기</S.Btn_Contents>
-                   <S.Btn_Contents onClick={props.MoveMainpage}>수정하기</S.Btn_Contents>
-                   <S.Btn_Contents onClick={props.MoveMainpage}>삭제하기</S.Btn_Contents>
+                   <S.Btn_Contents onClick={props.updateBoard}>수정하기</S.Btn_Contents>
+                   <S.Btn_Contents onClick={props.deleteOneBoard}>삭제하기</S.Btn_Contents>
                </S.Btns>
            </S.Wrapper2>
            

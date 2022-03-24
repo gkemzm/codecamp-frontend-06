@@ -132,6 +132,8 @@ export const Like_disLike = styled.div`
 `
 export const Like_disLike_btn = styled.div`
     display: flex;
+    cursor: pointer;
+  
 `
 
 export const BlueButton = styled(Like_disLike_btn)`
@@ -166,6 +168,7 @@ export const Btn_Contents = styled.button`
     height: 40px;
     border-radius: 10px;
     border: none;
+    cursor: pointer;
 `
 export const Wrapper_Waiting = styled.div`
     width: 300px;
