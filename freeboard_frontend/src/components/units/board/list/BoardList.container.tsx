@@ -25,3 +25,5 @@ export default function BoardList() {
     />
   );
 }
+//as HTMLButtonElement
+//instanceof Element

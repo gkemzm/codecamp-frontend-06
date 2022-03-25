@@ -11,13 +11,20 @@ export default function BoardSignHTML(props : BoardSignHTMLProps) {
         {props.isEdit ? <S.Top>
             <S.TopArea>
                 <S.Text>비밀번호</S.Text> 
-                <S.TopInput  placeholder= '  비밀번호를 입력해 주세요.' type={"password"} onChange={props.onChangePw}></S.TopInput>
+                <S.TopInput  
+                placeholder= '  비밀번호를 입력해 주세요.' 
+                type={"password"} 
+                onChange={props.onChangePw}
+                ></S.TopInput>
                 <S.Error>{props.pwError}</S.Error>
             </S.TopArea>
         </S.Top> : <S.Top>
             <S.TopArea>
                 <S.Text>작성자</S.Text>
-                <S.TopInput  placeholder= '  이름을 적어주세요.' onChange={props.onChangeWriter}></S.TopInput>
+                <S.TopInput  
+                placeholder= '  이름을 적어주세요.'
+                onChange={props.onChangeWriter}
+                defaultValue={props.data?.fetchBoard.writer}></S.TopInput>
                 <S.Error>{props.writerError}</S.Error>
             </S.TopArea>
             <S.TopArea>
@@ -41,13 +48,17 @@ export default function BoardSignHTML(props : BoardSignHTMLProps) {
 
         <S.MainTitle>
             <S.Text>제목</S.Text>
-            <S.TitleInput  placeholder= '  제목을 작성해주세요.' onChange={props.onChangeTitle}></S.TitleInput>
+            <S.TitleInput  placeholder= '  제목을 작성해주세요.'
+            onChange={props.onChangeTitle}
+            defaultValue={props.data?.fetchBoard.title}></S.TitleInput>
             <S.Error>{props.titleError}</S.Error>
         </S.MainTitle>
 
         <S.Middle>
             <S.Text>내용</S.Text>
-            <S.MiddleInput   placeholder= '  내용을 작성해주세요.' onChange={props.onChangeContents}></S.MiddleInput>
+            <S.MiddleInput   placeholder= '  내용을 작성해주세요.' 
+            onChange={props.onChangeContents}
+            defaultValue={props.data?.fetchBoard.contents}></S.MiddleInput>
             <S.Error>{props.contentsError}</S.Error>
         </S.Middle>
 

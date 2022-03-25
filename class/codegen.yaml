@@ -1,0 +1,17 @@
+schema: http://example.codebootcamp.co.kr/graphql
+generates:
+  ./src/commons/types/generated/types.ts:
+    plugins:
+      - typescript
+    config:
+      typesPrefix: I
+
+
+
+# yarn add @graphql-codegen/cli
+# yarn add @graphql-codegen/typescript
+# codegne.yaml 파일 생성
+# schema 수정
+# ./src/commons/types/generated/types.ts: 경로생성및 변경
+# package.json/scripts부분에 generate추가 
+# yarn generate 로 실행하면서 config 수정

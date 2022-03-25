@@ -73,7 +73,7 @@ export const Middle =  styled.div`
     padding-top: 40px;
 
 `
-export const MiddleInput = styled.input`
+export const MiddleInput = styled.textarea`
     width: 1000px;
     height: 500px;
     display: flex;
