@@ -1,9 +1,7 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { MouseEvent } from "react";
 
-
-export interface BoardListUIProps{
-    data?:any
-    onClickMoveToBoardNew: (event: MouseEvent<HTMLButtonElement>) => void
-    onClickMoveToBoardDetail: (event: MouseEvent<HTMLDivElement>) => void
-    
+export interface BoardListUIProps {
+  data?: any;
+  onClickMoveToBoardNew: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickMoveToBoardDetail: (event: MouseEvent<HTMLDivElement>) => void;
 }

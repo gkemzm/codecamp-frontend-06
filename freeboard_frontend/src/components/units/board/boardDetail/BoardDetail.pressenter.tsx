@@ -1,8 +1,8 @@
 // import {Wrapper, Top_Wrapper, ProfileImage, Profile, Clip,
-//     Position, Top_Wrapper_Inner, Name, Date, Pdetail,
+//     Position, TopWrapperInner, Name, Date, Pdetail,
 //    Middle_Wrapper, Middle_Wrapper_top, Title, Contents, ImageBox,
 //    Vidio, Like_disLike, Like_disLike_btn, Like_disLikes,
-//    Wrapper2, Btns, Btn_Contents, Wrapper_Waiting, Middle_Wrapper_bottom, ProfileHover} from '../../../styles/DetailPage'
+//    Wrapper2, Btns, Btn_Contents, Wrapper_Waiting, MiddleWrapperbottom, ProfileHover} from '../../../styles/DetailPage'
 import * as S from "../boardDetail/BoardDetail.styles";
 import { BoardDetailHTMLProps } from "./BoardDetail.types";
 
@@ -20,8 +20,8 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
               ></img>
             </S.Pdetail>
 
-            <S.Top_Wrapper>
-              <S.Top_Wrapper_Inner>
+            <S.TopWrapper>
+              <S.TopWrapperInner>
                 <S.ProfileImage>
                   <img
                     src="/fetchBoard/icon1.PNG"
@@ -35,8 +35,8 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                     {props.data?.fetchBoard.createdAt.slice(0, 10)}
                   </S.Date>
                 </S.ProfileHover>
-              </S.Top_Wrapper_Inner>
-              <S.Top_Wrapper_Inner>
+              </S.TopWrapperInner>
+              <S.TopWrapperInner>
                 <>
                   <S.Clip>
                     <img
@@ -53,10 +53,10 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                     ></img>
                   </S.Position>
                 </>
-              </S.Top_Wrapper_Inner>
-            </S.Top_Wrapper>
-            <S.Middle_Wrapper>
-              <S.Middle_Wrapper_top>
+              </S.TopWrapperInner>
+            </S.TopWrapper>
+            <S.MiddleWrapper>
+              <S.MiddleWrappertop>
                 <S.Title>
                   <div>{props.data?.fetchBoard.title}</div>
                 </S.Title>
@@ -66,8 +66,8 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                 <S.Contents>
                   <div>{props.data?.fetchBoard.contents}</div>
                 </S.Contents>
-              </S.Middle_Wrapper_top>
-              <S.Middle_Wrapper_bottom>
+              </S.MiddleWrappertop>
+              <S.MiddleWrapperBottom>
                 <S.Vidio>
                   {props.data?.fetchBoard.youtubeUrl}
                   <iframe
@@ -80,7 +80,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                     allowFullScreen
                   ></iframe>
                 </S.Vidio>
-                <S.Like_disLikes>
+                <S.LikeDislikes>
                   <S.Like_disLike_btn>
                     <img
                       src="/fetchBoard/like.PNG"
@@ -98,36 +98,83 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                       height="30px"
                     ></img>
                   </S.Like_disLike_btn>
-                </S.Like_disLikes>
+                </S.LikeDislikes>
 
-                <S.Like_disLikes>
+                <S.LikeDislikes>
                   <S.Like_disLike>
                     <div>{props.data?.fetchBoard.likeCount}</div>
                   </S.Like_disLike>
                   <S.Like_disLike>
                     <div>{props.data?.fetchBoard.dislikeCount}</div>
                   </S.Like_disLike>
-                </S.Like_disLikes>
-              </S.Middle_Wrapper_bottom>
-            </S.Middle_Wrapper>
+                </S.LikeDislikes>
+              </S.MiddleWrapperBottom>
+            </S.MiddleWrapper>
           </S.Wrapper>
 
           <S.Wrapper2>
             <S.Btns>
-              <S.Btn_Contents onClick={props.MoveMainpage}>
+              <S.BtnContents onClick={props.MoveMainpage}>
                 돌아가기
-              </S.Btn_Contents>
-              <S.Btn_Contents onClick={props.updateBoard}>
+              </S.BtnContents>
+              <S.BtnContents onClick={props.updateBoard}>
                 수정하기
-              </S.Btn_Contents>
-              <S.Btn_Contents onClick={props.deleteOneBoard}>
+              </S.BtnContents>
+              <S.BtnContents onClick={props.deleteOneBoard}>
                 삭제하기
-              </S.Btn_Contents>
+              </S.BtnContents>
             </S.Btns>
           </S.Wrapper2>
+
+          <S.CommentWrapper>
+            <S.CommentWrite>
+              <S.CommentInfo>
+                <S.Info>ID</S.Info>
+                <S.CommentInputId
+                  placeholder=" ID"
+                  onChange={props.onChangeCommentWriter}
+                ></S.CommentInputId>
+                <S.Info>PW</S.Info>
+                <S.CommentInputPw
+                  placeholder=" PW"
+                  onChange={props.onChangeCommentPw}
+                ></S.CommentInputPw>
+                <S.StarPoint></S.StarPoint>
+              </S.CommentInfo>
+              <S.CommentSubmit>
+                <S.CommentInput
+                  placeholder=" 내용을 입력하세요"
+                  onChange={props.onChangeCommentContents}
+                ></S.CommentInput>
+                <S.CommentSubmitBtn onClick={props.CreateCommentBoard}>
+                  댓글 등록하기
+                </S.CommentSubmitBtn>
+              </S.CommentSubmit>
+            </S.CommentWrite>
+            <S.CommentList>
+              {props.dataComment?.fetchBoardComments.map((el: any) => (
+                <S.CommentDetailBox key={el._id}>
+                  <S.CommentDetailPicture></S.CommentDetailPicture>
+                  <S.CommentDetailInfo>
+                    <S.CommentWriter>
+                      <S.CWriter>작성자 : {el.writer}</S.CWriter>
+                      <S.CStar>평점: {el.rating}</S.CStar>
+                      <S.CEdit>수정하기</S.CEdit>
+                      <S.CDelete>삭제</S.CDelete>
+                    </S.CommentWriter>
+                    <S.CommentContents>{el.contents}</S.CommentContents>
+                    <S.CommentTime>
+                      {String(el.createdAt).slice(0, 10)}
+                    </S.CommentTime>
+                  </S.CommentDetailInfo>
+                  <S.CommentDetailEdit></S.CommentDetailEdit>
+                </S.CommentDetailBox>
+              ))}
+            </S.CommentList>
+          </S.CommentWrapper>
         </>
       ) : (
-        <S.Wrapper_Waiting>로딩중입니다.</S.Wrapper_Waiting>
+        <S.WrapperWaiting>로딩중입니다.</S.WrapperWaiting>
       )}
     </>
   );

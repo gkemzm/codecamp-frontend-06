@@ -73,7 +73,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
     if (contents) updateBoardInput.contents = contents;
 
     try {
-      const resultUpdate = await callUpdateBoard({
+      await callUpdateBoard({
         variables: {
           updateBoardInput: {
             title: title,
