@@ -1,8 +1,3 @@
-// import {Wrapper, Top_Wrapper, ProfileImage, Profile, Clip,
-//     Position, TopWrapperInner, Name, Date, Pdetail,
-//    Middle_Wrapper, Middle_Wrapper_top, Title, Contents, ImageBox,
-//    Vidio, Like_disLike, Like_disLike_btn, Like_disLikes,
-//    Wrapper2, Btns, Btn_Contents, Wrapper_Waiting, MiddleWrapperbottom, ProfileHover} from '../../../styles/DetailPage'
 import * as S from "../boardDetail/BoardDetail.styles";
 import { BoardDetailHTMLProps } from "./BoardDetail.types";
 
@@ -138,8 +133,13 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                 <S.CommentInputPw
                   placeholder=" PW"
                   onChange={props.onChangeCommentPw}
+                  type={"password"}
                 ></S.CommentInputPw>
-                <S.StarPoint></S.StarPoint>
+                <S.Info> 평점</S.Info>
+                <S.StarPoint
+                  placeholder="평점(숫자만!)"
+                  onChange={props.onChangeCommentRating}
+                ></S.StarPoint>
               </S.CommentInfo>
               <S.CommentSubmit>
                 <S.CommentInput
@@ -153,22 +153,59 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
             </S.CommentWrite>
             <S.CommentList>
               {props.dataComment?.fetchBoardComments.map((el: any) => (
-                <S.CommentDetailBox key={el._id}>
-                  <S.CommentDetailPicture></S.CommentDetailPicture>
-                  <S.CommentDetailInfo>
-                    <S.CommentWriter>
-                      <S.CWriter>작성자 : {el.writer}</S.CWriter>
-                      <S.CStar>평점: {el.rating}</S.CStar>
-                      <S.CEdit>수정하기</S.CEdit>
-                      <S.CDelete>삭제</S.CDelete>
-                    </S.CommentWriter>
-                    <S.CommentContents>{el.contents}</S.CommentContents>
-                    <S.CommentTime>
-                      {String(el.createdAt).slice(0, 10)}
-                    </S.CommentTime>
-                  </S.CommentDetailInfo>
-                  <S.CommentDetailEdit></S.CommentDetailEdit>
-                </S.CommentDetailBox>
+                <>
+                  <S.CommentDetailBox key={el._id}>
+                    <S.CommentDetailPicture></S.CommentDetailPicture>
+                    <S.CommentDetailInfo>
+                      <S.CommentWriter>
+                        <S.CWriter>작성자 : {el.writer}</S.CWriter>
+                        <S.CStar>평점: {el.rating}</S.CStar>
+                      </S.CommentWriter>
+                      <S.CommentContents>{el.contents}</S.CommentContents>
+                      <S.CommentTime>
+                        {String(el.createdAt).slice(0, 10)}
+                      </S.CommentTime>
+                    </S.CommentDetailInfo>
+                    <S.CommentDetailEdit>
+                      <S.CEdit onClick={props.DisplayOnOff}>수정하기</S.CEdit>
+                      <S.CDelete onClick={props.deleteOneComment} id={el._id}>
+                        삭제하기
+                      </S.CDelete>
+                      <S.CPw
+                        placeholder="    비밀번호"
+                        type={"password"}
+                        onChange={props.onChangeCommentPw}
+                      ></S.CPw>
+                    </S.CommentDetailEdit>
+                  </S.CommentDetailBox>
+
+                  <S.CommentEditWrite isActive={props.isActive}>
+                    <S.CommentEditInfo>
+                      <S.Info></S.Info>
+                      <S.CommentInputPw
+                        placeholder=" PW"
+                        onChange={props.onChangeCommentPw}
+                        type={"password"}
+                      ></S.CommentInputPw>
+                      <S.StarPoint
+                        placeholder="평점(숫자만!)"
+                        onChange={props.onChangeCommentRating}
+                      ></S.StarPoint>
+                    </S.CommentEditInfo>
+                    <S.CommentSubmit>
+                      <S.CommentInput
+                        placeholder=" 내용을 입력하세요"
+                        onChange={props.onChangeCommentContents}
+                      ></S.CommentInput>
+                      <S.CommentSubmitBtn
+                        onClick={props.UpdateCommentBoard}
+                        id={el._id}
+                      >
+                        댓글 수정하기
+                      </S.CommentSubmitBtn>
+                    </S.CommentSubmit>
+                  </S.CommentEditWrite>
+                </>
               ))}
             </S.CommentList>
           </S.CommentWrapper>

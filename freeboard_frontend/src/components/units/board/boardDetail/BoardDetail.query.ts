@@ -14,6 +14,7 @@ export const FETCH_BOARD = gql`
     }
   }
 `;
+
 // export const FETCH_BOARD_COMMENT = gql`
 //   query fetchBoardComment($page: Int, $boardId: ID!) {
 //     fetchBoard(page: $page, boardId: $boardId) {
@@ -64,6 +65,12 @@ export const DELETE_BOARD = gql`
   }
 `;
 
+export const DELETE_BOARD_COMMENT = gql`
+  mutation deleteBoard($password: String, $boardCommentId: ID!) {
+    deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
+  }
+`;
+
 export const UP_LIKE = gql`
   mutation likeBoard($boardId: ID!) {
     likeBoard(boardId: $boardId)
@@ -96,6 +103,28 @@ export const UPDATE_BOARD = gql`
       dislikeCount
       images
       createdAt
+      rating
+    }
+  }
+`;
+
+export const UPDATE_BOARD_COMMENT = gql`
+  mutation updateBoardComment(
+    $updateBoardCommentInput: UpdateBoardCommentInput!
+    $password: String
+    $boardCommentId: ID!
+  ) {
+    updateBoardComment(
+      updateBoardCommentInput: $updateBoardCommentInput
+      password: $password
+      boardCommentId: $boardCommentId
+    ) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      updatedAt
     }
   }
 `;

@@ -8,6 +8,8 @@ import {
   DELETE_BOARD,
   CREATE_BOARD_COMMENT,
   FETCH_BOARD_COMMENT,
+  DELETE_BOARD_COMMENT,
+  UPDATE_BOARD_COMMENT,
 } from "./BoardDetail.query";
 import BoardDetailHTML from "./BoardDetail.pressenter";
 
@@ -18,11 +20,14 @@ export default function BoardDetailFunction() {
   const [callDisLikeApi] = useMutation(UP_DISLIKE);
   const [callDeleteBoard] = useMutation(DELETE_BOARD);
   const [createComment] = useMutation(CREATE_BOARD_COMMENT);
+  const [deleteComment] = useMutation(DELETE_BOARD_COMMENT);
+  const [updateComment] = useMutation(UPDATE_BOARD_COMMENT);
 
   const [writer, setWriter] = useState("");
   const [pw, setPw] = useState("");
-  // const [rating, setRating] = useState();
+  const [rating, setRating] = useState("");
   const [contents, setContents] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -42,6 +47,16 @@ export default function BoardDetailFunction() {
     router.push("/board");
   };
 
+  const DisplayOnOff = (event: MouseEvent<HTMLButtonElement>) => {
+    if (isActive === false) {
+      setIsActive(true);
+    }
+
+    if (isActive === true) {
+      setIsActive(false);
+    }
+  };
+
   const CreateCommentBoard = async (event: MouseEvent<HTMLButtonElement>) => {
     try {
       await createComment({
@@ -50,13 +65,69 @@ export default function BoardDetailFunction() {
             writer: writer,
             password: pw,
             contents: String(contents),
-            rating: 5,
+            rating: Number(rating),
           },
           boardId: router.query.boardId,
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENT,
+            variables: {
+              boardId: router.query.boardId,
+            },
+          },
+        ],
       });
-      console.log(data);
       console.log(dataComment);
+      // eslint-disable-next-line no-unused-expressions
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
+    }
+  };
+
+  const UpdateCommentBoard = async (event: MouseEvent<HTMLButtonElement>) => {
+    try {
+      await updateComment({
+        variables: {
+          updateBoardCommentInput: {
+            contents: contents,
+            rating: Number(rating),
+          },
+          password: pw,
+          boardCommentId: String((event.target as HTMLButtonElement).id),
+        },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENT,
+            variables: {
+              boardId: router.query.boardId,
+            },
+          },
+        ],
+      });
+      console.log(dataComment);
+      // eslint-disable-next-line no-unused-expressions
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
+    }
+  };
+
+  const deleteOneComment = async (event: MouseEvent<HTMLButtonElement>) => {
+    try {
+      await deleteComment({
+        variables: {
+          password: pw,
+          boardCommentId: String((event.target as HTMLButtonElement).id),
+        },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENT,
+            variables: {
+              boardId: String(router.query.boardId),
+            },
+          },
+        ],
+      });
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -89,9 +160,16 @@ export default function BoardDetailFunction() {
         variables: {
           boardId: router.query.boardId,
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD,
+            variables: {
+              boardId: router.query.boardId,
+            },
+          },
+        ],
       });
       // setLikeCountup(resultLike.data.callLikeApi)
-      location.reload();
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -103,8 +181,15 @@ export default function BoardDetailFunction() {
         variables: {
           boardId: router.query.boardId,
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD,
+            variables: {
+              boardId: router.query.boardId,
+            },
+          },
+        ],
       });
-      location.reload();
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -116,10 +201,14 @@ export default function BoardDetailFunction() {
   const onChangeCommentPw = (event: ChangeEvent<HTMLInputElement>) => {
     setPw(event.target.value);
   };
+
   const onChangeCommentContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
   };
 
+  const onChangeCommentRating = (event: ChangeEvent<HTMLInputElement>) => {
+    setRating(event.target.value);
+  };
   return (
     <BoardDetailHTML
       data={data}
@@ -133,6 +222,11 @@ export default function BoardDetailFunction() {
       onChangeCommentWriter={onChangeCommentWriter}
       onChangeCommentPw={onChangeCommentPw}
       onChangeCommentContents={onChangeCommentContents}
+      deleteOneComment={deleteOneComment}
+      UpdateCommentBoard={UpdateCommentBoard}
+      onChangeCommentRating={onChangeCommentRating}
+      isActive={isActive}
+      DisplayOnOff={DisplayOnOff}
     />
   );
 }

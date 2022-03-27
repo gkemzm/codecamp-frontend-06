@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { IdisplayOnOff } from "./BoardDetail.types";
 
 const hover = css`
   &:hover {
@@ -220,6 +221,15 @@ export const CommentInfo = styled.div`
   padding: 20px 0px;
   align-items: center;
 `;
+
+export const CommentEditInfo = styled.div`
+  width: 250px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px 0px;
+`;
+
 export const CommentInputId = styled.input`
   width: 170px;
   height: 25px;
@@ -239,17 +249,23 @@ export const CommentInputPw = styled.input`
   border-bottom: none;
   border-left: none;
   border-right: none;
+  margin-right: 30px;
 `;
 
-export const StarPoint = styled.div`
+export const StarPoint = styled.input`
   width: 100px;
   height: 25px;
   display: flex;
-  margin-left: 50px;
+  margin-left: 5px;
+  border-top: 5px solid greenyellow;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
 `;
 
 export const CommentInput = styled.textarea`
-  width: 870px;
+  width: 800px;
   height: 90px;
   margin-right: 20px;
   border-top: 5px solid greenyellow;
@@ -257,6 +273,8 @@ export const CommentInput = styled.textarea`
   border-bottom: none;
   border-left: none;
   border-right: none;
+  margin-left: 30px;
+  margin-right: 30px;
 `;
 
 export const CommentSubmitBtn = styled.button`
@@ -270,6 +288,7 @@ export const CommentSubmitBtn = styled.button`
   border-right: none;
   font-size: 15px;
   font-weight: 700;
+  display: Fixed;
   cursor: pointer;
 `;
 
@@ -325,7 +344,7 @@ export const CommentDetailInfo = styled.div`
   padding: 20px 10px;
 `;
 export const CommentWriter = styled.div`
-  width: 880px;
+  width: 700px;
   display: flex;
   flex-direction: row;
   height: 30px;
@@ -353,34 +372,9 @@ export const CStar = styled.div`
   font-size: 12px;
   font-weight: 700;
 `;
-export const CDelete = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
-  border: none;
-  height: 30px;
-  padding: 0px 10px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-left: 10px;
-`;
-
-export const CEdit = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
-  border: none;
-  height: 30px;
-  padding: 0px 10px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-left: 520px;
-`;
 
 export const CommentContents = styled.div`
-  width: 870px;
+  width: 800px;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   margin-top: 10px;
@@ -397,7 +391,59 @@ export const CommentTime = styled.div`
   margin-top: 10px;
 `;
 export const CommentDetailEdit = styled.div`
-  width: 50px;
+  width: 130px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+`;
+
+export const CDelete = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  border: none;
+  height: 30px;
+  padding: 0px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+`;
+
+export const CEdit = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  border: none;
+  height: 30px;
+  padding: 0px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+`;
+
+export const CPw = styled.input`
+  width: 90px;
+  height: 30px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  border: none;
+`;
+
+export const CommentEditWrite = styled.div`
+  width: 1000px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border-top: 5px solid greenyellow;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 80px;
+  padding: 10px 0px;
+  display: ${(props: IdisplayOnOff) => (props.isActive ? "flex" : "none")};
 `;
