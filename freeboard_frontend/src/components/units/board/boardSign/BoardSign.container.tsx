@@ -84,6 +84,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
           updateBoardInput: {
             title: title,
             contents: contents,
+            youtubeUrl: youTube,
           },
           password: pw,
           boardId: router.query.boardId,

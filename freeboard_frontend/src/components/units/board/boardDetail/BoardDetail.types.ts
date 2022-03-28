@@ -16,6 +16,7 @@ export interface BoardDetailHTMLProps {
   pw: any;
   contents: any;
   rating: any;
+  handleChange: any;
   upLike: () => void;
   upDisLike: () => void;
   MoveMainpage: (event: MouseEvent<HTMLButtonElement>) => void;

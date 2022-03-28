@@ -1,7 +1,5 @@
 import * as S from "../boardSign/BoardSign.styles";
 import { BoardSignHTMLProps } from "./BoardSing.types";
-import { YouTube } from "../boardDetail/BoardDetail.styles";
-import { Address } from "./BoardSign.styles";
 
 export default function BoardSignHTML(props: BoardSignHTMLProps) {
   return (
@@ -69,14 +67,14 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
           <S.PostBtn>우편번호 검색</S.PostBtn>
         </S.PostNum>
         <S.Address
-          onChange={props.onChangeAddress}
+          // onChange={props.onChangeAddress}
           placeholder="  주소를입력해주세요"
-          defaultValue={props.data?.fetchBoard.Address}
+          // defaultValue={props.data?.fetchBoard.Address}
         ></S.Address>
         <S.Address
-          onChange={props.onChangeAddressDetail}
+          // onChange={props.onChangeAddressDetail}
           placeholder="  상세주소를입력해주세요"
-          defaultValue={props.data?.fetchBoard.Address}
+          // defaultValue={props.data?.fetchBoard.Address}
         ></S.Address>
       </S.Middle>
 

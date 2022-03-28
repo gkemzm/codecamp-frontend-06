@@ -223,6 +223,9 @@ export default function BoardDetailFunction() {
   const onChangeCommentRating = (event: ChangeEvent<HTMLInputElement>) => {
     setRating(event.target.value);
   };
+  const handleChange = (value: any) => {
+    setRating(value);
+  };
   return (
     <BoardDetailHTML
       data={data}
@@ -243,6 +246,7 @@ export default function BoardDetailFunction() {
       onChangeCommentRating={onChangeCommentRating}
       DisplayOnOff={DisplayOnOff}
       PositionHover={PositionHover}
+      handleChange={handleChange}
       writer={writer}
       pw={pw}
       rating={rating}

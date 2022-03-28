@@ -286,7 +286,7 @@ export const StarNumber = styled.div`
   margin-left: 15px;
   font-size: 18px;
   font-weight: 700;
-  padding-top: 5px;
+  padding-top: 3px;
 `;
 
 export const CommentInput = styled.textarea`

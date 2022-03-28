@@ -143,13 +143,8 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                   value={props.pw}
                 ></S.CommentInputPw>
                 <S.Info> 평점</S.Info>
-                <S.StarPoint
-                  placeholder="평점(숫자만!)"
-                  onChange={props.onChangeCommentRating}
-                  value={props.rating}
-                ></S.StarPoint>
-                <Rate onChange={handleChange} value={value} />
-                <StarNumber>{value}.0</StarNumber>
+                <Rate onChange={props.handleChange} value={props.rating} />
+                <StarNumber>{props.rating}.0</StarNumber>
               </S.CommentInfo>
               <S.CommentSubmit>
                 <S.CommentInput
@@ -171,7 +166,11 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                       <S.CommentWriter>
                         <S.CWriter>작성자 : {el.writer}</S.CWriter>
                         <S.CStar>평점: {el.rating}</S.CStar>
-                        <Rate onChange={handleChange} value={value} />
+                        <Rate
+                          onChange={handleChange}
+                          value={el.rating}
+                          disabled={true}
+                        />
                       </S.CommentWriter>
                       <S.CommentContents>{el.contents}</S.CommentContents>
                       <S.CommentTime>
@@ -191,7 +190,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                     </S.CommentDetailEdit>
                   </S.CommentDetailBox>
 
-                  <S.CommentEditWrite id={el._id} isActive={props.isActive}>
+                  <S.CommentEditWrite isActive={props.isActive}>
                     <S.CommentEditInfo>
                       <S.Info></S.Info>
                       <S.CommentInputPw
