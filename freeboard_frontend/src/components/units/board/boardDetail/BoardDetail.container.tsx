@@ -28,6 +28,7 @@ export default function BoardDetailFunction() {
   const [rating, setRating] = useState("");
   const [contents, setContents] = useState("");
   const [isActive, setIsActive] = useState(false);
+  const [isHover, setIsHover] = useState(false);
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -57,79 +58,13 @@ export default function BoardDetailFunction() {
     }
   };
 
-  const CreateCommentBoard = async (event: MouseEvent<HTMLButtonElement>) => {
-    try {
-      await createComment({
-        variables: {
-          createBoardCommentInput: {
-            writer: writer,
-            password: pw,
-            contents: String(contents),
-            rating: Number(rating),
-          },
-          boardId: router.query.boardId,
-        },
-        refetchQueries: [
-          {
-            query: FETCH_BOARD_COMMENT,
-            variables: {
-              boardId: router.query.boardId,
-            },
-          },
-        ],
-      });
-      console.log(dataComment);
-      // eslint-disable-next-line no-unused-expressions
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
+  const PositionHover = () => {
+    if (isHover === false) {
+      setIsHover(true);
     }
-  };
 
-  const UpdateCommentBoard = async (event: MouseEvent<HTMLButtonElement>) => {
-    try {
-      await updateComment({
-        variables: {
-          updateBoardCommentInput: {
-            contents: contents,
-            rating: Number(rating),
-          },
-          password: pw,
-          boardCommentId: String((event.target as HTMLButtonElement).id),
-        },
-        refetchQueries: [
-          {
-            query: FETCH_BOARD_COMMENT,
-            variables: {
-              boardId: router.query.boardId,
-            },
-          },
-        ],
-      });
-      console.log(dataComment);
-      // eslint-disable-next-line no-unused-expressions
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
-    }
-  };
-
-  const deleteOneComment = async (event: MouseEvent<HTMLButtonElement>) => {
-    try {
-      await deleteComment({
-        variables: {
-          password: pw,
-          boardCommentId: String((event.target as HTMLButtonElement).id),
-        },
-        refetchQueries: [
-          {
-            query: FETCH_BOARD_COMMENT,
-            variables: {
-              boardId: String(router.query.boardId),
-            },
-          },
-        ],
-      });
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
+    if (isHover === true) {
+      setIsHover(false);
     }
   };
 
@@ -195,6 +130,85 @@ export default function BoardDetailFunction() {
     }
   };
 
+  const CreateCommentBoard = async (event: MouseEvent<HTMLButtonElement>) => {
+    try {
+      await createComment({
+        variables: {
+          createBoardCommentInput: {
+            writer: writer,
+            password: pw,
+            contents: String(contents),
+            rating: Number(rating),
+          },
+          boardId: router.query.boardId,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENT,
+            variables: {
+              boardId: router.query.boardId,
+            },
+          },
+        ],
+      });
+      console.log(dataComment);
+      setWriter("");
+      setPw("");
+      setContents("");
+      // eslint-disable-next-line no-unused-expressions
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
+    }
+  };
+
+  const UpdateCommentBoard = async (event: MouseEvent<HTMLButtonElement>) => {
+    try {
+      await updateComment({
+        variables: {
+          updateBoardCommentInput: {
+            contents: contents,
+            rating: Number(rating),
+          },
+          password: pw,
+          boardCommentId: String((event.target as HTMLButtonElement).id),
+        },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENT,
+            variables: {
+              boardId: router.query.boardId,
+            },
+          },
+        ],
+      });
+      console.log(dataComment);
+      // eslint-disable-next-line no-unused-expressions
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
+    }
+  };
+
+  const deleteOneComment = async (event: MouseEvent<HTMLButtonElement>) => {
+    try {
+      await deleteComment({
+        variables: {
+          password: pw,
+          boardCommentId: String((event.target as HTMLButtonElement).id),
+        },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENT,
+            variables: {
+              boardId: String(router.query.boardId),
+            },
+          },
+        ],
+      });
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
+    }
+  };
+
   const onChangeCommentWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
   };
@@ -213,6 +227,8 @@ export default function BoardDetailFunction() {
     <BoardDetailHTML
       data={data}
       dataComment={dataComment}
+      isActive={isActive}
+      isHover={isHover}
       upLike={upLike}
       upDisLike={upDisLike}
       MoveMainpage={MoveMainpage}
@@ -225,8 +241,12 @@ export default function BoardDetailFunction() {
       deleteOneComment={deleteOneComment}
       UpdateCommentBoard={UpdateCommentBoard}
       onChangeCommentRating={onChangeCommentRating}
-      isActive={isActive}
       DisplayOnOff={DisplayOnOff}
+      PositionHover={PositionHover}
+      writer={writer}
+      pw={pw}
+      rating={rating}
+      contents={contents}
     />
   );
 }

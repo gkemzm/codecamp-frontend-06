@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { IdisplayOnOff } from "./BoardDetail.types";
+import { IdisplayOnOff, IHoverPosition } from "./BoardDetail.types";
 
 const hover = css`
   &:hover {
@@ -20,11 +20,24 @@ export const Wrapper = styled.div`
 `;
 export const Pdetail = styled.div`
   width: 970px;
+  height: 70px;
   display: flex;
   flex-direction: row;
   justify-content: end;
   align-items: center;
   padding-top: 15px;
+`;
+
+export const PositionDetail = styled.div`
+  width: 270px;
+  height: 50px;
+  display: flex;
+  padding-top: 15px;
+  background-color: #bdbdbd;
+  border: none;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  color: white;
+  display: ${(props: IHoverPosition) => (props.isHover ? "flex" : "none")};
 `;
 
 export const TopWrapper = styled.div`
@@ -75,6 +88,7 @@ export const Clip = styled.div`
 export const Position = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 export const MiddleWrapper = styled.div`
   width: 1000px;
@@ -262,6 +276,17 @@ export const StarPoint = styled.input`
   border-bottom: none;
   border-left: none;
   border-right: none;
+  margin-right: 10px;
+`;
+
+export const StarNumber = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  padding-top: 5px;
 `;
 
 export const CommentInput = styled.textarea`
@@ -357,6 +382,7 @@ export const CWriter = styled.div`
   display: flex;
   align-items: center;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
   margin-right: 20px;
   padding: 0px 10px;
   font-size: 16px;
@@ -367,10 +393,12 @@ export const CStar = styled.div`
   display: flex;
   align-items: center;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
   height: 30px;
   padding: 0px 10px;
   font-size: 12px;
   font-weight: 700;
+  margin-right: 10px;
 `;
 
 export const CommentContents = styled.div`

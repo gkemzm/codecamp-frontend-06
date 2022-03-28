@@ -3,10 +3,19 @@ export interface IdisplayOnOff {
   isActive: boolean;
 }
 
+export interface IHoverPosition {
+  isHover: boolean;
+}
+
 export interface BoardDetailHTMLProps {
   data?: any;
   dataComment?: any;
   isActive: boolean;
+  isHover: boolean;
+  writer: any;
+  pw: any;
+  contents: any;
+  rating: any;
   upLike: () => void;
   upDisLike: () => void;
   MoveMainpage: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -20,4 +29,5 @@ export interface BoardDetailHTMLProps {
   UpdateCommentBoard: (event: MouseEvent<HTMLButtonElement>) => void;
   DisplayOnOff: (event: MouseEvent<HTMLButtonElement>) => void;
   onChangeCommentRating: (event: ChangeEvent<HTMLInputElement>) => void;
+  PositionHover: (event: MouseEvent<HTMLDivElement>) => void;
 }

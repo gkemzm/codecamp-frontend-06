@@ -13,6 +13,8 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const [youTube, setYouTube] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [addressDetail, setAddressDetail] = useState("");
 
   const [writerError, setWriterError] = useState("");
   const [pwError, setPwError] = useState("");
@@ -45,6 +47,10 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
             title: title,
             contents: contents,
             youtubeUrl: youTube,
+            // BoardAddress: {
+            //   address: address,
+            //   addressDetail: addressDetail,
+            // },
           },
         },
       });
@@ -146,6 +152,14 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
     setYouTube(event.target.value);
   };
 
+  // const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setAddress(event.target.value);
+  // };
+
+  // const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setAddressDetail(event.target.value);
+  // };
+
   return (
     <BoardSignHTML
       isActive={isActive}
@@ -159,6 +173,8 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
       onChangeTitle={onChangeTitle}
       onChangeContents={onChangeContents}
       onChangeYouTube={onChangeYouTube}
+      // onChangeAddress={onChangeAddress}
+      // onChangeAddressDetail={onChangeAddressDetail}
       updateBoard={updateBoard}
       submit={submit}
       data={props.data}

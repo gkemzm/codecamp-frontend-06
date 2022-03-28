@@ -26,6 +26,8 @@ export interface BoardSignHTMLProps {
   onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   onChangeYouTube: (event: ChangeEvent<HTMLInputElement>) => void;
+  // onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
+  // onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   updateBoard: () => void;
   submit: (event: MouseEvent<HTMLButtonElement>) => void;
   data?: any;

@@ -26,6 +26,7 @@ export const UPDATE_BOARD = gql`
       likeCount
       dislikeCount
       images
+      boardAddress
       createdAt
     }
   }

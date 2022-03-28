@@ -14,51 +14,6 @@ export const FETCH_BOARD = gql`
     }
   }
 `;
-
-// export const FETCH_BOARD_COMMENT = gql`
-//   query fetchBoardComment($page: Int, $boardId: ID!) {
-//     fetchBoard(page: $page, boardId: $boardId) {
-//       _id
-//       writer
-//       contents
-//       rating
-//       createdAt
-//       updatedAt
-//     }
-//   }
-// `;
-export const FETCH_BOARD_COMMENT = gql`
-  query fetchBoardcomments($boardId: ID!) {
-    fetchBoardComments(boardId: $boardId) {
-      _id
-      writer
-      contents
-      rating
-      createdAt
-      updatedAt
-    }
-  }
-`;
-
-export const CREATE_BOARD_COMMENT = gql`
-  mutation createBoardComment(
-    $createBoardCommentInput: CreateBoardCommentInput!
-    $boardId: ID!
-  ) {
-    createBoardComment(
-      createBoardCommentInput: $createBoardCommentInput
-      boardId: $boardId
-    ) {
-      _id
-      writer
-      contents
-      createdAt
-      updatedAt
-      rating
-    }
-  }
-`;
-
 export const DELETE_BOARD = gql`
   mutation deleteBoard($boardId: ID!) {
     deleteBoard(boardId: $boardId)
@@ -107,6 +62,37 @@ export const UPDATE_BOARD = gql`
     }
   }
 `;
+export const FETCH_BOARD_COMMENT = gql`
+  query fetchBoardcomments($boardId: ID!) {
+    fetchBoardComments(boardId: $boardId) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const CREATE_BOARD_COMMENT = gql`
+  mutation createBoardComment(
+    $createBoardCommentInput: CreateBoardCommentInput!
+    $boardId: ID!
+  ) {
+    createBoardComment(
+      createBoardCommentInput: $createBoardCommentInput
+      boardId: $boardId
+    ) {
+      _id
+      writer
+      contents
+      createdAt
+      updatedAt
+      rating
+    }
+  }
+`;
 
 export const UPDATE_BOARD_COMMENT = gql`
   mutation updateBoardComment(
@@ -128,3 +114,16 @@ export const UPDATE_BOARD_COMMENT = gql`
     }
   }
 `;
+
+// export const FETCH_BOARD_COMMENT = gql`
+//   query fetchBoardComment($page: Int, $boardId: ID!) {
+//     fetchBoard(page: $page, boardId: $boardId) {
+//       _id
+//       writer
+//       contents
+//       rating
+//       createdAt
+//       updatedAt
+//     }
+//   }
+// `;

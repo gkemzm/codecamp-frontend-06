@@ -1,5 +1,7 @@
 import * as S from "../boardSign/BoardSign.styles";
 import { BoardSignHTMLProps } from "./BoardSing.types";
+import { YouTube } from "../boardDetail/BoardDetail.styles";
+import { Address } from "./BoardSign.styles";
 
 export default function BoardSignHTML(props: BoardSignHTMLProps) {
   return (
@@ -39,18 +41,6 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
           </S.TopArea>
         </S.Top>
       )}
-      {/* <S.Top>
-            <S.TopArea>
-                <S.Text>작성자</S.Text>
-                <S.TopInput  placeholder= '  이름을 적어주세요.' onChange={props.onChangeWriter}></S.TopInput>
-                <S.Error>{props.writerError}</S.Error>
-            </S.TopArea>
-            <S.TopArea>
-                <S.Text>비밀번호</S.Text> 
-                <S.TopInput  placeholder= '  비밀번호를 입력해 주세요.' type={"password"} onChange={props.onChangePw}></S.TopInput>
-                <S.Error>{props.pwError}</S.Error>
-            </S.TopArea>
-        </S.Top> */}
 
       <S.MainTitle>
         <S.Text>제목</S.Text>
@@ -78,8 +68,16 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
           <S.PostInput placeholder="         07250"></S.PostInput>
           <S.PostBtn>우편번호 검색</S.PostBtn>
         </S.PostNum>
-        <S.Address></S.Address>
-        <S.Address></S.Address>
+        <S.Address
+          onChange={props.onChangeAddress}
+          placeholder="  주소를입력해주세요"
+          defaultValue={props.data?.fetchBoard.Address}
+        ></S.Address>
+        <S.Address
+          onChange={props.onChangeAddressDetail}
+          placeholder="  상세주소를입력해주세요"
+          defaultValue={props.data?.fetchBoard.Address}
+        ></S.Address>
       </S.Middle>
 
       <S.Bottom>
@@ -87,6 +85,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
         <S.YouTube
           onChange={props.onChangeYouTube}
           placeholder="  링크를 입력해주세요"
+          defaultValue={props.data?.fetchBoard.youtubeUrl}
         ></S.YouTube>
       </S.Bottom>
 

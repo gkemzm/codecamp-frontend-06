@@ -1,18 +1,28 @@
 import * as S from "../boardDetail/BoardDetail.styles";
 import { BoardDetailHTMLProps } from "./BoardDetail.types";
+import ReactPlayer from "react-player";
+import { Rate } from "antd";
+import { useState } from "react";
+import { StarNumber } from "./BoardDetail.styles";
 
 export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
+  const [value, setValue] = useState(3);
+
+  const handleChange = (value: any) => {
+    setValue(value);
+  };
+
+  const onClickAlert = (event: any) => {
+    alert(`${event.currentTarget.id}님이 작성한 댓글입니다.`);
+  };
+
   return (
     <>
       {props.data ? (
         <>
           <S.Wrapper>
             <S.Pdetail>
-              <img
-                src="/fetchBoard/positiondetail.PNG"
-                width="260px"
-                height="50px"
-              ></img>
+              <S.PositionDetail isHover={props.isHover}></S.PositionDetail>
             </S.Pdetail>
 
             <S.TopWrapper>
@@ -40,7 +50,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                       height="30px"
                     ></img>
                   </S.Clip>
-                  <S.Position>
+                  <S.Position onClick={props.PositionHover}>
                     <img
                       src="/fetchBoard/position.PNG"
                       width="30px"
@@ -64,16 +74,11 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
               </S.MiddleWrappertop>
               <S.MiddleWrapperBottom>
                 <S.Vidio>
-                  {props.data?.fetchBoard.youtubeUrl}
-                  <iframe
-                    width="560"
-                    height="315"
-                    src={props.data?.fetchBoard?.youtubeUrl}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
+                  <ReactPlayer
+                    url={props.data?.fetchBoard.youtubeUrl}
+                    width="560px"
+                    height="315px"
+                  />
                 </S.Vidio>
                 <S.LikeDislikes>
                   <S.Like_disLike_btn>
@@ -128,23 +133,29 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                 <S.CommentInputId
                   placeholder=" ID"
                   onChange={props.onChangeCommentWriter}
+                  value={props.writer} // 제어컴포넌트
                 ></S.CommentInputId>
                 <S.Info>PW</S.Info>
                 <S.CommentInputPw
                   placeholder=" PW"
                   onChange={props.onChangeCommentPw}
                   type={"password"}
+                  value={props.pw}
                 ></S.CommentInputPw>
                 <S.Info> 평점</S.Info>
                 <S.StarPoint
                   placeholder="평점(숫자만!)"
                   onChange={props.onChangeCommentRating}
+                  value={props.rating}
                 ></S.StarPoint>
+                <Rate onChange={handleChange} value={value} />
+                <StarNumber>{value}.0</StarNumber>
               </S.CommentInfo>
               <S.CommentSubmit>
                 <S.CommentInput
                   placeholder=" 내용을 입력하세요"
                   onChange={props.onChangeCommentContents}
+                  value={props.contents}
                 ></S.CommentInput>
                 <S.CommentSubmitBtn onClick={props.CreateCommentBoard}>
                   댓글 등록하기
@@ -156,10 +167,11 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                 <>
                   <S.CommentDetailBox key={el._id}>
                     <S.CommentDetailPicture></S.CommentDetailPicture>
-                    <S.CommentDetailInfo>
+                    <S.CommentDetailInfo id={el.writer} onClick={onClickAlert}>
                       <S.CommentWriter>
                         <S.CWriter>작성자 : {el.writer}</S.CWriter>
                         <S.CStar>평점: {el.rating}</S.CStar>
+                        <Rate onChange={handleChange} value={value} />
                       </S.CommentWriter>
                       <S.CommentContents>{el.contents}</S.CommentContents>
                       <S.CommentTime>
@@ -179,7 +191,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                     </S.CommentDetailEdit>
                   </S.CommentDetailBox>
 
-                  <S.CommentEditWrite isActive={props.isActive}>
+                  <S.CommentEditWrite id={el._id} isActive={props.isActive}>
                     <S.CommentEditInfo>
                       <S.Info></S.Info>
                       <S.CommentInputPw
@@ -195,6 +207,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                     <S.CommentSubmit>
                       <S.CommentInput
                         placeholder=" 내용을 입력하세요"
+                        maxLength={50}
                         onChange={props.onChangeCommentContents}
                       ></S.CommentInput>
                       <S.CommentSubmitBtn
