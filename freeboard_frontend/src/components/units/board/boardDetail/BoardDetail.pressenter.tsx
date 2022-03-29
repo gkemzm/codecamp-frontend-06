@@ -78,6 +78,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                     url={props.data?.fetchBoard.youtubeUrl}
                     width="560px"
                     height="315px"
+                    controls={true}
                   />
                 </S.Vidio>
                 <S.LikeDislikes>
@@ -144,7 +145,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                 ></S.CommentInputPw>
                 <S.Info> 평점</S.Info>
                 <Rate onChange={props.handleChange} value={props.rating} />
-                <StarNumber>{props.rating}.0</StarNumber>
+                <StarNumber>{props.rating}</StarNumber>
               </S.CommentInfo>
               <S.CommentSubmit>
                 <S.CommentInput
