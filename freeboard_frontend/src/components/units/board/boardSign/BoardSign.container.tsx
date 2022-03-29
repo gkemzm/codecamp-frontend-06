@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import BoardSignHTML from "./BoardSign.pressenter";
 import { SIGN_BOARD, UPDATE_BOARD } from "./BoardSign.query";
 import { BoardSignFunctionProps, IUpdateBoardInput } from "./BoardSing.types";
-import { Modal, Button } from "antd";
+import { Modal } from "antd";
 
 export default function BoardSignFunction(props: BoardSignFunctionProps) {
   const router = useRouter();
@@ -22,9 +22,15 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
   const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
 
+  // const [isOpen, setIsOpen] = useState(false);
+
   const [isActive, setIsActive] = useState(false);
   const [callApi] = useMutation(SIGN_BOARD);
   const [callUpdateBoard] = useMutation(UPDATE_BOARD);
+
+  // const onToggleModal = () => {
+  //   setIsOpen((prev) => !prev);
+  // };
 
   const submit = async (event: MouseEvent<HTMLButtonElement>) => {
     if (writer === "") {
@@ -39,6 +45,15 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
     if (contents === "") {
       setContentsError("내용을 입력하세요");
     }
+
+    if (!title || !contents) {
+      Modal.warning({
+        title: "빈값에러.",
+        content: "빈값을 채워주세요",
+      });
+      return;
+    }
+
     try {
       const result = await callApi({
         variables: {
@@ -55,23 +70,39 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
           },
         },
       });
-      console.log(result);
       if (writer !== "" && pw !== "" && title !== "" && contents !== "") {
-        alert("게시물 등록이 성공했습니다.");
+        // setIsOpen((prev) => !prev);
+        // alert("게시물 등록이 성공했습니다.");
+        Modal.success({
+          content: "게시물 등록이 성공했습니다.",
+        });
       }
       router.push(`/board/${result.data.createBoard._id}`);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        // {alert(error.message)};
+        Modal.error({
+          title: "error",
+          content: "비어있는 공간이 있습니다.",
+        });
+      }
     }
   };
   const updateBoard = async () => {
     if (!title && !contents) {
-      alert("수정한 내용이 없습니다.");
+      Modal.warning({
+        title: "내용이 없습니다.",
+        content: "내용을 채워주세요",
+      });
       return;
     }
 
     if (!pw) {
-      alert("비밀번호를 입력해주세요.");
+      // alert("비밀번호를 입력해주세요.");
+      Modal.warning({
+        title: "비밀번호가 없습니다.",
+        content: "비밀번호를 입력해 주세요",
+      });
       return;
     }
 
@@ -91,10 +122,18 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
           boardId: router.query.boardId,
         },
       });
-      alert("게시물 수정에 성공하였습니다!");
+      // alert("게시물 수정에 성공하였습니다!");
+      Modal.success({
+        content: "게시물 수정에 성공했습니다.",
+      });
       router.push(`/board/${router.query.boardId}`);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        Modal.warning({
+          title: "에러입니다.",
+          content: "올바른 값을 입력해주세요",
+        });
+      }
     }
   };
 
@@ -166,6 +205,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
     <BoardSignHTML
       isActive={isActive}
       isEdit={props.isEdit}
+      // isOpen={isOpen}
       writerError={writerError}
       pwError={pwError}
       titleError={titleError}
@@ -178,6 +218,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
       // onChangeAddress={onChangeAddress}
       // onChangeAddressDetail={onChangeAddressDetail}
       updateBoard={updateBoard}
+      // onToggleModal={onToggleModal}
       submit={submit}
       data={props.data}
     ></BoardSignHTML>

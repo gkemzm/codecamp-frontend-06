@@ -17,6 +17,7 @@ export interface IUpdateBoardInput {
 export interface BoardSignHTMLProps {
   isEdit: boolean;
   isActive: boolean;
+  // isOpen: boolean;
   writerError: string;
   pwError: string;
   titleError: string;
@@ -29,6 +30,7 @@ export interface BoardSignHTMLProps {
   // onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
   // onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   updateBoard: () => void;
+  // onToggleModal: any;
   submit: (event: MouseEvent<HTMLButtonElement>) => void;
   data?: any;
 }

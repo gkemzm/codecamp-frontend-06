@@ -12,6 +12,7 @@ import {
   UPDATE_BOARD_COMMENT,
 } from "./BoardDetail.query";
 import BoardDetailHTML from "./BoardDetail.pressenter";
+import { Modal } from "antd";
 
 export default function BoardDetailFunction() {
   const router = useRouter();
@@ -48,6 +49,20 @@ export default function BoardDetailFunction() {
     router.push("/board");
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const showModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsOpen(false);
+  };
+
   const DisplayOnOff = (event: MouseEvent<HTMLButtonElement>) => {
     if (isActive === false) {
       setIsActive(true);
@@ -77,7 +92,12 @@ export default function BoardDetailFunction() {
       });
       router.push("/board");
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        Modal.error({
+          title: "error",
+          content: "삭제하지 못했습니다.",
+        });
+      }
     }
   };
 
@@ -85,7 +105,12 @@ export default function BoardDetailFunction() {
     try {
       router.push(`/board/${router.query.boardId}/edit`);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        Modal.error({
+          title: "error",
+          content: "수정에 실패했습니다.",
+        });
+      }
     }
   };
 
@@ -106,7 +131,12 @@ export default function BoardDetailFunction() {
       });
       // setLikeCountup(resultLike.data.callLikeApi)
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        Modal.error({
+          title: "error",
+          content: "error",
+        });
+      }
     }
   };
 
@@ -126,7 +156,12 @@ export default function BoardDetailFunction() {
         ],
       });
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        Modal.error({
+          title: "error",
+          content: "error",
+        });
+      }
     }
   };
 
@@ -157,7 +192,12 @@ export default function BoardDetailFunction() {
       setContents("");
       // eslint-disable-next-line no-unused-expressions
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        Modal.error({
+          title: "error",
+          content: "댓글작성에 실패했습니다.",
+        });
+      }
     }
   };
 
@@ -184,16 +224,21 @@ export default function BoardDetailFunction() {
       console.log(dataComment);
       // eslint-disable-next-line no-unused-expressions
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        Modal.error({
+          title: "error",
+          content: "댓글수정에 실패했습니다.",
+        });
+      }
     }
   };
 
-  const deleteOneComment = async (event: MouseEvent<HTMLButtonElement>) => {
+  const deleteOneComment = async (id: any) => {
     try {
       await deleteComment({
         variables: {
-          password: pw,
-          boardCommentId: String((event.target as HTMLButtonElement).id),
+          password: String(pw),
+          boardCommentId: String(id),
         },
         refetchQueries: [
           {
@@ -205,13 +250,22 @@ export default function BoardDetailFunction() {
         ],
       });
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        Modal.error({
+          title: "error",
+          content: "댓글삭제에 실패했습니다.",
+        });
+      }
     }
+    // finally {
+    //   location.reload();
+    // }
   };
 
   const onChangeCommentWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
   };
+
   const onChangeCommentPw = (event: ChangeEvent<HTMLInputElement>) => {
     setPw(event.target.value);
   };
@@ -232,6 +286,7 @@ export default function BoardDetailFunction() {
       dataComment={dataComment}
       isActive={isActive}
       isHover={isHover}
+      isOpen={isOpen}
       upLike={upLike}
       upDisLike={upDisLike}
       MoveMainpage={MoveMainpage}
@@ -247,6 +302,9 @@ export default function BoardDetailFunction() {
       DisplayOnOff={DisplayOnOff}
       PositionHover={PositionHover}
       handleChange={handleChange}
+      handleOk={handleOk}
+      handleCancel={handleCancel}
+      showModal={showModal}
       writer={writer}
       pw={pw}
       rating={rating}

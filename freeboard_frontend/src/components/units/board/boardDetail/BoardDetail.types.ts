@@ -17,6 +17,10 @@ export interface BoardDetailHTMLProps {
   contents: any;
   rating: any;
   handleChange: any;
+  isOpen: any;
+  showModal: () => any;
+  handleOk: () => any;
+  handleCancel: () => any;
   upLike: () => void;
   upDisLike: () => void;
   MoveMainpage: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -26,7 +30,7 @@ export interface BoardDetailHTMLProps {
   onChangeCommentWriter: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeCommentPw: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeCommentContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-  deleteOneComment: (event: MouseEvent<HTMLButtonElement>) => void;
+  deleteOneComment: (id: any) => void;
   UpdateCommentBoard: (event: MouseEvent<HTMLButtonElement>) => void;
   DisplayOnOff: (event: MouseEvent<HTMLButtonElement>) => void;
   onChangeCommentRating: (event: ChangeEvent<HTMLInputElement>) => void;

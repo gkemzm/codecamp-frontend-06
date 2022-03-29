@@ -1,7 +1,14 @@
 import * as S from "../boardSign/BoardSign.styles";
 import { BoardSignHTMLProps } from "./BoardSing.types";
+// import { useState } from "react";
+// import { Modal, Button } from "antd";
 
 export default function BoardSignHTML(props: BoardSignHTMLProps) {
+  // const [isOpen, setIsOpen] = useState(false);
+
+  // const onToggleModal = () => {
+  //   setIsOpen((prev) => !prev);
+  // };
   return (
     <S.Wrapper>
       <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
@@ -118,6 +125,19 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       >
         {props.isEdit ? "수정" : "등록"}하기
       </S.RegistBtn>
+      {/* <Button onClick={props.isEdit ? props.updateBoard : props.submit}>
+        {props.isEdit ? "수정" : "등록"}하기
+      </Button> */}
+      {/* {props.isOpen && (
+        <Modal
+          title="게시글등록"
+          visible={true}
+          onOk={props.onToggleModal}
+          onCancel={props.onToggleModal}
+        >
+          게시글이 등록되었습니다.
+        </Modal>
+      )} */}
     </S.Wrapper>
   );
 }

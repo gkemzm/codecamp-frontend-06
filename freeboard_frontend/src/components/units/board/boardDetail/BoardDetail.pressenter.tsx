@@ -1,8 +1,8 @@
 import * as S from "../boardDetail/BoardDetail.styles";
 import { BoardDetailHTMLProps } from "./BoardDetail.types";
 import ReactPlayer from "react-player";
-import { Rate } from "antd";
-import { useState } from "react";
+import { Rate, Modal } from "antd";
+import { useState, ChangeEvent } from "react";
 import { StarNumber } from "./BoardDetail.styles";
 
 export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
@@ -15,6 +15,20 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
   const onClickAlert = (event: any) => {
     alert(`${event.currentTarget.id}님이 작성한 댓글입니다.`);
   };
+
+  // const [isOpen, setIsOpen] = useState(false);
+
+  // const showModal = () => {
+  //   setIsOpen(true);
+  // };
+
+  // const handleOk = () => {
+  //   setIsOpen(false);
+  // };
+
+  // const handleCancel = () => {
+  //   setIsOpen(false);
+  // };
 
   return (
     <>
@@ -180,14 +194,26 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                     </S.CommentDetailInfo>
                     <S.CommentDetailEdit>
                       <S.CEdit onClick={props.DisplayOnOff}>수정하기</S.CEdit>
-                      <S.CDelete onClick={props.deleteOneComment} id={el._id}>
-                        삭제하기
-                      </S.CDelete>
-                      <S.CPw
+                      <S.CDelete onClick={props.showModal}>삭제하기</S.CDelete>
+                      {/* <S.CPw
                         placeholder="    비밀번호"
                         type={"password"}
                         onChange={props.onChangeCommentPw}
-                      ></S.CPw>
+                      ></S.CPw> */}
+                      <Modal
+                        title="비밀번호 입력창"
+                        visible={props.isOpen}
+                        onOk={() => props.deleteOneComment(el._id)}
+                        onCancel={props.handleCancel}
+                        // afterClose={props.deleteOneComment}
+                      >
+                        비밀번호입력:{" "}
+                        <input
+                          type={"password"}
+                          onChange={props.onChangeCommentPw}
+                          id={el._id}
+                        />
+                      </Modal>
                     </S.CommentDetailEdit>
                   </S.CommentDetailBox>
 
