@@ -2,7 +2,7 @@ import * as S from "../boardDetail/BoardDetail.styles";
 import { BoardDetailHTMLProps } from "./BoardDetail.types";
 import ReactPlayer from "react-player";
 import { Rate, Modal } from "antd";
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
 import { StarNumber } from "./BoardDetail.styles";
 
 export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
@@ -36,7 +36,14 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
         <>
           <S.Wrapper>
             <S.Pdetail>
-              <S.PositionDetail isHover={props.isHover}></S.PositionDetail>
+              <S.PositionDetail isHover={props.isHover}>
+                <S.AddressD>
+                  {props.data?.fetchBoard?.boardAddress?.address}
+                </S.AddressD>
+                <S.AddressD>
+                  {props.data?.fetchBoard?.boardAddress?.addressDetail}
+                </S.AddressD>
+              </S.PositionDetail>
             </S.Pdetail>
 
             <S.TopWrapper>

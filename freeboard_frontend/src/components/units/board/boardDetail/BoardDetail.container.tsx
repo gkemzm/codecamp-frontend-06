@@ -76,10 +76,12 @@ export default function BoardDetailFunction() {
   const PositionHover = () => {
     if (isHover === false) {
       setIsHover(true);
+      console.log(data);
     }
 
     if (isHover === true) {
       setIsHover(false);
+      console.log(data);
     }
   };
 

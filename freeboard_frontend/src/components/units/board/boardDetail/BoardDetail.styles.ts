@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { IdisplayOnOff, IHoverPosition } from "./BoardDetail.types";
+import { Address } from "../boardSign/BoardSign.styles";
 
 const hover = css`
   &:hover {
@@ -30,14 +31,26 @@ export const Pdetail = styled.div`
 
 export const PositionDetail = styled.div`
   width: 270px;
-  height: 50px;
+  height: 60px;
   display: flex;
-  padding-top: 15px;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
   background-color: #bdbdbd;
   border: none;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-  color: white;
+  color: black;
   display: ${(props: IHoverPosition) => (props.isHover ? "flex" : "none")};
+`;
+
+export const AddressD = styled.div`
+  width: 100px;
+  height: 50px;
+  display: flex;
+  border: none;
+  color: black;
+  font-size: 13px;
+  font-weight: 700;
 `;
 
 export const TopWrapper = styled.div`
