@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import BoardSignHTML from "./BoardSign.pressenter";
 import { SIGN_BOARD, UPDATE_BOARD } from "./BoardSign.query";
 import { BoardSignFunctionProps, IUpdateBoardInput } from "./BoardSing.types";
+import { Modal, Button } from "antd";
 
 export default function BoardSignFunction(props: BoardSignFunctionProps) {
   const router = useRouter();

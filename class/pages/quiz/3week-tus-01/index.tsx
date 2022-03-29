@@ -1,7 +1,7 @@
 import DaumPostcode from "react-daum-postcode";
 import { useState } from "react";
 
-export default function ModalCustomPag() {
+export default function MapBagicPage() {
   const [region, setRegion] = useState("");
 
   const handleComplete = (data: any) => {
