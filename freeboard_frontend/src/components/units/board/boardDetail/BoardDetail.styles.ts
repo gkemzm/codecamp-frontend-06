@@ -428,27 +428,27 @@ export const CommentDetailEdit = styled.div`
 `;
 
 export const CDelete = styled.button`
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: end;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
   border: none;
-  height: 30px;
   padding: 0px 10px;
-  font-size: 12px;
-  font-weight: 700;
   margin-top: 20px;
   margin-bottom: 20px;
+  font-size: 12px;
+  font-weight: 700;
   cursor: pointer;
 `;
 
 export const CEdit = styled.button`
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: end;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
   border: none;
-  height: 30px;
   padding: 0px 10px;
   font-size: 12px;
   font-weight: 700;
