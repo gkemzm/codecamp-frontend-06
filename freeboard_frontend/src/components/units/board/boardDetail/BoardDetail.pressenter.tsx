@@ -14,6 +14,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
 
   const onClickAlert = (event: any) => {
     alert(`${event.currentTarget.id}님이 작성한 댓글입니다.`);
+    console.log(value);
   };
 
   // const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,8 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                   {props.data?.fetchBoard?.boardAddress?.address}
                 </S.AddressD>
                 <S.AddressD>
-                  {props.data?.fetchBoard?.boardAddress?.addressDetail}
+                  {props.data?.fetchBoard?.boardAddress?.addressDetail}(
+                  {props.data?.fetchBoard?.boardAddress?.zipcode})
                 </S.AddressD>
               </S.PositionDetail>
             </S.Pdetail>

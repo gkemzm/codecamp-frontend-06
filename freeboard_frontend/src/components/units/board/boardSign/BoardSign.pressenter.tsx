@@ -1,14 +1,9 @@
 import * as S from "../boardSign/BoardSign.styles";
 import { BoardSignHTMLProps } from "./BoardSing.types";
-// import { useState } from "react";
-// import { Modal, Button } from "antd";
+import DaumPostcode from "react-daum-postcode";
+import { Modal } from "antd";
 
 export default function BoardSignHTML(props: BoardSignHTMLProps) {
-  // const [isOpen, setIsOpen] = useState(false);
-
-  // const onToggleModal = () => {
-  //   setIsOpen((prev) => !prev);
-  // };
   return (
     <S.Wrapper>
       <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
@@ -70,13 +65,35 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       <S.Middle>
         <S.Text>주소</S.Text>
         <S.PostNum>
-          <S.PostInput placeholder="         07250"></S.PostInput>
-          <S.PostBtn>우편번호 검색</S.PostBtn>
+          <S.PostInput
+            placeholder="         07250"
+            value={props.zonecode}
+          ></S.PostInput>
+          <S.PostBtn onClick={props.onToggleModal}>우편번호 검색</S.PostBtn>
+          {props.isOpen && (
+            <Modal
+              title="우편번호검색"
+              visible={true}
+              onOk={props.onToggleModal}
+              onCancel={props.onToggleModal}
+            >
+              <DaumPostcode onComplete={props.handleComplete} autoClose />
+            </Modal>
+          )}
         </S.PostNum>
         <S.Address
-          onChange={props.onChangeAddress}
+          readOnly
+          // onChange={props.onChangeAddress}
+          // value={props.region}
+          value={
+            props.region || props.data?.fetchBoard.boardAddress?.address || ""
+          }
           placeholder="  주소를입력해주세요"
           // defaultValue={props.data?.fetchBoard.Address}
+          // value와 defaultValue가 있다면 value가 우선시 되기에
+          // defaultValue가 vlue에 덮여씌워져 작동이 된다.
+          // 그러므로 value를 설정해준다면 defaultValue를
+          // value의 조건으로 제시해준다.
         ></S.Address>
         <S.Address
           onChange={props.onChangeAddressDetail}
@@ -125,19 +142,6 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       >
         {props.isEdit ? "수정" : "등록"}하기
       </S.RegistBtn>
-      {/* <Button onClick={props.isEdit ? props.updateBoard : props.submit}>
-        {props.isEdit ? "수정" : "등록"}하기
-      </Button> */}
-      {/* {props.isOpen && (
-        <Modal
-          title="게시글등록"
-          visible={true}
-          onOk={props.onToggleModal}
-          onCancel={props.onToggleModal}
-        >
-          게시글이 등록되었습니다.
-        </Modal>
-      )} */}
     </S.Wrapper>
   );
 }

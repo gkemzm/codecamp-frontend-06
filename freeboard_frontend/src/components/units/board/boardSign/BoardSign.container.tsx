@@ -31,6 +31,19 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
   // const onToggleModal = () => {
   //   setIsOpen((prev) => !prev);
   // };
+  const [isOpen, setIsOpen] = useState(false);
+  const [region, setRegion] = useState("");
+  const [zonecode, setZonecode] = useState("");
+
+  const onToggleModal = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleComplete = (data: any) => {
+    console.log(data);
+    setRegion(data.address);
+    setZonecode(data.zonecode);
+  };
 
   const submit = async (event: MouseEvent<HTMLButtonElement>) => {
     if (writer === "") {
@@ -64,8 +77,9 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
             contents: contents,
             youtubeUrl: youTube,
             boardAddress: {
-              address: address,
+              address: region,
               addressDetail: addressDetail,
+              zipcode: zonecode,
             },
           },
         },
@@ -109,6 +123,14 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
     const updateBoardInput: IUpdateBoardInput = {};
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
+    // 추가한 부분
+    if (zonecode || address || addressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (zonecode) updateBoardInput.boardAddress.zipcode = zonecode;
+      if (region) updateBoardInput.boardAddress.address = region;
+      if (addressDetail)
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
 
     try {
       await callUpdateBoard({
@@ -117,6 +139,11 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
             title: title,
             contents: contents,
             youtubeUrl: youTube,
+            boardAddress: {
+              address: region,
+              addressDetail: addressDetail,
+              zipcode: zonecode,
+            },
           },
           password: pw,
           boardId: router.query.boardId,
@@ -205,11 +232,15 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
     <BoardSignHTML
       isActive={isActive}
       isEdit={props.isEdit}
-      // isOpen={isOpen}
+      isOpen={isOpen}
+      region={region}
+      zonecode={zonecode}
       writerError={writerError}
       pwError={pwError}
       titleError={titleError}
       contentsError={contentsError}
+      address={address}
+      handleComplete={handleComplete}
       onChangeWriter={onChangeWriter}
       onChangePw={onChangePw}
       onChangeTitle={onChangeTitle}
@@ -218,7 +249,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
       onChangeAddress={onChangeAddress}
       onChangeAddressDetail={onChangeAddressDetail}
       updateBoard={updateBoard}
-      // onToggleModal={onToggleModal}
+      onToggleModal={onToggleModal}
       submit={submit}
       data={props.data}
     ></BoardSignHTML>

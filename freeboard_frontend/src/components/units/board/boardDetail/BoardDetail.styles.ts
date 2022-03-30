@@ -44,7 +44,7 @@ export const PositionDetail = styled.div`
 `;
 
 export const AddressD = styled.div`
-  width: 100px;
+  width: 260px;
   height: 50px;
   display: flex;
   border: none;
