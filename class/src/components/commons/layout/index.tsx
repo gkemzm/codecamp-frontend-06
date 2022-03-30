@@ -6,6 +6,8 @@ import LayoutSidebar from "./sidebar";
 import { ReactNode } from "react";
 import * as S from "./layoutStyle";
 import { useRouter } from "next/router";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface ILayoutProps {
   children: ReactNode;
