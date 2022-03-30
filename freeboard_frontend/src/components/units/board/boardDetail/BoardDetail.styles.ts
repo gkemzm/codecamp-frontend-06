@@ -7,6 +7,11 @@ const hover = css`
   &:hover {
   }
 `;
+export const AllWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+`;
 
 export const Wrapper = styled.div`
   width: 1200px;

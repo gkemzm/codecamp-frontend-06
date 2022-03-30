@@ -34,7 +34,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
   return (
     <>
       {props.data ? (
-        <>
+        <S.AllWrapper>
           <S.Wrapper>
             <S.Pdetail>
               <S.PositionDetail isHover={props.isHover}>
@@ -257,7 +257,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
               ))}
             </S.CommentList>
           </S.CommentWrapper>
-        </>
+        </S.AllWrapper>
       ) : (
         <S.WrapperWaiting>로딩중입니다.</S.WrapperWaiting>
       )}
