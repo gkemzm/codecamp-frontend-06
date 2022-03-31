@@ -12,7 +12,7 @@ interface ILayoutProps {
   children: ReactNode;
 }
 
-const HIDDEN_HEADER = ["12-05-modal-refactoring"];
+const HIDDEN_HEADER = [""];
 
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
@@ -31,8 +31,3 @@ export default function Layout(props: ILayoutProps) {
     </S.MainWrapper>
   );
 }
-<img
-              src="/slick/background.jpg"
-              height="400px"
-              width="1920px"
-            ></img>

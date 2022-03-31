@@ -234,6 +234,8 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                         onChange={props.onChangeCommentPw}
                         type={"password"}
                       ></S.CommentInputPw>
+                      {/* 여기 인풋을 별로 */}
+
                       <S.StarPoint
                         placeholder="평점(숫자만!)"
                         onChange={props.onChangeCommentRating}

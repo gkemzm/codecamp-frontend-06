@@ -123,8 +123,9 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
     const updateBoardInput: IUpdateBoardInput = {};
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
+    if (youTube) updateBoardInput.contents = youTube;
     // 추가한 부분
-    if (zonecode || address || addressDetail) {
+    if (zonecode || region || addressDetail) {
       updateBoardInput.boardAddress = {};
       if (zonecode) updateBoardInput.boardAddress.zipcode = zonecode;
       if (region) updateBoardInput.boardAddress.address = region;
@@ -154,6 +155,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
         content: "게시물 수정에 성공했습니다.",
       });
       router.push(`/board/${router.query.boardId}`);
+      console.log(callUpdateBoard);
     } catch (error) {
       if (error instanceof Error) {
         Modal.warning({

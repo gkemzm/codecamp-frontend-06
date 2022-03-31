@@ -67,7 +67,12 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
         <S.PostNum>
           <S.PostInput
             placeholder="         07250"
-            value={props.zonecode}
+            // value={props.zonecode} 우편번호
+            value={
+              props.zonecode ||
+              props.data?.fetchBoard.boardAddress?.zipcode ||
+              ""
+            }
           ></S.PostInput>
           <S.PostBtn onClick={props.onToggleModal}>우편번호 검색</S.PostBtn>
           {props.isOpen && (
@@ -86,7 +91,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
           // onChange={props.onChangeAddress}
           // value={props.region}
           value={
-            props.region || props.data?.fetchBoard.boardAddress?.address || ""
+            props.region || props.data?.fetchBoard?.boardAddress?.address || ""
           }
           placeholder="  주소를입력해주세요"
           // defaultValue={props.data?.fetchBoard.Address}
@@ -98,7 +103,10 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
         <S.Address
           onChange={props.onChangeAddressDetail}
           placeholder="  상세주소를입력해주세요"
-          // defaultValue={props.data?.fetchBoard.Address}
+          // defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail}
+          defaultValue={
+            props.data?.fetchBoard.boardAddress?.addressDetail || ""
+          }
         ></S.Address>
       </S.Middle>
 

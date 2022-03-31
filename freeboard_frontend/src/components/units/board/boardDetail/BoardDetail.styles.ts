@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { IdisplayOnOff, IHoverPosition } from "./BoardDetail.types";
-import { Address } from "../boardSign/BoardSign.styles";
 
 const hover = css`
   &:hover {

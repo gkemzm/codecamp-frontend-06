@@ -20,7 +20,7 @@ export default function LayoutBanner() {
       <Wrapper>
         <Slider {...settings}>
           <div>
-            <img src="/aaa/example.jpg" height="300px" width="300px"></img>
+            {/* <img src="/aaa/example.jpg" height="300px" width="300px"></img> */}
           </div>
           <div>
             <h3>2</h3>
