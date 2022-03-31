@@ -7,4 +7,7 @@ export const Body = styled.div`
 export const BodyWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  padding-top: 100px;
+  margin: auto;
 `;
