@@ -1,12 +1,12 @@
 import BoardListUI from "./BoardList.presenter";
-import { useQuery } from "@apollo/client";
-import { FETCH_BOARDS } from "./BoardList.queries";
+// import { useQuery } from "@apollo/client";
+// import { FETCH_BOARDS } from "./BoardList.queries";
 import { useRouter } from "next/router";
 import { MouseEvent } from "react";
 
-export default function BoardList() {
+export default function BoardList(props: any) {
   const router = useRouter();
-  const { data } = useQuery(FETCH_BOARDS);
+  // const { data } = useQuery(FETCH_BOARDS);
 
   function onClickMoveToBoardNew() {
     router.push("/board/new");
@@ -18,7 +18,7 @@ export default function BoardList() {
 
   return (
     <BoardListUI
-      data={data}
+      data={props.data}
       onClickMoveToBoardNew={onClickMoveToBoardNew}
       onClickMoveToBoardDetail={onClickMoveToBoardDetail}
     />

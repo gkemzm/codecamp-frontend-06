@@ -1,17 +1,8 @@
 import { useState, MouseEvent } from "react";
-import * as S from "./list2style";
+import * as S from "./numbarStyles";
+import { PageListProps } from "./numbar.types";
 
-export interface List222 {
-  isActive: boolean;
-  isActive2: boolean;
-  refetch: any;
-  lastPage: any;
-  setIsActive: any;
-  setIsActive2: any;
-  btnColor: any;
-}
-
-export default function List2(props: List222) {
+export default function PageList(props: PageListProps) {
   const [startPage, setStartPage] = useState(1);
   const [btnColor, setBtnColor] = useState("");
 
@@ -24,17 +15,27 @@ export default function List2(props: List222) {
     setBtnColor((event.target as HTMLButtonElement).id);
   };
 
-  const onClickPrevPage = (event: MouseEvent<HTMLDivElement>) => {
+  const onClickPrevPage = () => {
     props.setIsActive2(true);
-    if (startPage <= 10) {
+    if (startPage < 10) {
       props.setIsActive(false);
       return;
     }
     setStartPage((prev) => prev - 10);
-    props.refetch({ page: startPage - 1 });
+    props.refetch({ page: startPage - 10 });
   };
 
-  const onClickNextPage = (event: MouseEvent<HTMLDivElement>) => {
+  // const onClickPrevTenPage = () => {
+  //   props.setIsActive2(true);
+  //   if (startPage < 10) {
+  //     props.setIsActive(false);
+  //     return;
+  //   }
+  //   setStartPage((prev) => prev - 10);
+  //   props.refetch({ page: startPage - 10 });
+  // };
+
+  const onClickNextPage = () => {
     props.setIsActive(true);
     if (startPage + 10 > props.lastPage) {
       props.setIsActive2(false);
@@ -44,11 +45,24 @@ export default function List2(props: List222) {
     props.refetch({ page: startPage + 10 });
   };
 
+  // const onClickNextTenPage = () => {
+  //   props.setIsActive(true);
+  //   if (startPage + 10 > props.lastPage) {
+  //     props.setIsActive2(false);
+  //     return;
+  //   }
+  //   setStartPage((prev) => prev + 10);
+  //   props.refetch({ page: startPage + 10 });
+  // };
+
   return (
     <S.Wrapper>
-      <S.Btn onClick={onClickPrevPage} isActive={props.isActive}>
+      {/* <S.PrevPageBtn onClick={onClickPrevTenPage} isActive={props.isActive}>
+        ◀◀
+      </S.PrevPageBtn> */}
+      <S.PrevPageBtn onClick={onClickPrevPage} isActive={props.isActive}>
         ◀
-      </S.Btn>
+      </S.PrevPageBtn>
       {new Array(10).fill(1).map((_, index) =>
         index + startPage <= props.lastPage ? (
           <S.ListButton
@@ -64,9 +78,12 @@ export default function List2(props: List222) {
           <span></span>
         )
       )}
-      <S.Btn2 onClick={onClickNextPage} isActive2={props.isActive2}>
+      <S.NextPageBtn onClick={onClickNextPage} isActive2={props.isActive2}>
         ▶
-      </S.Btn2>
+      </S.NextPageBtn>
+      {/* <S.NextPageBtn onClick={onClickNextTenPage} isActive2={props.isActive2}>
+        ▶▶
+      </S.NextPageBtn> */}
     </S.Wrapper>
   );
 }
