@@ -43,7 +43,7 @@ export default function StaticRoutedPage() {
     const aaa = myIndex;
     aaa[event.target.id] = true; // 일반적인 복사가 일어나 30행의 false가 true로 설정됨
     console.log(aaa);
-    setMyIndex(aaa); // 기존상태
+    // setMyIndex(aaa); // 기존상태
     setMyIndex([...aaa]); // 얕은복사를해준상태
     // setMyIndex(Number(event.target.id));
   };

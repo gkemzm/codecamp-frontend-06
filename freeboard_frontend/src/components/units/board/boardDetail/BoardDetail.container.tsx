@@ -28,6 +28,7 @@ export default function BoardDetailFunction() {
   const [pw, setPw] = useState("");
   const [rating, setRating] = useState("");
   const [contents, setContents] = useState("");
+  const [display, setDisplay] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [isHover, setIsHover] = useState(false);
 
@@ -36,6 +37,19 @@ export default function BoardDetailFunction() {
       boardId: router.query.boardId,
     },
   });
+
+  const DisplayOnOff = (event: any) => {
+    setDisplay((event.target as any).id);
+    // console.log((event.target as any).id);
+    // console.log(isActive);
+    if (isActive === false) {
+      setIsActive(true);
+    }
+
+    if (isActive === true) {
+      setIsActive(false);
+    }
+  };
 
   const { data: dataComment } = useQuery(FETCH_BOARD_COMMENT, {
     variables: {
@@ -63,15 +77,17 @@ export default function BoardDetailFunction() {
     setIsOpen(false);
   };
 
-  const DisplayOnOff = (event: MouseEvent<HTMLButtonElement>) => {
-    if (isActive === false) {
-      setIsActive(true);
-    }
+  // const DisplayOnOff = (event: MouseEvent<HTMLButtonElement>) => {
+  //   setDisplay((event.target as any).id);
+  //   console.log((event.target as any).id);
+  //   if (isActive === false) {
+  //     setIsActive(true);
+  //   }
 
-    if (isActive === true) {
-      setIsActive(false);
-    }
-  };
+  //   if (isActive === true) {
+  //     setIsActive(false);
+  //   }
+  // };
 
   const PositionHover = () => {
     if (isHover === false) {
@@ -289,6 +305,7 @@ export default function BoardDetailFunction() {
       isActive={isActive}
       isHover={isHover}
       isOpen={isOpen}
+      display={display}
       upLike={upLike}
       upDisLike={upDisLike}
       MoveMainpage={MoveMainpage}

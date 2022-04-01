@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { IdisplayOnOff, IHoverPosition } from "./BoardDetail.types";
+import { Idisplay, IHoverPosition } from "./BoardDetail.types";
 
 const hover = css`
   &:hover {
@@ -490,5 +490,6 @@ export const CommentEditWrite = styled.div`
   margin: auto;
   margin-bottom: 80px;
   padding: 10px 0px;
-  display: ${(props: IdisplayOnOff) => (props.isActive ? "flex" : "none")};
+  display: ${(props: Idisplay) =>
+    props.display === props.id ? (props.isActive ? "flex" : "none") : "none"};
 `;

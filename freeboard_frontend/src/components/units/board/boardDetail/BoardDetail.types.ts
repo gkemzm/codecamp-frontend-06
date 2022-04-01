@@ -7,6 +7,12 @@ export interface IHoverPosition {
   isHover: boolean;
 }
 
+export interface Idisplay {
+  display: string;
+  isActive: boolean;
+  id: string;
+}
+
 export interface BoardDetailHTMLProps {
   data?: any;
   dataComment?: any;
@@ -18,6 +24,7 @@ export interface BoardDetailHTMLProps {
   rating: any;
   handleChange: any;
   isOpen: any;
+  display: any;
   showModal: () => any;
   handleOk: () => any;
   handleCancel: () => any;

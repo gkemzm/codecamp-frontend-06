@@ -4,6 +4,7 @@ import ReactPlayer from "react-player";
 import { Rate, Modal } from "antd";
 import { useState } from "react";
 import { StarNumber } from "./BoardDetail.styles";
+import InfiniteScroll from "react-infinite-scroller";
 
 export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
   const [value, setValue] = useState(3);
@@ -16,7 +17,20 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
     alert(`${event.currentTarget.id}님이 작성한 댓글입니다.`);
     console.log(value);
   };
+  // const [display, setDisplay] = useState("");
+  // const [isActive, setIsActive] = useState(false);
 
+  // const DisplayOnOff = (event: any) => {
+  //   setDisplay((event.target as any).id);
+  //   console.log((event.target as any).id);
+  //   if (isActive === false) {
+  //     setIsActive(true);
+  //   }
+
+  //   if (isActive === true) {
+  //     setIsActive(false);
+  //   }
+  // };
   // const [isOpen, setIsOpen] = useState(false);
 
   // const showModal = () => {
@@ -202,7 +216,9 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                       </S.CommentTime>
                     </S.CommentDetailInfo>
                     <S.CommentDetailEdit>
-                      <S.CEdit onClick={props.DisplayOnOff}>수정하기</S.CEdit>
+                      <S.CEdit id={el._id} onClick={props.DisplayOnOff}>
+                        수정하기
+                      </S.CEdit>
                       <S.CDelete onClick={props.showModal}>삭제하기</S.CDelete>
                       {/* <S.CPw
                         placeholder="    비밀번호"
@@ -226,7 +242,11 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                     </S.CommentDetailEdit>
                   </S.CommentDetailBox>
 
-                  <S.CommentEditWrite isActive={props.isActive}>
+                  <S.CommentEditWrite
+                    isActive={props.isActive}
+                    id={el._id}
+                    display={props.display}
+                  >
                     <S.CommentEditInfo>
                       <S.Info></S.Info>
                       <S.CommentInputPw
