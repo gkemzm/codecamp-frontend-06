@@ -254,9 +254,10 @@ export const CommentInfo = styled.div`
 `;
 
 export const CommentEditInfo = styled.div`
-  width: 250px;
+  width: 600px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: center;
   padding: 20px 0px;
 `;

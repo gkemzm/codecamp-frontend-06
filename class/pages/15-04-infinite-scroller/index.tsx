@@ -42,7 +42,7 @@ export default function StaticRoutedPage() {
     });
   };
   return (
-    <div style={{ height: 500 + "em", overflow: "auto" }}>
+    <div style={{ height: "700px", overflow: "auto" }}>
       <InfiniteScroll
         pageStart={0}
         loadMore={onLoadMore}

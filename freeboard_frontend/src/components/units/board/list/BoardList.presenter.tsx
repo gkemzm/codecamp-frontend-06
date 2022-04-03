@@ -1,5 +1,5 @@
-import * as S from "./BoardList.styles";
 import { getDate } from "../../../../commons/utils";
+import * as S from "./BoardList.styles";
 import { BoardListUIProps } from "./BoardList.types";
 
 export default function BoardListUI(props: BoardListUIProps) {
@@ -21,6 +21,7 @@ export default function BoardListUI(props: BoardListUIProps) {
             {el.title}
           </S.ColumnTitle>
           <S.ColumnBasic>{el.writer}</S.ColumnBasic>
+          {/* <S.ColumnBasic>Number({el.createdAt})</S.ColumnBasic> */}
           <S.ColumnBasic>{getDate(el.createdAt)}</S.ColumnBasic>
         </S.Row>
       ))}

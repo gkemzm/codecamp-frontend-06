@@ -31,6 +31,7 @@ export default function BoardDetailFunction() {
   const [display, setDisplay] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [isHover, setIsHover] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -38,6 +39,32 @@ export default function BoardDetailFunction() {
     },
   });
 
+  const { data: dataComment, fetchMore } = useQuery(FETCH_BOARD_COMMENT, {
+    variables: {
+      // page: Number(router.query.page),
+      boardId: router.query.boardId,
+    },
+  });
+  // const onLoadMore = () => {
+  //   if (dataComment) return; // 데이터가 없으면 요청하지말하라
+
+  //   fetchMore({
+  //     variables: {
+  //       page: Math.ceil(dataComment?.fetchBoardComments.length / 10),
+  //       boadrId: router.query.boardId,
+  //     },
+  //     updateQuery: (prev, { fetchMoreResult }) => {
+  //       if (!fetchMoreResult.fetchBoardComments)
+  //         return { fetchBoardComments: [...prev.fetchBoardComments] };
+  //       return {
+  //         fetchBoardComments: [
+  //           ...prev.fetchBoardComments,
+  //           ...fetchMoreResult.fetchBoardComments,
+  //         ],
+  //       };
+  //     },
+  //   });
+  // };
   const DisplayOnOff = (event: any) => {
     setDisplay((event.target as any).id);
     // console.log((event.target as any).id);
@@ -51,19 +78,10 @@ export default function BoardDetailFunction() {
     }
   };
 
-  const { data: dataComment } = useQuery(FETCH_BOARD_COMMENT, {
-    variables: {
-      // page: Number(router.query.page),
-      boardId: router.query.boardId,
-    },
-  });
-
   // Number(router.query.page)
   const MoveMainpage = () => {
     router.push("/board");
   };
-
-  const [isOpen, setIsOpen] = useState(false);
 
   const showModal = () => {
     setIsOpen(true);
@@ -251,7 +269,7 @@ export default function BoardDetailFunction() {
     }
   };
 
-  const deleteOneComment = async (id: any) => {
+  const deleteOneComment = async (id: String) => {
     try {
       await deleteComment({
         variables: {
@@ -267,6 +285,8 @@ export default function BoardDetailFunction() {
           },
         ],
       });
+      console.log(id);
+      console.log(dataComment);
     } catch (error) {
       if (error instanceof Error) {
         Modal.error({
@@ -306,6 +326,8 @@ export default function BoardDetailFunction() {
       isHover={isHover}
       isOpen={isOpen}
       display={display}
+      // onLoadMore={onLoadMore}
+      fetchMore={fetchMore}
       upLike={upLike}
       upDisLike={upDisLike}
       MoveMainpage={MoveMainpage}

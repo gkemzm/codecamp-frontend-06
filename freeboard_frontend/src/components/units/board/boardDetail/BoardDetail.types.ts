@@ -25,6 +25,8 @@ export interface BoardDetailHTMLProps {
   handleChange: any;
   isOpen: any;
   display: any;
+  fetchMore: any;
+  // onLoadMore: () => any;
   showModal: () => any;
   handleOk: () => any;
   handleCancel: () => any;

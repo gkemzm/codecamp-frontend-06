@@ -5,45 +5,46 @@ import { Rate, Modal } from "antd";
 import { useState } from "react";
 import { StarNumber } from "./BoardDetail.styles";
 import InfiniteScroll from "react-infinite-scroller";
+import { useRouter } from "next/router";
 
 export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
+  const router = useRouter();
+  console.log(props.data);
+  console.log(props.dataComment);
   const [value, setValue] = useState(3);
-
+  console.log(value);
+  // console.log(props.dataComment);
   const handleChange = (value: any) => {
     setValue(value);
   };
 
   const onClickAlert = (event: any) => {
     alert(`${event.currentTarget.id}님이 작성한 댓글입니다.`);
-    console.log(value);
+    // console.log(value);
   };
-  // const [display, setDisplay] = useState("");
-  // const [isActive, setIsActive] = useState(false);
 
-  // const DisplayOnOff = (event: any) => {
-  //   setDisplay((event.target as any).id);
-  //   console.log((event.target as any).id);
-  //   if (isActive === false) {
-  //     setIsActive(true);
-  //   }
+  const onLoadMore = () => {
+    if (!props.dataComment) return; // 데이터가 없으면 요청하지말하라
 
-  //   if (isActive === true) {
-  //     setIsActive(false);
-  //   }
-  // };
-  // const [isOpen, setIsOpen] = useState(false);
-
-  // const showModal = () => {
-  //   setIsOpen(true);
-  // };
-
-  // const handleOk = () => {
-  //   setIsOpen(false);
-  // };
-
-  // const handleCancel = () => {
-  //   setIsOpen(false);
-  // };
+    props.fetchMore({
+      variables: {
+        // boaddId: props.data?.fetchBoard._id,
+        page: Math.ceil(props.dataComment?.fetchBoardComments.length / 10) + 1,
+        // boadrId: props.dataComment._id,
+        boardId: router.query.boardId,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchBoardComments)
+          return { fetchBoardComments: [...prev.fetchBoardComments] };
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
 
   return (
     <>
@@ -196,86 +197,108 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
               </S.CommentSubmit>
             </S.CommentWrite>
             <S.CommentList>
-              {props.dataComment?.fetchBoardComments.map((el: any) => (
-                <>
-                  <S.CommentDetailBox key={el._id}>
-                    <S.CommentDetailPicture></S.CommentDetailPicture>
-                    <S.CommentDetailInfo id={el.writer} onClick={onClickAlert}>
-                      <S.CommentWriter>
-                        <S.CWriter>작성자 : {el.writer}</S.CWriter>
-                        <S.CStar>평점: {el.rating}</S.CStar>
-                        <Rate
-                          onChange={handleChange}
-                          value={el.rating}
-                          disabled={true}
-                        />
-                      </S.CommentWriter>
-                      <S.CommentContents>{el.contents}</S.CommentContents>
-                      <S.CommentTime>
-                        {String(el.createdAt).slice(0, 10)}
-                      </S.CommentTime>
-                    </S.CommentDetailInfo>
-                    <S.CommentDetailEdit>
-                      <S.CEdit id={el._id} onClick={props.DisplayOnOff}>
-                        수정하기
-                      </S.CEdit>
-                      <S.CDelete onClick={props.showModal}>삭제하기</S.CDelete>
-                      {/* <S.CPw
+              <div
+                style={{ height: "700px", width: "1050px", overflow: "auto" }}
+              >
+                <InfiniteScroll
+                  pageStart={0}
+                  loadMore={onLoadMore}
+                  hasMore={true}
+                  // loader={
+                  //   <div className="loader" key={0}>
+                  //     Loading ...
+                  //   </div>
+                  // }
+                  useWindow={false}
+                >
+                  {props.dataComment?.fetchBoardComments.map((el: any) => (
+                    <>
+                      <S.CommentDetailBox key={el._id}>
+                        <S.CommentDetailPicture></S.CommentDetailPicture>
+                        <S.CommentDetailInfo
+                          id={el.writer}
+                          onClick={onClickAlert}
+                        >
+                          <S.CommentWriter>
+                            <S.CWriter>작성자 : {el.writer}</S.CWriter>
+                            <S.CStar>평점: {el.rating}</S.CStar>
+                            <Rate
+                              onChange={handleChange}
+                              value={el.rating}
+                              disabled={true}
+                            />
+                          </S.CommentWriter>
+                          <S.CommentContents>{el.contents}</S.CommentContents>
+                          <S.CommentTime>
+                            {String(el.createdAt).slice(0, 10)}
+                          </S.CommentTime>
+                        </S.CommentDetailInfo>
+                        <S.CommentDetailEdit>
+                          <S.CEdit id={el._id} onClick={props.DisplayOnOff}>
+                            수정하기
+                          </S.CEdit>
+                          <S.CDelete onClick={props.showModal}>
+                            삭제하기
+                          </S.CDelete>
+                          {/* <S.CPw
                         placeholder="    비밀번호"
                         type={"password"}
                         onChange={props.onChangeCommentPw}
                       ></S.CPw> */}
-                      <Modal
-                        title="비밀번호 입력창"
-                        visible={props.isOpen}
-                        onOk={() => props.deleteOneComment(el._id)}
-                        onCancel={props.handleCancel}
-                        // afterClose={props.deleteOneComment}
-                      >
-                        비밀번호입력:{" "}
-                        <input
-                          type={"password"}
-                          onChange={props.onChangeCommentPw}
-                          id={el._id}
-                        />
-                      </Modal>
-                    </S.CommentDetailEdit>
-                  </S.CommentDetailBox>
+                          <Modal
+                            title="비밀번호 입력창"
+                            visible={props.isOpen}
+                            onOk={() => props.deleteOneComment(el._id)}
+                            onCancel={props.handleCancel}
+                            // afterClose={props.deleteOneComment}
+                          >
+                            비밀번호입력:{" "}
+                            <input
+                              type={"password"}
+                              onChange={props.onChangeCommentPw}
+                              id={el._id}
+                            />
+                          </Modal>
+                        </S.CommentDetailEdit>
+                      </S.CommentDetailBox>
 
-                  <S.CommentEditWrite
-                    isActive={props.isActive}
-                    id={el._id}
-                    display={props.display}
-                  >
-                    <S.CommentEditInfo>
-                      <S.Info></S.Info>
-                      <S.CommentInputPw
-                        placeholder=" PW"
-                        onChange={props.onChangeCommentPw}
-                        type={"password"}
-                      ></S.CommentInputPw>
-                      {/* 여기 인풋을 별로 */}
-                      <S.StarPoint
-                        placeholder="평점(숫자만!)"
-                        onChange={props.onChangeCommentRating}
-                      ></S.StarPoint>
-                    </S.CommentEditInfo>
-                    <S.CommentSubmit>
-                      <S.CommentInput
-                        placeholder=" 내용을 입력하세요"
-                        maxLength={50}
-                        onChange={props.onChangeCommentContents}
-                      ></S.CommentInput>
-                      <S.CommentSubmitBtn
-                        onClick={props.UpdateCommentBoard}
+                      <S.CommentEditWrite
+                        isActive={props.isActive}
                         id={el._id}
+                        display={props.display}
                       >
-                        댓글 수정하기
-                      </S.CommentSubmitBtn>
-                    </S.CommentSubmit>
-                  </S.CommentEditWrite>
-                </>
-              ))}
+                        <S.CommentEditInfo>
+                          <S.Info></S.Info>
+                          <S.CommentInputPw
+                            placeholder=" PW"
+                            onChange={props.onChangeCommentPw}
+                            type={"password"}
+                          ></S.CommentInputPw>
+                          {/* 여기 인풋을 별로 */}
+                          {/* <S.StarPoint
+                            placeholder="평점(숫자만!)"
+                            onChange={props.onChangeCommentRating}
+                          ></S.StarPoint> */}
+                          <Rate onChange={props.handleChange} />
+                        </S.CommentEditInfo>
+                        <S.CommentSubmit>
+                          <S.CommentInput
+                            placeholder=" 내용을 입력하세요"
+                            maxLength={50}
+                            onChange={props.onChangeCommentContents}
+                          ></S.CommentInput>
+                          <S.CommentSubmitBtn
+                            onClick={props.UpdateCommentBoard}
+                            id={el._id}
+                          >
+                            댓글 수정하기
+                          </S.CommentSubmitBtn>
+                        </S.CommentSubmit>
+                      </S.CommentEditWrite>
+                    </>
+                  ))}
+                </InfiniteScroll>
+              </div>
             </S.CommentList>
           </S.CommentWrapper>
         </S.AllWrapper>
