@@ -40,7 +40,6 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
   };
 
   const handleComplete = (data: any) => {
-    console.log(data);
     setRegion(data.address);
     setZonecode(data.zonecode);
   };
@@ -155,7 +154,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
         content: "게시물 수정에 성공했습니다.",
       });
       router.push(`/board/${router.query.boardId}`);
-      console.log(callUpdateBoard);
+      // console.log(callUpdateBoard);
     } catch (error) {
       if (error instanceof Error) {
         Modal.warning({

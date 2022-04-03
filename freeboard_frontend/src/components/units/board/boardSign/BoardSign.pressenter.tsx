@@ -10,7 +10,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       {props.isEdit ? (
         <S.Top>
           <S.TopArea>
-            <S.Text>비밀번호</S.Text>
+            <S.TextDiv>비밀번호</S.TextDiv>
             <S.TopInput
               placeholder="  비밀번호를 입력해 주세요."
               type={"password"}
@@ -22,7 +22,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       ) : (
         <S.Top>
           <S.TopArea>
-            <S.Text>작성자</S.Text>
+            <S.TextDiv>작성자</S.TextDiv>
             <S.TopInput
               placeholder="  이름을 적어주세요."
               onChange={props.onChangeWriter}
@@ -31,7 +31,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
             <S.Error>{props.writerError}</S.Error>
           </S.TopArea>
           <S.TopArea>
-            <S.Text>비밀번호</S.Text>
+            <S.TextDiv>비밀번호</S.TextDiv>
             <S.TopInput
               placeholder="  비밀번호를 입력해 주세요."
               type={"password"}
@@ -43,7 +43,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       )}
 
       <S.MainTitle>
-        <S.Text>제목</S.Text>
+        <S.TextDiv>제목</S.TextDiv>
         <S.TitleInput
           placeholder="  제목을 작성해주세요."
           onChange={props.onChangeTitle}
@@ -53,7 +53,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       </S.MainTitle>
 
       <S.Middle>
-        <S.Text>내용</S.Text>
+        <S.TextDiv>내용</S.TextDiv>
         <S.MiddleInput
           placeholder="  내용을 작성해주세요."
           onChange={props.onChangeContents}
@@ -63,9 +63,10 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       </S.Middle>
 
       <S.Middle>
-        <S.Text>주소</S.Text>
+        <S.TextDiv>주소</S.TextDiv>
         <S.PostNum>
           <S.PostInput
+            readOnly
             placeholder="         07250"
             // value={props.zonecode} 우편번호
             value={
@@ -111,7 +112,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       </S.Middle>
 
       <S.Bottom>
-        <S.Text>유튜브</S.Text>
+        <S.TextDiv>유튜브</S.TextDiv>
         <S.YouTube
           onChange={props.onChangeYouTube}
           placeholder="  링크를 입력해주세요"
@@ -120,7 +121,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       </S.Bottom>
 
       <S.Bottom>
-        <S.Text>사진첨부</S.Text>
+        <S.TextDiv>사진첨부</S.TextDiv>
         <S.PostArea>
           <S.ImgBtn>
             +<br></br>Upload
@@ -135,7 +136,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       </S.Bottom>
 
       <S.Bottom>
-        <S.Text>메인설정</S.Text>
+        <S.TextDiv>메인설정</S.TextDiv>
         <S.SelectArea>
           <S.SelectInput type="radio"></S.SelectInput>
           <S.SelectText>유튜브</S.SelectText>

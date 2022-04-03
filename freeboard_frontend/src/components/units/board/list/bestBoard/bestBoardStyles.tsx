@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   /* margin: auto; */
   padding-top: 30px;
   margin-bottom: 50px;
+  word-break: break-all;
 `;
 
 export const BestBoardTable = styled.div`
@@ -19,15 +20,20 @@ export const BestBoardTable = styled.div`
   align-items: center;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
   border: 1px solid yellow;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Writer = styled.div`
   font-size: 19px;
   font-weight: 900;
   padding-bottom: 5px;
+  cursor: pointer;
 `;
 
 export const Info = styled.div`
+  display: flex;
   font-size: 15px;
   font-weight: 600;
   padding-bottom: 10px;

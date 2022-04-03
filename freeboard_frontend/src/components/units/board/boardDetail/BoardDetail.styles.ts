@@ -22,6 +22,7 @@ export const Wrapper = styled.div`
   align-items: center;
   margin: auto;
   margin-top: 50px;
+  word-break: break-all;
 `;
 export const Pdetail = styled.div`
   width: 970px;

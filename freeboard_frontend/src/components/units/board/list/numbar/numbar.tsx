@@ -4,7 +4,7 @@ import { PageListProps } from "./numbar.types";
 
 export default function PageList(props: PageListProps) {
   const [startPage, setStartPage] = useState(1);
-  const [btnColor, setBtnColor] = useState("");
+  // const [btnColor, setBtnColor] = useState("");
 
   //   const onClickPage = (event: any) => {
   //     props.refetch({ page: Number(event.target.id) });
@@ -12,7 +12,7 @@ export default function PageList(props: PageListProps) {
   //   };
   const onClickPage = async (event: MouseEvent<HTMLButtonElement>) => {
     props?.refetch({ page: Number((event.target as HTMLButtonElement).id) });
-    setBtnColor((event.target as HTMLButtonElement).id);
+    props?.setBtnColor((event.target as HTMLButtonElement).id);
   };
 
   const onClickPrevPage = () => {
@@ -69,13 +69,13 @@ export default function PageList(props: PageListProps) {
             key={index + startPage}
             onClick={onClickPage}
             id={String(index + startPage)}
-            btnColor={btnColor}
+            btnColor={props.btnColor}
           >
             {``}
             {index + startPage}
           </S.ListButton>
         ) : (
-          <span></span>
+          <span key={index + startPage}></span>
         )
       )}
       <S.NextPageBtn onClick={onClickNextPage} isActive2={props.isActive2}>

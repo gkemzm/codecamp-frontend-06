@@ -26,11 +26,11 @@ const MainPage = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 export default function BoardsPage() {
   const { data, refetch } = useQuery(FETCH_BOARDS);
   const [isActive, setIsActive] = useState(false);
   const [isActive2, setIsActive2] = useState(true);
+  const [btnColor, setBtnColor] = useState("");
 
   const { data: dataBoardsCount } = useQuery(FETCH_BOARDS_COUNT);
   const lastPage = Math.ceil(dataBoardsCount?.fetchBoardsCount / 10);
@@ -46,7 +46,8 @@ export default function BoardsPage() {
         setIsActive={setIsActive}
         isActive2={isActive2}
         setIsActive2={setIsActive2}
-        btnColor={undefined}
+        btnColor={btnColor}
+        setBtnColor={setBtnColor}
       />
     </MainPage>
   );

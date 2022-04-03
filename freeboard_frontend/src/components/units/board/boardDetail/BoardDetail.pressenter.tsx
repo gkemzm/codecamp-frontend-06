@@ -9,13 +9,13 @@ import { useRouter } from "next/router";
 
 export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
   const router = useRouter();
-  console.log(props.data);
-  console.log(props.dataComment);
-  const [value, setValue] = useState(3);
-  console.log(value);
+  // console.log(props.data);
   // console.log(props.dataComment);
-  const handleChange = (value: any) => {
-    setValue(value);
+  // const [value, setValue] = useState(3);
+  const [starValue, setStarValue] = useState(3);
+  // console.log(props.dataComment);
+  const handleChange = () => {
+    setStarValue(starValue);
   };
 
   const onClickAlert = (event: any) => {
@@ -33,7 +33,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
         // boadrId: props.dataComment._id,
         boardId: router.query.boardId,
       },
-      updateQuery: (prev, { fetchMoreResult }) => {
+      updateQuery: (prev: any, { fetchMoreResult }: any) => {
         if (!fetchMoreResult.fetchBoardComments)
           return { fetchBoardComments: [...prev.fetchBoardComments] };
         return {

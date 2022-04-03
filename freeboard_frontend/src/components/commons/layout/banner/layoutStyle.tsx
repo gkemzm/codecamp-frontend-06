@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   background-color: beige;
   height: 400px;
+  cursor: pointer;
   .slick-prev:before {
     opacity: 1;
     color: white;

@@ -65,8 +65,8 @@ export default function BoardDetailFunction() {
   //     },
   //   });
   // };
-  const DisplayOnOff = (event: any) => {
-    setDisplay((event.target as any).id);
+  const DisplayOnOff = (event: MouseEvent<HTMLButtonElement>) => {
+    setDisplay((event.target as Element).id);
     // console.log((event.target as any).id);
     // console.log(isActive);
     if (isActive === false) {
@@ -110,12 +110,12 @@ export default function BoardDetailFunction() {
   const PositionHover = () => {
     if (isHover === false) {
       setIsHover(true);
-      console.log(data);
+      // console.log(data);
     }
 
     if (isHover === true) {
       setIsHover(false);
-      console.log(data);
+      // console.log(data);
     }
   };
 
@@ -222,7 +222,7 @@ export default function BoardDetailFunction() {
           },
         ],
       });
-      console.log(dataComment);
+      // console.log(dataComment);
       setWriter("");
       setPw("");
       setContents("");
@@ -257,7 +257,7 @@ export default function BoardDetailFunction() {
           },
         ],
       });
-      console.log(dataComment);
+      // console.log(dataComment);
       // eslint-disable-next-line no-unused-expressions
     } catch (error) {
       if (error instanceof Error) {
@@ -285,8 +285,8 @@ export default function BoardDetailFunction() {
           },
         ],
       });
-      console.log(id);
-      console.log(dataComment);
+      // console.log(id);
+      // console.log(dataComment);
     } catch (error) {
       if (error instanceof Error) {
         Modal.error({

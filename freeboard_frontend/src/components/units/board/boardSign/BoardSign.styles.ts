@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   align-items: center;
   margin: auto;
 `;
-export const Title = styled.text`
+export const Title = styled.div`
   font-size: 30px;
   font-weight: 900;
   padding-top: 50px;
@@ -41,7 +41,7 @@ export const TopArea = styled.div`
   display: flex;
   flex-direction: column;
 `;
-export const Text = styled.text`
+export const TextDiv = styled.div`
   font-size: 15px;
   font-weight: 700;
   padding-bottom: 10px;
