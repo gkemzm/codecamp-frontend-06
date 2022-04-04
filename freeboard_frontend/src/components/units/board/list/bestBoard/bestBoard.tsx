@@ -5,11 +5,18 @@ import { useRouter } from "next/router";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { MouseEvent } from "react";
 import { IBoard } from "../../../../../../../class/src/commons/types/generated/types";
+import {
+  IQuery,
+  IQueryFetchBoardArgs,
+} from "../../../../../commons/types/generated/types";
 interface BestPageProps {}
 
 export default function BestPage(props: BestPageProps) {
   const router = useRouter();
-  const { data } = useQuery(FETCH_BOARDS_OF_THE_BEST);
+  const { data } = useQuery<
+    Pick<IQuery, "fetchBoardsOfTheBest">,
+    IQueryFetchBoardArgs
+  >(FETCH_BOARDS_OF_THE_BEST);
   const MoveBestPage = (event: MouseEvent<HTMLDivElement>) => {
     router.push(`/board/${(event?.target as HTMLDivElement).id}`);
   };

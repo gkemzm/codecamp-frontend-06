@@ -71,7 +71,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
             // value={props.zonecode} 우편번호
             value={
               props.zonecode ||
-              props.data?.fetchBoard.boardAddress?.zipcode ||
+              props.data?.fetchBoard.boardAddress.zipcode ||
               ""
             }
           ></S.PostInput>
@@ -92,7 +92,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
           // onChange={props.onChangeAddress}
           // value={props.region}
           value={
-            props.region || props.data?.fetchBoard?.boardAddress?.address || ""
+            props.region || props.data?.fetchBoard.boardAddress.address || ""
           }
           placeholder="  주소를입력해주세요"
           // defaultValue={props.data?.fetchBoard.Address}

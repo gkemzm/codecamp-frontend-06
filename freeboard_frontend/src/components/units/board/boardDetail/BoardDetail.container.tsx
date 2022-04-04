@@ -13,6 +13,11 @@ import {
 } from "./BoardDetail.query";
 import BoardDetailHTML from "./BoardDetail.pressenter";
 import { Modal } from "antd";
+import {
+  IQueryFetchBoardArgs,
+  IQuery,
+  IQueryFetchBoardCommentsArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function BoardDetailFunction() {
   const router = useRouter();
@@ -33,16 +38,22 @@ export default function BoardDetailFunction() {
   const [isHover, setIsHover] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: {
-      boardId: router.query.boardId,
-    },
-  });
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: {
+        boardId: String(router.query.boardId),
+      },
+    }
+  );
 
-  const { data: dataComment, fetchMore } = useQuery(FETCH_BOARD_COMMENT, {
+  const { data: dataComment, fetchMore } = useQuery<
+    Pick<IQuery, "fetchBoardComments">,
+    IQueryFetchBoardCommentsArgs
+  >(FETCH_BOARD_COMMENT, {
     variables: {
       // page: Number(router.query.page),
-      boardId: router.query.boardId,
+      boardId: String(router.query.boardId),
     },
   });
   // const onLoadMore = () => {

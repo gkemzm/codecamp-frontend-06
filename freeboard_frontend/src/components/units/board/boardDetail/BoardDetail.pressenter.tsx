@@ -286,6 +286,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                             placeholder=" 내용을 입력하세요"
                             maxLength={50}
                             onChange={props.onChangeCommentContents}
+                            id={el._id}
                           ></S.CommentInput>
                           <S.CommentSubmitBtn
                             onClick={props.UpdateCommentBoard}

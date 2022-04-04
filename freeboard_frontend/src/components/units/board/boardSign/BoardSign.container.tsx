@@ -122,7 +122,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
     const updateBoardInput: IUpdateBoardInput = {};
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
-    if (youTube) updateBoardInput.contents = youTube;
+    if (youTube) updateBoardInput.youtubeUrl = youTube;
     // 추가한 부분
     if (zonecode || region || addressDetail) {
       updateBoardInput.boardAddress = {};

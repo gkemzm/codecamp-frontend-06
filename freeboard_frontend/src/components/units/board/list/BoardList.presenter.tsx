@@ -3,6 +3,7 @@ import * as S from "./BoardList.styles";
 import { BoardListUIProps } from "./BoardList.types";
 
 export default function BoardListUI(props: BoardListUIProps) {
+  console.log(props.data);
   return (
     <S.Wrapper>
       <S.TableTop />

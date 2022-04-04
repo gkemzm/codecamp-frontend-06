@@ -4,6 +4,10 @@ import { useState } from "react";
 import PageList from "../../src/components/units/board/list/numbar/numbar";
 import styled from "@emotion/styled";
 import BestPage from "../../src/components/units/board/list/bestBoard/bestBoard";
+import {
+  IQuery,
+  IQueryFetchBoardArgs,
+} from "../../src/commons/types/generated/types";
 
 const FETCH_BOARDS = gql`
   query fetchBoards($page: Int) {
@@ -12,6 +16,7 @@ const FETCH_BOARDS = gql`
       writer
       title
       contents
+      createdAt
     }
   }
 `;
@@ -27,7 +32,10 @@ const MainPage = styled.div`
   flex-direction: column;
 `;
 export default function BoardsPage() {
-  const { data, refetch } = useQuery(FETCH_BOARDS);
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchBoard">,
+    IQueryFetchBoardArgs
+  >(FETCH_BOARDS);
   const [isActive, setIsActive] = useState(false);
   const [isActive2, setIsActive2] = useState(true);
   const [btnColor, setBtnColor] = useState("");

@@ -1,6 +1,5 @@
 import Slider from "react-slick";
 import * as S from "./layoutStyle";
-import { useRouter } from "next/router";
 
 const settings = {
   dots: true,
@@ -11,13 +10,9 @@ const settings = {
 };
 
 export default function LayoutBanner() {
-  const router = useRouter();
-  const MoveMainPage = () => {
-    router.push("/board");
-  };
   return (
     <>
-      <S.Wrapper onClick={MoveMainPage}>
+      <S.Wrapper>
         <Slider {...settings}>
           <S.Slick1>
             <S.SlickD>Carousel Design</S.SlickD>

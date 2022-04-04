@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
   background-color: yellow;
-  height: 120px;
+  height: 100px;
 `;
 
 export default function LayoutNavigation() {
