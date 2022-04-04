@@ -18,10 +18,6 @@ export default function Layout(props: ILayoutProps) {
   const router = useRouter();
   console.log(router);
 
-  const MoveMainPage = () => {
-    router.push("/board");
-  };
-
   const isHidden = HIDDEN_HEADER.includes(router.asPath);
   return (
     <S.MainWrapper>

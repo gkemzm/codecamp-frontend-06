@@ -4,7 +4,7 @@ import BoardListUI from "./BoardList.presenter";
 import { useRouter } from "next/router";
 import { MouseEvent } from "react";
 
-export default function BoardList(props: any) {
+export default function BoardList(props:any) {
   const router = useRouter();
   // const { data } = useQuery(FETCH_BOARDS);
 
