@@ -98,9 +98,9 @@ export default function BoardDetailFunction() {
     setIsOpen(true);
   };
 
-  const handleOk = () => {
-    setIsOpen(false);
-  };
+  // const handleOk = () => {
+  //   setIsOpen(false);
+  // };
 
   const handleCancel = () => {
     setIsOpen(false);
@@ -354,7 +354,7 @@ export default function BoardDetailFunction() {
       DisplayOnOff={DisplayOnOff}
       PositionHover={PositionHover}
       handleChange={handleChange}
-      handleOk={handleOk}
+      // handleOk={handleOk}
       handleCancel={handleCancel}
       showModal={showModal}
       writer={writer}

@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
-import { ProfileOutlined, ShopOutlined } from "@ant-design/icons";
+import {
+  ProfileOutlined,
+  ShopOutlined,
+  ContactsOutlined,
+} from "@ant-design/icons";
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,4 +47,9 @@ export const ProfileOutLine = styled(ProfileOutlined)`
 
 export const MarketIcon = styled(ShopOutlined)`
   font-size: 270px;
+`;
+
+export const ImgIcon = styled(ContactsOutlined)`
+  font-size: 270px;
+  margin-left: 10px;
 `;

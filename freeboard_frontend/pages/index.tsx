@@ -11,6 +11,10 @@ export default function Home() {
   const MoveFreeBoard = () => {
     router.push("/board");
   };
+
+  const MoveDogs = () => {
+    router.push("/dogs");
+  };
   return (
     <S.Wrapper>
       <S.ShadowBox onClick={MoveFreeBoard}>
@@ -22,6 +26,11 @@ export default function Home() {
         <S.BasicBox>Free Market</S.BasicBox>
         <S.MarketIcon />
       </S.ShadowBox2>
+
+      <S.ShadowBox onClick={MoveDogs}>
+        <S.ImgIcon />
+        <S.BasicBox>Dogs</S.BasicBox>
+      </S.ShadowBox>
     </S.Wrapper>
   );
 }

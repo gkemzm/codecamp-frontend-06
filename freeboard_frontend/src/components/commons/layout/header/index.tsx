@@ -80,12 +80,16 @@ export default function LayoutHeader() {
   const MoveFreeBoard = () => {
     router.push("/board");
   };
+  const Dogs = () => {
+    router.push("/dogs");
+  };
   return (
     <>
       <Wrapper>
         <BasicRow>
           <HomeBtn onClick={MoveMainPage}>Home</HomeBtn>
           <HomeBtn onClick={MoveFreeBoard}>FreeBoard</HomeBtn>
+          <HomeBtn onClick={Dogs}>Dogs</HomeBtn>
         </BasicRow>
         <BasicRow>
           <LoginBtn>Login</LoginBtn>

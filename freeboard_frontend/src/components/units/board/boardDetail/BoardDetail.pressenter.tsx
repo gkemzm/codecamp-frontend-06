@@ -204,11 +204,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                   pageStart={0}
                   loadMore={onLoadMore}
                   hasMore={true}
-                  // loader={
-                  //   <div className="loader" key={0}>
-                  //     Loading ...
-                  //   </div>
-                  // }
+                  loader={<div className="loader" key={0}></div>}
                   useWindow={false}
                 >
                   {props.dataComment?.fetchBoardComments.map((el: any) => (
