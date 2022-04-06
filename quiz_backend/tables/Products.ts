@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class fetchProducts {
   @PrimaryGeneratedColumn("uuid") // 중복되지않은 자동으로 증가하는 컬럼 ("uuid") <- 사용시 중복 되지 않은 id자동생성
-  _id!: any;
+  _id!: string;
 
   @Column({ type: "text" })
   seller!: string;
@@ -14,6 +14,6 @@ export class fetchProducts {
   @Column({ type: "text" })
   detail!: string;
 
-  @Column({ type: "text" })
-  price!: any;
+  @Column({ type: "number" })
+  price!: number;
 }
