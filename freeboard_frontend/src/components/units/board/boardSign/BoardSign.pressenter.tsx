@@ -2,6 +2,7 @@ import * as S from "../boardSign/BoardSign.styles";
 import { BoardSignHTMLProps } from "./BoardSing.types";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
+import ImageSignPage from "../../../../commons/libraries/images/imageSign";
 
 export default function BoardSignHTML(props: BoardSignHTMLProps) {
   return (
@@ -69,11 +70,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
             readOnly
             placeholder="         07250"
             // value={props.zonecode} 우편번호
-            value={
-              props.zonecode ||
-              props.data?.fetchBoard.boardAddress.zipcode ||
-              ""
-            }
+            value={props.zonecode}
           ></S.PostInput>
           <S.PostBtn onClick={props.onToggleModal}>우편번호 검색</S.PostBtn>
           {props.isOpen && (
@@ -91,9 +88,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
           readOnly
           // onChange={props.onChangeAddress}
           // value={props.region}
-          value={
-            props.region || props.data?.fetchBoard.boardAddress.address || ""
-          }
+          value={props.region}
           placeholder="  주소를입력해주세요"
           // defaultValue={props.data?.fetchBoard.Address}
           // value와 defaultValue가 있다면 value가 우선시 되기에
@@ -121,9 +116,9 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
       </S.Bottom>
 
       <S.Bottom>
-        <S.TextDiv>사진첨부</S.TextDiv>
+        {/* <S.TextDiv>사진첨부</S.TextDiv> */}
         <S.PostArea>
-          <S.ImgBtn>
+          {/* <S.ImgBtn>
             +<br></br>Upload
           </S.ImgBtn>
           <S.ImgBtn>
@@ -131,7 +126,8 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
           </S.ImgBtn>
           <S.ImgBtn>
             +<br></br>Upload
-          </S.ImgBtn>
+          </S.ImgBtn> */}
+          <ImageSignPage />
         </S.PostArea>
       </S.Bottom>
 

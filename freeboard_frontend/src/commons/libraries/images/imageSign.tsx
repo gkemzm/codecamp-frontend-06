@@ -3,8 +3,10 @@ import { useMutation, gql } from "@apollo/client";
 import {
   IMutation,
   IMutationUploadFileArgs,
-} from "../../src/commons/types/generated/types";
-import { checkFileValidation } from "../../src/commons/libraries/validation";
+} from "../../types/generated/types";
+import { checkFileValidation } from "./validation";
+import ImageSignHTML from "./imageSign.presenter";
+// import * as S from "./imageSign.styles";
 
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
@@ -14,7 +16,7 @@ const UPLOAD_FILE = gql`
   }
 `;
 
-export default function ImageValidationPage() {
+export default function ImageSignPage() {
   const fileRef = useRef<HTMLInputElement>(null);
   const [imageUrl, setImageUrl] = useState<string | undefined>(""); // 타입이 둘중하나
 
@@ -49,22 +51,11 @@ export default function ImageValidationPage() {
   };
 
   return (
-    <div>
-      <div>이미지 업로드 연습하기</div>
-      <div
-        style={{ width: "100px", height: "100px", backgroundColor: "gray" }}
-        onClick={onClickImage}
-      >
-        이미지 선택{" "}
-      </div>
-      <input
-        style={{ display: "none" }}
-        type="file"
-        onChange={onChangeFile}
-        ref={fileRef}
-      />
-      {/* <input type="file"  onChange={onChangeFile} multiple /> 여러개 선택시 / */}
-      <img src={`https://storage.googleapis.com/${imageUrl}`} />
-    </div>
+    <ImageSignHTML
+      fileRef={fileRef}
+      imageUrl={imageUrl}
+      onChangeFile={onChangeFile}
+      onClickImage={onClickImage}
+    />
   );
 }

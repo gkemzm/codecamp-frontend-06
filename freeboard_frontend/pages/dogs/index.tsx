@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
+import ImageSignPage from "../../src/commons/libraries/images/imageSign";
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,6 +32,7 @@ export default function DogsPage() {
 
   return (
     <Wrapper>
+      <ImageSignPage />
       <Btn onClick={AnotherImg}>다른사진</Btn>
       <img src={dogUrl} />
     </Wrapper>
