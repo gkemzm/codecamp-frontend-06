@@ -2,13 +2,13 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   width: 1200px;
-    border: 1px solid yellow;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
+  box-shadow: 0px 4px 20px skyblue;
+  border: 1px solid skyblue;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
 `;
 
 export const TableTop = styled.div`
@@ -71,6 +71,8 @@ export const PencilIcon = styled.img``;
 export const Button = styled.button`
   width: 171px;
   height: 52px;
+  box-shadow: 0px 4px 20px skyblue;
+  border: 1px solid skyblue;
   background-color: white;
   border-radius: 15px;
   display: flex;

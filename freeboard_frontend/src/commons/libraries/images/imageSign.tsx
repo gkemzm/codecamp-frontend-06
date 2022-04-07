@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useRef } from "react";
+import { ChangeEvent, useRef } from "react";
 import { useMutation, gql } from "@apollo/client";
 import {
   IMutation,
@@ -16,9 +16,9 @@ const UPLOAD_FILE = gql`
   }
 `;
 
-export default function ImageSignPage() {
+export default function ImageSignPage(props: any) {
   const fileRef = useRef<HTMLInputElement>(null);
-  const [imageUrl, setImageUrl] = useState<string | undefined>(""); // 타입이 둘중하나
+  // const [imageUrl, setImageUrl] = useState<string | undefined>("");
 
   const [uploadFile] = useMutation<
     Pick<IMutation, "uploadFile">,
@@ -39,7 +39,7 @@ export default function ImageSignPage() {
       });
       console.log(result.data?.uploadFile.url);
 
-      setImageUrl(result.data?.uploadFile.url);
+      props.setImageUrl(result.data?.uploadFile.url);
     } catch (error) {
       // Modal.error({content: error.message});
       console.log("error");
@@ -53,7 +53,7 @@ export default function ImageSignPage() {
   return (
     <ImageSignHTML
       fileRef={fileRef}
-      imageUrl={imageUrl}
+      imageUrl={props.imageUrl}
       onChangeFile={onChangeFile}
       onClickImage={onClickImage}
     />

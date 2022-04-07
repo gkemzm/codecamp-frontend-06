@@ -14,8 +14,8 @@ export const AllWrapper = styled.div`
 
 export const Wrapper = styled.div`
   width: 1200px;
-  border: 1px solid yellow;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 20px skyblue;
+  border: 1px solid skyblue;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -41,9 +41,9 @@ export const PositionDetail = styled.div`
   flex-direction: column;
   justify-content: center;
   padding-left: 10px;
-  background-color: #bdbdbd;
+  background-color: skyblue;
   border: none;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 20px skyblue;
   color: black;
   display: ${(props: IHoverPosition) => (props.isHover ? "flex" : "none")};
 `;
@@ -202,14 +202,22 @@ export const BtnContents = styled.button`
   height: 40px;
   border-radius: 10px;
   border: none;
+  box-shadow: 0px 4px 20px skyblue;
+  background-color: white;
+  font-weight: 700;
   cursor: pointer;
+
+  :hover {
+    background-color: #85a5e9;
+    border-color: #85a5e9;
+  }
 `;
 export const WrapperWaiting = styled.div`
   width: 300px;
   height: 100px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 20px skyblue;
   border-radius: 10px;
-  border: 2px solid yellow;
+  border: 2px solid skyblue;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -218,9 +226,9 @@ export const WrapperWaiting = styled.div`
 `;
 export const CommentWrapper = styled.div`
   width: 1200px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 20px skyblue;
   border-radius: 10px;
-  border-top: 1px solid yellow;
+  border-top: 1px solid skyblue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -232,9 +240,9 @@ export const CommentWrapper = styled.div`
 
 export const CommentWrite = styled.div`
   width: 1030px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 10px skyblue;
   border-radius: 10px;
-  border-top: 5px solid greenyellow;
+  border-top: 5px solid skyblue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -248,8 +256,8 @@ export const CommentInfo = styled.div`
   width: 1000px;
   display: flex;
   flex-direction: row;
-  border-top: 5px solid greenyellow;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-top: 5px solid skyblue;
+  box-shadow: 0px 4px 10px skyblue;
   padding: 20px 0px;
   align-items: center;
 `;
@@ -267,8 +275,8 @@ export const CommentInputId = styled.input`
   width: 170px;
   height: 25px;
   margin-right: 30px;
-  border-top: 5px solid greenyellow;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-top: 5px solid skyblue;
+  box-shadow: 0px 4px 10px skyblue;
   border-bottom: none;
   border-left: none;
   border-right: none;
@@ -277,8 +285,8 @@ export const CommentInputId = styled.input`
 export const CommentInputPw = styled.input`
   width: 170px;
   height: 25px;
-  border-top: 5px solid greenyellow;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-top: 5px solid skyblue;
+  box-shadow: 0px 4px 10px skyblue;
   border-bottom: none;
   border-left: none;
   border-right: none;
@@ -312,8 +320,8 @@ export const CommentInput = styled.textarea`
   width: 800px;
   height: 90px;
   margin-right: 20px;
-  border-top: 5px solid greenyellow;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-top: 5px solid skyblue;
+  box-shadow: 0px 4px 10px skyblue;
   border-bottom: none;
   border-left: none;
   border-right: none;
@@ -324,8 +332,9 @@ export const CommentInput = styled.textarea`
 export const CommentSubmitBtn = styled.button`
   width: 90px;
   height: 90px;
-  border-top: 5px solid greenyellow;
-  box-shadow: 3px 10px 5px rgba(0, 0, 0, 0.2);
+  border-top: 5px solid skyblue;
+  box-shadow: 3px 10px 20px skyblue;
+  background-color: white;
   border-radius: 10px;
   border-bottom: none;
   border-left: none;
@@ -334,6 +343,11 @@ export const CommentSubmitBtn = styled.button`
   font-weight: 700;
   display: Fixed;
   cursor: pointer;
+
+  :hover {
+    background-color: #85a5e9;
+    border-color: #85a5e9;
+  }
 `;
 
 export const CommentSubmit = styled.div`
@@ -362,8 +376,8 @@ export const CommentDetailBox = styled.div`
   display: flex;
   flex-direction: row;
   border-radius: 15px;
-  border-top: 2px solid greenyellow;
-  box-shadow: 3px 10px 5px rgba(0, 0, 0, 0.2);
+  border-top: 2px solid skyblue;
+  box-shadow: 3px 10px 20px skyblue;
   border-bottom: none;
   border-left: none;
   border-right: none;
@@ -380,8 +394,8 @@ export const CommentDetailInfo = styled.div`
   width: 900px;
   display: flex;
   flex-direction: column;
-  border-top: 5px solid greenyellow;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  border-top: 5px solid skyblue;
+  box-shadow: 0px 1px 10px skyblue;
   border-bottom: none;
   border-left: none;
   border-right: none;
@@ -451,7 +465,9 @@ export const CDelete = styled.button`
   display: flex;
   align-items: center;
   justify-content: end;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 10px skyblue;
+  background-color: white;
+  border-radius: 10px;
   border: none;
   padding: 0px 10px;
   margin-top: 20px;
@@ -459,6 +475,11 @@ export const CDelete = styled.button`
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
+
+  :hover {
+    background-color: #85a5e9;
+    border-color: #85a5e9;
+  }
 `;
 
 export const CEdit = styled.button`
@@ -466,12 +487,19 @@ export const CEdit = styled.button`
   display: flex;
   align-items: center;
   justify-content: end;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 10px skyblue;
+  background-color: white;
+  border-radius: 10px;
   border: none;
   padding: 0px 10px;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
+
+  :hover {
+    background-color: #85a5e9;
+    border-color: #85a5e9;
+  }
 `;
 
 export const CPw = styled.input`
@@ -483,9 +511,9 @@ export const CPw = styled.input`
 
 export const CommentEditWrite = styled.div`
   width: 1000px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 10px skyblue;
   border-radius: 10px;
-  border-top: 5px solid greenyellow;
+  border-top: 5px solid skyblue;
   flex-direction: column;
   justify-content: center;
   align-items: center;

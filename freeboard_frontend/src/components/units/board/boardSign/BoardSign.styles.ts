@@ -3,8 +3,8 @@ import { ISubmitButtonProps } from "./BoardSing.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
-  border: 1px solid yellow;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 20px skyblue;
+  border: 1px solid skyblue;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -14,8 +14,12 @@ export const Wrapper = styled.div`
 export const Title = styled.div`
   font-size: 30px;
   font-weight: 900;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding: 5px 20px;
+  background-color: white;
+
+  border-radius: 30px;
+  color: skyblue;
+  margin: 30px 0px;
 `;
 
 export const Error = styled.div`
@@ -42,14 +46,26 @@ export const TopArea = styled.div`
   flex-direction: column;
 `;
 export const TextDiv = styled.div`
-  font-size: 15px;
+  width: 120px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
   font-weight: 700;
-  padding-bottom: 10px;
+  color: skyblue;
+  border: none;
+  border-radius: 30px;
+
+  margin: 10px 125px 10px 0px;
 `;
 export const TopInput = styled.input`
   width: 485px;
   height: 37px;
-  border: 1px solid #bdbdbd;
+  border: none;
+  box-shadow: 0px 4px 20px skyblue;
+  border-radius: 15px;
 `;
 export const MainTitle = styled.div`
   width: 1000px;
@@ -61,7 +77,9 @@ export const MainTitle = styled.div`
 export const TitleInput = styled.input`
   width: 1000px;
   height: 37px;
-  border: 1px solid #bdbdbd;
+  border: none;
+  box-shadow: 0px 4px 20px skyblue;
+  border-radius: 15px;
 `;
 export const Middle = styled.div`
   width: 1000px;
@@ -74,8 +92,9 @@ export const MiddleInput = styled.textarea`
   height: 500px;
   display: flex;
   text-align: left;
-  padding-bottom: 460px;
-  border: 1px solid #bdbdbd;
+  border: none;
+  box-shadow: 0px 4px 20px skyblue;
+  border-radius: 15px;
 `;
 export const PostNum = styled.div`
   width: 250px;
@@ -88,7 +107,9 @@ export const PostInput = styled.input`
   width: 110px;
   height: 55px;
   margin-right: 30px;
-  border: 1px solid #bdbdbd;
+  border: none;
+  box-shadow: 0px 4px 20px skyblue;
+  border-radius: 15px;
 `;
 export const PostBtn = styled.button`
   width: 110px;
@@ -101,7 +122,9 @@ export const Address = styled.input`
   width: 1000px;
   height: 37px;
   margin-bottom: 25px;
-  border: 1px solid #bdbdbd;
+  border: none;
+  box-shadow: 0px 4px 20px skyblue;
+  border-radius: 15px;
 `;
 export const Bottom = styled.div`
   width: 1000px;
@@ -113,7 +136,9 @@ export const Bottom = styled.div`
 export const YouTube = styled.input`
   width: 1000px;
   height: 37px;
-  border: 1px solid #bdbdbd;
+  border: none;
+  box-shadow: 0px 4px 20px skyblue;
+  border-radius: 15px;
 `;
 export const PostArea = styled.div`
   width: 1000px;
@@ -145,23 +170,33 @@ export const SelectArea = styled.div`
 `;
 
 export const SelectText = styled.div`
-  width: 50px;
+  width: 60px;
   margin: 0px 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: skyblue;
 `;
 
 export const RegistBtn = styled.button`
   width: 150px;
   height: 60px;
-  font-size: 15px;
-  font-weight: 700;
-  margin-top: 50px;
-  margin-bottom: 70px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: skyblue;
   border: none;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  box-shadow: 0px 4px 20px skyblue;
+  margin: 50px 0px 70px 0px;
+  background-color: white;
   cursor: pointer;
+
+  :hover {
+    background-color: #afc0e4;
+    border-color: #afc0e4;
+  }
 
   background-color: ${(props: ISubmitButtonProps) =>
     props.isActive ? "yellow" : "none"};

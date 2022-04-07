@@ -22,6 +22,8 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
   const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
 
+  const [imageUrl, setImageUrl] = useState("");
+
   // const [isOpen, setIsOpen] = useState(false);
 
   const [isActive, setIsActive] = useState(false);
@@ -75,6 +77,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
             title: title,
             contents: contents,
             youtubeUrl: youTube,
+            images: imageUrl,
             boardAddress: {
               address: region,
               addressDetail: addressDetail,
@@ -90,6 +93,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
           content: "게시물 등록이 성공했습니다.",
         });
       }
+      console.log(result);
       router.push(`/board/${result.data.createBoard._id}`);
     } catch (error) {
       if (error instanceof Error) {
@@ -139,6 +143,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
             title: title,
             contents: contents,
             youtubeUrl: youTube,
+            images: imageUrl,
             boardAddress: {
               address: region,
               addressDetail: addressDetail,
@@ -253,6 +258,8 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
       onToggleModal={onToggleModal}
       submit={submit}
       data={props.data}
+      imageUrl={imageUrl}
+      setImageUrl={setImageUrl}
     ></BoardSignHTML>
   );
 }

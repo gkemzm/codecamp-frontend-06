@@ -14,6 +14,7 @@ const FETCH_BOARD = gql`
       contents
       likeCount
       dislikeCount
+      images
       youtubeUrl
       createdAt
     }

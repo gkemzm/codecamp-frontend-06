@@ -11,12 +11,15 @@ export const ListButton = styled.button`
   justify-content: center;
   align-items: center;
   margin-right: 10px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 20px skyblue;
+  border: 1px solid skyblue;
+  border-radius: 30px;
+  background-color: white;
   cursor: pointer;
 
   :hover {
-    background-color: #bdbdbd;
-    border-color: #bdbdbd;
+    background-color: #f5f2fc;
+    border-color: #f5f2fc;
   }
 `;
 

@@ -127,7 +127,10 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
           <S.ImgBtn>
             +<br></br>Upload
           </S.ImgBtn> */}
-          <ImageSignPage />
+          <ImageSignPage
+            imageUrl={props.imageUrl}
+            setImageUrl={props.setImageUrl}
+          />
         </S.PostArea>
       </S.Bottom>
 

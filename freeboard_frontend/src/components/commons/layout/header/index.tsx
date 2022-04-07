@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 
 const Wrapper = styled.div`
-  background-color: white;
+  background-color: skyblue;
   height: 80px;
   display: flex;
   flex-direction: row;
@@ -16,6 +16,7 @@ const LoginBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: skyblue;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   margin-right: 30px;
@@ -23,8 +24,8 @@ const LoginBtn = styled.button`
   cursor: pointer;
 
   :hover {
-    background-color: #bdbdbd;
-    border-color: #bdbdbd;
+    background-color: #85a5e9;
+    border-color: #85a5e9;
   }
 `;
 
@@ -34,6 +35,7 @@ const SignBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: skyblue;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   margin-right: 30px;
@@ -41,8 +43,8 @@ const SignBtn = styled.button`
   cursor: pointer;
 
   :hover {
-    background-color: #bdbdbd;
-    border-color: #bdbdbd;
+    background-color: #85a5e9;
+    border-color: #85a5e9;
   }
 `;
 
@@ -52,6 +54,7 @@ const HomeBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: skyblue;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   margin-right: 30px;
@@ -59,8 +62,8 @@ const HomeBtn = styled.button`
   cursor: pointer;
 
   :hover {
-    background-color: #bdbdbd;
-    border-color: #bdbdbd;
+    background-color: #85a5e9;
+    border-color: #85a5e9;
   }
 `;
 
@@ -68,7 +71,7 @@ const BasicRow = styled.div`
   display: flex;
   flex-direction: row;
   border: none;
-  background-color: white;
+  background-color: skyblue;
 `;
 
 export default function LayoutHeader() {

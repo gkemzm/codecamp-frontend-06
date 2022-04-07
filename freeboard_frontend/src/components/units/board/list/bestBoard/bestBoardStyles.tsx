@@ -18,8 +18,8 @@ export const BestBoardTable = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-  border: 1px solid yellow;
+  box-shadow: 0px 4px 20px skyblue;
+  border: 1px solid skyblue;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

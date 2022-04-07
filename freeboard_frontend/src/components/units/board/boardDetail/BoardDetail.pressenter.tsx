@@ -103,8 +103,11 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                 <S.Title>
                   <div>{props.data?.fetchBoard.title}</div>
                 </S.Title>
-
-                <S.ImageBox>이미지가 들어갈 구간</S.ImageBox>
+                <S.ImageBox>
+                  <img
+                    src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[0]}`}
+                  />
+                </S.ImageBox>
 
                 <S.Contents>
                   <div>{props.data?.fetchBoard.contents}</div>
