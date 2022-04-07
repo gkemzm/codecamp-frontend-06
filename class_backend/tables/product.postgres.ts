@@ -1,8 +1,8 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class fetchProducts extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid") // 중복되지않은 자동으로 증가하는 컬럼 ("uuid") <- 사용시 중복 되지 않은 id자동생성
+export class Product extends BaseEntity {
+  @PrimaryGeneratedColumn("uuid")
   _id!: string;
 
   @Column({ type: "text" })
@@ -17,6 +17,9 @@ export class fetchProducts extends BaseEntity {
   @Column({ type: "text" })
   price!: any;
 
-  @Column({ type: "text" })
+  @Column({ type: "timestamp", nullable: true, default: null })
   createdAt!: Date;
+
+  @Column({ type: "timestamp", nullable: true, default: null })
+  deletedAt!: Date;
 }
