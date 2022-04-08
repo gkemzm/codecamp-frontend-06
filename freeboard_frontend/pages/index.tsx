@@ -4,7 +4,6 @@
 // import styles from "../styles/Home.module.css";
 import * as S from "./styles";
 import { useRouter } from "next/router";
-import BoardsSearchPage from "../src/components/units/board/list/search/BoardSearch.container";
 
 export default function Home() {
   const router = useRouter();
@@ -22,7 +21,6 @@ export default function Home() {
   };
   return (
     <S.Wrapper>
-      <BoardsSearchPage />
       <S.ShadowBox onClick={MoveFreeBoard}>
         <S.ProfileOutLine />
         <S.BasicBox>Free Board</S.BasicBox>

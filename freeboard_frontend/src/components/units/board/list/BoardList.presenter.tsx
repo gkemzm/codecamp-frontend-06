@@ -1,6 +1,7 @@
 import { getDate } from "../../../../commons/utils";
 import * as S from "./BoardList.styles";
 import { BoardListUIProps } from "./BoardList.types";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardListUI(props: BoardListUIProps) {
   console.log(props.data);
@@ -19,7 +20,14 @@ export default function BoardListUI(props: BoardListUIProps) {
             {String(el._id).slice(-4).toUpperCase()}
           </S.ColumnBasic>
           <S.ColumnTitle id={el._id} onClick={props.onClickMoveToBoardDetail}>
-            {el.title}
+            {el.title
+              .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
+              .split("#$%")
+              .map((el: any) => (
+                <S.Word key={uuidv4()} isMatched={props.keyword === el}>
+                  {el}
+                </S.Word>
+              ))}
           </S.ColumnTitle>
           <S.ColumnBasic>{el.writer}</S.ColumnBasic>
           {/* <S.ColumnBasic>Number({el.createdAt})</S.ColumnBasic> */}

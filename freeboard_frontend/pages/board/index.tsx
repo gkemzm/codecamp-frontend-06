@@ -8,10 +8,11 @@ import {
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../src/commons/types/generated/types";
+import BoardsSearchPage from "../../src/components/units/board/list/search/BoardSearch.container";
 
 const FETCH_BOARDS = gql`
-  query fetchBoards($page: Int) {
-    fetchBoards(page: $page) {
+  query fetchBoards($search: String, $page: Int) {
+    fetchBoards(search: $search, page: $page) {
       _id
       writer
       title
@@ -39,6 +40,7 @@ export default function BoardsPage() {
   const [isActive, setIsActive] = useState(false);
   const [isActive2, setIsActive2] = useState(true);
   const [btnColor, setBtnColor] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   const { data: dataBoardsCount } = useQuery(FETCH_BOARDS_COUNT);
   const lastPage = Math.ceil(dataBoardsCount?.fetchBoardsCount / 10);
@@ -46,7 +48,13 @@ export default function BoardsPage() {
   return (
     <MainPage>
       <BestPage />
-      <BoardList data={data} />
+      <BoardsSearchPage
+        data={data}
+        refetch={refetch}
+        keyword={keyword}
+        setKeyword={setKeyword}
+      />
+      <BoardList data={data} keyword={keyword} setKeyword={setKeyword} />
       <PageList
         refetch={refetch}
         lastPage={lastPage}

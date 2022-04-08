@@ -1,15 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 import _ from "lodash";
-// import { v4 as uuidv4 } from "uuid";
 import * as S from "./BoardSearch.styles";
 import { ISearchBoardProps } from "./BoardSearch.types";
 
 export default function SearchBoardHTML(props: ISearchBoardProps) {
   return (
-    <div>
+    <S.Wrapper>
       검색어입력:
-      <input type="text" onChange={props.onChangeSearch} />
-      {props.data?.fetchBoards.map((el: any, index: any) => (
+      <S.SearchInput type="text" onChange={props.onChangeSearch} />
+      {/* {props.data?.fetchBoards.map((el: any, index: any) => (
         <S.MyRow key={el._id}>
           <S.MyColumn>
             <input type="checkbox" />
@@ -21,17 +20,14 @@ export default function SearchBoardHTML(props: ISearchBoardProps) {
               .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
               .split("#$%")
               .map((el: any) => (
-                // <S.Word key={uuidv4()} isMatched={props.keyword === el}>
-                //   {el}
-                // </S.Word>
-                <S.Word key={index} isMatched={props.keyword === el}>
+                <S.Word key={uuidv4()} isMatched={props.keyword === el}>
                   {el}
                 </S.Word>
               ))}
           </S.MyColumn>
         </S.MyRow>
-      ))}
-      {new Array(10).fill(1).map((_, index) => (
+      ))} */}
+      {/* {new Array(10).fill(1).map((_, index) => (
         <button
           key={index + 1}
           onClick={props.onClickPage}
@@ -39,8 +35,8 @@ export default function SearchBoardHTML(props: ISearchBoardProps) {
         >
           {index + 1}
         </button>
-      ))}
-    </div>
+      ))} */}
+    </S.Wrapper>
   );
 }
 

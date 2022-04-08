@@ -18,6 +18,7 @@ export default function BoardList(props: any) {
 
   return (
     <BoardListUI
+      keyword={props.keyword}
       data={props.data}
       onClickMoveToBoardNew={onClickMoveToBoardNew}
       onClickMoveToBoardDetail={onClickMoveToBoardDetail}

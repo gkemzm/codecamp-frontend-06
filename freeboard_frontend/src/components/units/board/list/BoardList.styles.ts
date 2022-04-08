@@ -85,3 +85,10 @@ export const Button = styled.button`
     background-color: #f5f2fc;
   }
 `;
+
+interface IProps {
+  isMatched: boolean;
+}
+export const Word = styled.span`
+  color: ${(props: IProps) => (props.isMatched ? "red" : "black")};
+`;
