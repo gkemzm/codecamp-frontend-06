@@ -1,5 +1,6 @@
 import * as S from "./imageSign.styles";
 import { ImageSignProps } from "./imageSign.types";
+
 export default function ImageSignHTML(props: ImageSignProps) {
   return (
     <S.AreaColum>
@@ -12,7 +13,8 @@ export default function ImageSignHTML(props: ImageSignProps) {
         multiple
       />
       {/* <input type="file"  onChange={onChangeFile} multiple /> 여러개 선택시 / */}
-      <S.ImageBoard>
+      <S.ImageBoard isActive={props.isActive}>
+        {/* //조금이따 타입만들기 */}
         <img
           src={`https://storage.googleapis.com/${props.imageUrl}`}
           style={{

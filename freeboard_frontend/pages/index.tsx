@@ -15,6 +15,10 @@ export default function Home() {
   const MoveDogs = () => {
     router.push("/dogs");
   };
+
+  const MoveFirebase = () => {
+    router.push("/firebase");
+  };
   return (
     <S.Wrapper>
       <S.ShadowBox onClick={MoveFreeBoard}>
@@ -31,6 +35,11 @@ export default function Home() {
         <S.ImgIcon />
         <S.BasicBox>Dogs</S.BasicBox>
       </S.ShadowBox>
+
+      <S.ShadowBox2 onClick={MoveFirebase}>
+        <S.BasicBox>Firebase</S.BasicBox>
+        <S.FireIcon />
+      </S.ShadowBox2>
     </S.Wrapper>
   );
 }

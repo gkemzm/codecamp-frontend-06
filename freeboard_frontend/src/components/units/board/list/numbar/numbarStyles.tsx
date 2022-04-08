@@ -13,8 +13,8 @@ export const ListButton = styled.button`
   margin-right: 10px;
   box-shadow: 0px 4px 20px skyblue;
   border: 1px solid skyblue;
-  border-radius: 30px;
   background-color: white;
+  border-radius: 30px;
   cursor: pointer;
 
   :hover {

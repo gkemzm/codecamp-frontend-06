@@ -43,12 +43,17 @@ export default function LayoutNavigation() {
   const Dogs = () => {
     router.push("/dogs");
   };
+
+  const Firebase = () => {
+    router.push("/firebase");
+  };
   return (
     <>
       <Wrapper>
         <HomeBtn onClick={MoveMainPage}>Home</HomeBtn>
         <HomeBtn onClick={MoveFreeBoard}>FreeBoard</HomeBtn>
         <HomeBtn onClick={Dogs}>Dogs</HomeBtn>
+        <HomeBtn onClick={Firebase}>Firebase</HomeBtn>
       </Wrapper>
     </>
   );

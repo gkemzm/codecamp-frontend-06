@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { IImageBoard } from "./imageSign.types";
 
 export const Btn = styled.div`
   width: 120px;
@@ -50,7 +51,7 @@ export const AreaRow = styled.div`
 export const ImageBoard = styled.div`
   width: 250px;
   height: 250px;
-  display: flex;
+  display: ${(props: IImageBoard) => (props.isActive ? "flex" : "none")};
   flex-direction: Row;
   align-items: center;
   justify-content: center;

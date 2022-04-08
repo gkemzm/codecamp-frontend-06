@@ -86,6 +86,10 @@ export default function LayoutHeader() {
   const Dogs = () => {
     router.push("/dogs");
   };
+
+  const Firebase = () => {
+    router.push("/firebase");
+  };
   return (
     <>
       <Wrapper>
@@ -93,6 +97,7 @@ export default function LayoutHeader() {
           <HomeBtn onClick={MoveMainPage}>Home</HomeBtn>
           <HomeBtn onClick={MoveFreeBoard}>FreeBoard</HomeBtn>
           <HomeBtn onClick={Dogs}>Dogs</HomeBtn>
+          <HomeBtn onClick={Firebase}>Firebase</HomeBtn>
         </BasicRow>
         <BasicRow>
           <LoginBtn>Login</LoginBtn>

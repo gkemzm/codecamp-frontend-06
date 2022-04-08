@@ -3,6 +3,7 @@ import {
   ProfileOutlined,
   ShopOutlined,
   ContactsOutlined,
+  FireOutlined,
 } from "@ant-design/icons";
 
 export const Wrapper = styled.div`
@@ -52,4 +53,9 @@ export const MarketIcon = styled(ShopOutlined)`
 export const ImgIcon = styled(ContactsOutlined)`
   font-size: 270px;
   margin-left: 10px;
+`;
+
+export const FireIcon = styled(FireOutlined)`
+  font-size: 270px;
+  margin-left: 100px;
 `;
