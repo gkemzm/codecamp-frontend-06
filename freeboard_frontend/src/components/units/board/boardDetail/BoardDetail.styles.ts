@@ -509,6 +509,10 @@ export const CPw = styled.input`
   border: none;
 `;
 
+export const Img = styled.img`
+  max-width: 1000px;
+  max-height: 700px;
+`;
 export const CommentEditWrite = styled.div`
   width: 1000px;
   box-shadow: 0px 4px 10px skyblue;

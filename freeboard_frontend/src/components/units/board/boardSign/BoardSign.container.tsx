@@ -22,7 +22,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
   const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
 
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(["", "", ""]);
 
   // const [isOpen, setIsOpen] = useState(false);
 

@@ -49,8 +49,8 @@ export const AreaRow = styled.div`
 `;
 
 export const ImageBoard = styled.div`
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   display: ${(props: IImageBoard) => (props.isActive ? "flex" : "none")};
   flex-direction: Row;
   align-items: center;
@@ -61,9 +61,11 @@ export const ImageBoard = styled.div`
   border: none;
   border-radius: 30px;
   box-shadow: 0px 4px 20px skyblue;
-  margin: 10px 0px;
+  margin: 10px 50px 10px 0px;
 `;
 
-export const Hidden = styled.div`
-  display: none;
+export const Img = styled.img`
+  height: 180px;
+  width: 180px;
+  object-Fit: "cover";
 `;

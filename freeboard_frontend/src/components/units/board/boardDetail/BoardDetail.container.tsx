@@ -162,6 +162,7 @@ export default function BoardDetailFunction() {
   };
 
   const upLike = async () => {
+    console.log(data);
     try {
       await callLikeApi({
         variables: {

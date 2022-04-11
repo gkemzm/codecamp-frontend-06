@@ -130,6 +130,7 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
           <ImageSignPage
             imageUrl={props.imageUrl}
             setImageUrl={props.setImageUrl}
+            data={props.data}
           />
         </S.PostArea>
       </S.Bottom>

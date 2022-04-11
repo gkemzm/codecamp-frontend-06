@@ -14,14 +14,8 @@ export default function ImageSignHTML(props: ImageSignProps) {
       />
       {/* <input type="file"  onChange={onChangeFile} multiple /> 여러개 선택시 / */}
       <S.ImageBoard isActive={props.isActive}>
-        {/* //조금이따 타입만들기 */}
-        <img
+        <S.Img
           src={`https://storage.googleapis.com/${props.imageUrl}`}
-          style={{
-            height: "230px",
-            width: "230px",
-            objectFit: "cover",
-          }}
         />
       </S.ImageBoard>
     </S.AreaColum>

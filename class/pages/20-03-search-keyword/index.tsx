@@ -39,11 +39,16 @@ export default function MapBoardPage() {
 
   const [keyword, setKeyword] = useState("");
 
+  // const { data, refetch } = useQuery<
+  //   Pick<IQuery, "fetchBoards">,
+  //   IQueryFetchBoardsArgs
+  // >(FETCH_BOARDS, {
+  //   variables,fetchPolicy:"cache-first"// 기본(default)이 퍼스트 cash-only는 캐시에서만 꺼내오기 network-only는 백엔드에서만 꺼내오기
+  // });
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
-
   // const onClickSearch = () => {
   //   refetch({ search: search, page: 1 });
   // };

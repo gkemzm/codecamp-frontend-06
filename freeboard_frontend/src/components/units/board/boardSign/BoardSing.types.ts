@@ -43,6 +43,6 @@ export interface BoardSignHTMLProps {
   onToggleModal: () => any;
   submit: (event: MouseEvent<HTMLButtonElement>) => void;
   data?: any;
-  imageUrl?: string;
+  imageUrl?: object;
   setImageUrl: any;
 }
