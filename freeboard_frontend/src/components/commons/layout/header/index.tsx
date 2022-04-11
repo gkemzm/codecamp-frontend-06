@@ -90,6 +90,14 @@ export default function LayoutHeader() {
   const Firebase = () => {
     router.push("/firebase");
   };
+
+  const MoveLogin = () => {
+    router.push("/Login");
+  };
+
+  const MoveSignUp = () => {
+    router.push("/signUp");
+  };
   return (
     <>
       <Wrapper>
@@ -100,8 +108,8 @@ export default function LayoutHeader() {
           <HomeBtn onClick={Firebase}>Firebase</HomeBtn>
         </BasicRow>
         <BasicRow>
-          <LoginBtn>Login</LoginBtn>
-          <SignBtn>Sign Up</SignBtn>
+          <LoginBtn onClick={MoveLogin}>Login</LoginBtn>
+          <SignBtn onClick={MoveSignUp}>Sign Up</SignBtn>
         </BasicRow>
       </Wrapper>
     </>
