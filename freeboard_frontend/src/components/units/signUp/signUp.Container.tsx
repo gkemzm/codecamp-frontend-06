@@ -1,41 +1,37 @@
 import { useRecoilState } from "recoil";
-import * as S from "./signUp.styles";
-import { gId, gPw, gPwCheck, gEmail } from "../../commons/store/index";
-import { useState } from "react";
-// import { useEffect, useState } from 'react';
+import SignUpPresenter from "./signUp.Presenter";
+import {
+  gIdError,
+  gPwError,
+  gPwCheckError,
+  gEmailError,
+} from "../../commons/store/index";
+import { useState, useEffect } from "react";
 
 export default function SignUpContainer() {
-  const [id, setId] = useRecoilState(gId);
-  const [pw, setPw] = useRecoilState(gPw);
-  const [pwCheck, setPwCheck] = useRecoilState(gPwCheck);
-  const [email, setEmail] = useRecoilState(gEmail);
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
+  const [pwCheck, setPwCheck] = useState("");
+  const [email, setEmail] = useState("");
 
-  const [idError, setIdError] = useState("");
-  const [pwError, setPwError] = useState("");
-  const [pwCheckError, setPwCheckError] = useState("");
-  const [emailError, setEmailError] = useState("");
-
-  // useEffect(() => {
-  //   setId("");
-  //   setPw("");
-  //   setPwCheck("");
-  // }, []);
+  const [, setIdError] = useRecoilState(gIdError);
+  const [, setPwError] = useRecoilState(gPwError);
+  const [, setPwCheckError] = useRecoilState(gPwCheckError);
+  const [, setEmailError] = useRecoilState(gEmailError);
 
   const onClickSignUp = () => {
-    if (/^\w{6,15}$/.test(id) ? id : setIdError("id를 확인하세요")) {
+    if (/^\w{6,15}$/.test(id) ? id : setIdError("Check Your ID")) {
       console.log(id);
     }
-    if (/^\w[a-zA-Z0-9]{6,18}$/.test(pw) ? pw : setPwError("pw를 확인하세요")) {
+    if (/^\w[a-zA-Z0-9]{6,18}$/.test(pw) ? pw : setPwError("Check Your PW")) {
       console.log(pw);
     }
     if (pwCheck !== pw || pwCheck === "") {
-      setPwCheckError("pwCheck를 확인하세요");
+      setPwCheckError("Check Your PwCheck");
     }
 
     if (
-      /^\w+@\w+\.\w+$/.test(email)
-        ? email
-        : setEmailError("이메일을 확인하세요")
+      /^\w+@\w+\.\w+$/.test(email) ? email : setEmailError("Check Your Email")
     ) {
       console.log(email);
     }
@@ -79,32 +75,24 @@ export default function SignUpContainer() {
     }
   };
 
+  useEffect(() => {
+    return () => {
+      setIdError("");
+      setPwError("");
+      setPwCheckError("");
+      setEmailError("");
+    };
+  }, []);
+
   return (
-    <S.Wrapper>
-      <S.LoginBox>
-        <S.Title>SIGN-UP</S.Title>
-        <S.BasicRow>
-          <S.SmallDiv>ID :</S.SmallDiv>{" "}
-          <S.LoginInput onChange={onChangeId}></S.LoginInput>
-        </S.BasicRow>
-        <S.Error>{idError}</S.Error>
-        <S.BasicRow>
-          <S.SmallDiv>PW:</S.SmallDiv>{" "}
-          <S.LoginInput onChange={onChangePw}></S.LoginInput>
-        </S.BasicRow>
-        <S.Error>{pwError}</S.Error>
-        <S.BasicRow>
-          <S.SmallDiv>PW CHECK:</S.SmallDiv>{" "}
-          <S.LoginInput onChange={onChangePwCheck}></S.LoginInput>
-        </S.BasicRow>
-        <S.Error>{pwCheckError}</S.Error>
-        <S.BasicRow>
-          <S.SmallDiv>EMAIL</S.SmallDiv>{" "}
-          <S.LoginInput onChange={onChangeEmail}></S.LoginInput>
-        </S.BasicRow>
-        <S.Error>{emailError}</S.Error>
-        <S.LoginBtn onClick={onClickSignUp}>SIGN UP!</S.LoginBtn>
-      </S.LoginBox>
-    </S.Wrapper>
+    <>
+      <SignUpPresenter
+        onClickSignUp={onClickSignUp}
+        onChangeId={onChangeId}
+        onChangePw={onChangePw}
+        onChangePwCheck={onChangePwCheck}
+        onChangeEmail={onChangeEmail}
+      />
+    </>
   );
 }

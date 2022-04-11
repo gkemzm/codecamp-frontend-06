@@ -14,7 +14,12 @@ export const Title = styled.div`
   color: skyblue;
   margin-bottom: 40px;
 `;
-
+export const Error = styled.div`
+  height: 20px;
+  display: flex;
+  color: red;
+  margin-bottom: 10px;
+`;
 export const LoginBox = styled.div`
   width: 600px;
   height: 400px;
@@ -37,7 +42,6 @@ export const BasicRow = styled.div`
   color: skyblue;
   font-size: 17px;
   font-weight: 700;
-  margin-bottom: 10px;
 `;
 
 export const BasicColumn = styled.div`
