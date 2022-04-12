@@ -7,8 +7,11 @@ import {
   gEmailError,
 } from "../../commons/store/index";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function SignUpContainer() {
+  const router = useRouter();
+
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [pwCheck, setPwCheck] = useState("");
@@ -42,6 +45,7 @@ export default function SignUpContainer() {
       pwCheck === pw
     ) {
       alert("Ok");
+      router.push("/Login");
     } else {
       alert("Sign Up Fail");
     }

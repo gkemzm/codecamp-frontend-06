@@ -21,9 +21,8 @@ export const Error = styled.div`
   color: red;
   margin-bottom: 10px;
 `;
-export const LoginBox = styled.div`
+export const SignUpBox = styled.div`
   width: 600px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,7 +32,6 @@ export const LoginBox = styled.div`
   border-radius: 20px;
   margin: auto;
   padding-top: 30px;
-  padding-right: 50px;
 `;
 
 export const BasicRow = styled.div`
@@ -45,6 +43,7 @@ export const BasicRow = styled.div`
   color: skyblue;
   font-size: 17px;
   font-weight: 700;
+  margin-right: 70px;
 `;
 
 export const BasicColumn = styled.div`
@@ -60,6 +59,11 @@ export const LoginInput = styled.input`
   border: none;
   border-radius: 20px;
   box-shadow: 0px 2px 10px skyblue;
+
+  ::placeholder {
+    color: skyblue;
+    font-weight: 700;
+  }
 `;
 
 export const LoginBtn = styled.button`

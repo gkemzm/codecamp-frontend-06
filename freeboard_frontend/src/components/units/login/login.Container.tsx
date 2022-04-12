@@ -1,16 +1,31 @@
-import * as S from "./login.styles";
 import { useState, useEffect } from "react";
+import LoginPresenter from "./login.Presenter";
+import { useRouter } from "next/router";
+import { LOGIN_USER } from "./login.query";
+import {
+  gEmailError,
+  gPwError,
+  accessTokenState,
+} from "../../commons/store/index";
+import { useRecoilState } from "recoil";
+import { useMutation } from "@apollo/client";
 
 export default function LoginContainer() {
-  const [id, setId] = useState("");
+  const router = useRouter();
+  const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
-  const [idError, setIdError] = useState("");
-  const [pwError, setPwError] = useState("");
+  // const [idError, setIdError] = useState("");
+  // const [pwError, setPwError] = useState("");
+  const [, setEmailError] = useRecoilState(gEmailError);
+  const [, setPwError] = useRecoilState(gPwError);
+  const [, setAccessToken] = useRecoilState(accessTokenState);
+
+  const [loginUser] = useMutation(LOGIN_USER);
 
   const onChangeId = (event: any) => {
-    setId(event?.target.value);
+    setEmail(event?.target.value);
     if (event.target.value !== "") {
-      setIdError("");
+      setEmailError("");
     }
   };
 
@@ -21,44 +36,55 @@ export default function LoginContainer() {
     }
   };
 
-  const onClickLogin = () => {
-    if (/^\w{6,15}$/.test(id) ? id : setIdError("Check Your ID")) {
-      console.log(id);
+  const onClickLogin = async () => {
+    if (
+      /^\w+@\w+\.\w+$/.test(email) ? email : setEmailError("Check Your E-mail")
+    ) {
+      console.log(email);
     }
     if (/^\w[a-zA-Z0-9]{6,18}$/.test(pw) ? pw : setPwError("Check Your PW")) {
       console.log(pw);
     }
-
-    if (/^\w{6,15}$/.test(id) && /^\w[a-zA-Z0-9]{6,15}$/.test(pw)) {
-      alert("Hello");
-    } else {
-      alert("Check Your Id or PassWord");
+    if (/^\w+@\w+\.\w+$/.test(email) && /^\w[a-zA-Z0-9]{6,15}$/.test(pw)) {
+      console.log("SUCCESS");
     }
+    try {
+      const result = await loginUser({
+        variables: {
+          email: email,
+          password: pw,
+        },
+      });
+      const accessToken = result.data.loginUser.accessToken;
+      setAccessToken(accessToken);
+      console.log(accessToken);
+      alert("Login Success");
+      router.push("/");
+    } catch {
+      alert("Login Failed");
+      setEmailError("Check Your E-mail");
+      setPwError("Check Your PW");
+    }
+  };
+  const MoveSignUp = () => {
+    router.push("/signUp");
   };
 
   useEffect(() => {
     return () => {
-      setIdError("");
+      setEmailError("");
       setPwError("");
     };
   }, []);
 
   return (
-    <S.Wrapper>
-      <S.LoginBox>
-        <S.Title>LOG-IN</S.Title>
-        <S.BasicRow>
-          <S.SmallDiv>ID :</S.SmallDiv>{" "}
-          <S.LoginInput onChange={onChangeId}></S.LoginInput>
-        </S.BasicRow>
-        <S.Error>{idError}</S.Error>
-        <S.BasicRow>
-          <S.SmallDiv>PW:</S.SmallDiv>{" "}
-          <S.LoginInput onChange={onChangePw}></S.LoginInput>
-        </S.BasicRow>
-        <S.Error>{pwError}</S.Error>
-        <S.LoginBtn onClick={onClickLogin}>LOGIN</S.LoginBtn>
-      </S.LoginBox>
-    </S.Wrapper>
+    <LoginPresenter
+      // idError={idError}
+      // pwError={pwError}
+      onChangeId={onChangeId}
+      onChangePw={onChangePw}
+      onClickLogin={onClickLogin}
+      MoveSignUp={MoveSignUp}
+    />
   );
 }

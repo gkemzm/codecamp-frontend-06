@@ -1,15 +1,5 @@
 import { atom } from "recoil";
 
-export const gId = atom({
-  key: "gId",
-  default: "",
-});
-
-export const gPw = atom({
-  key: "gPw",
-  default: "",
-});
-
 export const gIdError = atom({
   key: "gIdError",
   default: "",
@@ -27,5 +17,15 @@ export const gPwCheckError = atom({
 
 export const gEmailError = atom({
   key: "gEmailError",
+  default: "",
+});
+
+export const aaa = atom({
+  key: "aaa",
+  default: true,
+});
+
+export const accessTokenState = atom({
+  key: "accessTokenState",
   default: "",
 });

@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
 `;
 
 export const SmallDiv = styled.div`
-  width: 40px;
+  width: 63px;
 `;
 
 export const Title = styled.div`
@@ -56,6 +56,12 @@ export const LoginInput = styled.input`
   border: none;
   border-radius: 20px;
   box-shadow: 0px 2px 10px skyblue;
+  color: skyblue;
+
+  ::placeholder {
+    color: skyblue;
+    font-weight: 700;
+  }
 `;
 
 export const LoginBtn = styled.button`
@@ -76,4 +82,25 @@ export const LoginBtn = styled.button`
     border-color: #afc0e4;
     color: black;
   }
+`;
+
+export const BottomWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 50px;
+`;
+export const NomalBtn = styled.button`
+  width: 150px;
+  height: 50px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px skyblue;
+  background-color: white;
+  margin-right: px;
+  color: skyblue;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0px 15px;
+  cursor: pointer;
 `;
