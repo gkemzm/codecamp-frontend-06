@@ -104,7 +104,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                   <div>{props.data?.fetchBoard.title}</div>
                 </S.Title>
                 <S.ImageBox>
-                  <img
+                  <S.BoardImg
                     src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[0]}`}
                   />
                 </S.ImageBox>

@@ -19,18 +19,23 @@ export default function BestPage(props: BestPageProps) {
   >(FETCH_BOARDS_OF_THE_BEST);
   const MoveBestPage = (event: MouseEvent<HTMLDivElement>) => {
     router.push(`/board/${(event?.target as HTMLDivElement).id}`);
+    console.log(data);
   };
 
   return (
     <S.Wrapper>
-      {data?.fetchBoardsOfTheBest.map((el: IBoard) => (
+      {data?.fetchBoardsOfTheBest.map((el: IBoard, index) => (
         <S.BestBoardTable key={el._id}>
           <S.Writer onClick={MoveBestPage} id={el._id}>
             {el.writer}
           </S.Writer>
+          <S.BoardImg src={`https://storage.googleapis.com/${el.images}`} />
           <S.Info>{el.title}</S.Info>
-          <S.Info>{el.likeCount}</S.Info>
-          <S.Info>{el.createdAt.slice(0, 10)}</S.Info>
+          <S.BasicRow>
+            <S.LikeIcon />
+            <S.Info>{el.likeCount}</S.Info>
+            <S.Info>{el.createdAt.slice(0, 10)}</S.Info>
+          </S.BasicRow>
         </S.BestBoardTable>
       ))}
     </S.Wrapper>

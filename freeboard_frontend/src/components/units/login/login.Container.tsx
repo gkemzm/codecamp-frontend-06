@@ -46,24 +46,27 @@ export default function LoginContainer() {
       console.log(pw);
     }
     if (/^\w+@\w+\.\w+$/.test(email) && /^\w[a-zA-Z0-9]{6,15}$/.test(pw)) {
-      console.log("SUCCESS");
-    }
-    try {
-      const result = await loginUser({
-        variables: {
-          email: email,
-          password: pw,
-        },
-      });
-      const accessToken = result.data.loginUser.accessToken;
-      setAccessToken(accessToken);
-      console.log(accessToken);
-      alert("Login Success");
-      router.push("/");
-    } catch {
-      alert("Login Failed");
-      setEmailError("Check Your E-mail");
-      setPwError("Check Your PW");
+      try {
+        const result = await loginUser({
+          variables: {
+            email: email,
+            password: pw,
+          },
+        });
+        const accessToken = result.data.loginUser.accessToken;
+        setAccessToken(accessToken);
+        localStorage.setItem("accessToken", accessToken); // 임시저장
+        console.log(accessToken);
+        alert("Login Success");
+        router.push("/");
+      } catch {
+        alert("Login Failed");
+        setEmailError("Check Your E-mail");
+        setPwError("Check Your PW");
+      }
+    } else {
+      setEmailError("Check your E-mail");
+      setPwError("Check your PassWord");
     }
   };
   const MoveSignUp = () => {

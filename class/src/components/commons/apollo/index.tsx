@@ -7,19 +7,42 @@ import {
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/store/index";
 import { createUploadLink } from "apollo-upload-client";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 interface IAppProps {
   children: ReactNode;
 }
 
 export default function ApolloSetting(props: IAppProps) {
-  const [accessToken] = useRecoilState(accessTokenState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  // 1. 더 이상 지원되지 않음
+  // if(process.browser){
+
+  // }slse{
+
+  // }
+  // 2. 두번째 방법!!!
+  if (typeof window !== "undefined") {
+    console.log("여기는 브라우저다!!!");
+  } else {
+    console.log("여기는 프론트엔드 서버다!!! yarn dev다!!!");
+  }
+
+  // 프리랜더링시 문제되는 코드
+  // const mylocalstorageAccessToken = localStorage.getItem("accessitem");
+  // setAccessToken(mylocalstorageAccessToken || "");
+
+  // 3번째 방법!!!
+  useEffect(() => {
+    const mylocalstorageAccessToken = localStorage.getItem("accessitem");
+    setAccessToken(mylocalstorageAccessToken || "");
+  }, []);
 
   const uploadLink = createUploadLink({
     uri: "http://backend06.codebootcamp.co.kr/graphql",
     headers: { Authorization: `Bearer ${accessToken}` },
   });
+
   const client = new ApolloClient({
     // uri: "http://example.codebootcamp.co.kr/graphql",
     // uri: "http://backend06.codebootcamp.co.kr/graphql",

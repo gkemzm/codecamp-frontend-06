@@ -143,6 +143,11 @@ export const ImageBox = styled.div`
   flex-direction: column;
   padding-bottom: 50px;
 `;
+
+export const BoardImg = styled.img`
+  max-width: 700px;
+  max-height: 400px;
+`;
 export const Contents = styled.div`
   display: flex;
   flex-direction: column;

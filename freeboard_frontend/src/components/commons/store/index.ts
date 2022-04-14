@@ -29,3 +29,8 @@ export const accessTokenState = atom({
   key: "accessTokenState",
   default: "",
 });
+
+export const isInfo = atom({
+  key: "isInfo",
+  default: false,
+});

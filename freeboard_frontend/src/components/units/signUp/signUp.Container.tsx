@@ -8,6 +8,8 @@ import {
 } from "../../commons/store/index";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useMutation } from "@apollo/client";
+import { CREATE_USER } from "./signUp.query";
 
 export default function SignUpContainer() {
   const router = useRouter();
@@ -22,12 +24,14 @@ export default function SignUpContainer() {
   const [, setPwCheckError] = useRecoilState(gPwCheckError);
   const [, setEmailError] = useRecoilState(gEmailError);
 
-  const onClickSignUp = () => {
+  const [signUpUser] = useMutation(CREATE_USER);
+
+  const onClickSignUp = async () => {
     if (/^\w{6,15}$/.test(id) ? id : setIdError("Check Your ID")) {
-      console.log(id);
+      // id 검증
     }
     if (/^\w[a-zA-Z0-9]{6,18}$/.test(pw) ? pw : setPwError("Check Your PW")) {
-      console.log(pw);
+      // pw 검증
     }
     if (pwCheck !== pw || pwCheck === "") {
       setPwCheckError("Check Your PwCheck");
@@ -36,7 +40,7 @@ export default function SignUpContainer() {
     if (
       /^\w+@\w+\.\w+$/.test(email) ? email : setEmailError("Check Your Email")
     ) {
-      console.log(email);
+      // e-mail 검증 아래 부터는 전체검증
     }
     if (
       /^\w{6,15}$/.test(id) &&
@@ -44,10 +48,23 @@ export default function SignUpContainer() {
       /^\w+@\w+\.\w+$/.test(email) &&
       pwCheck === pw
     ) {
-      alert("Ok");
-      router.push("/Login");
-    } else {
-      alert("Sign Up Fail");
+      try {
+        const result = await signUpUser({
+          variables: {
+            createUserInput: {
+              email: email,
+              password: pw,
+              name: id,
+            },
+          },
+        });
+        console.log(result);
+        console.log(result?.data.createUser.name);
+        alert("Congratulation! Sign-Up Success!");
+        router.push("/Login");
+      } catch {
+        console.log("Faild Sign Up");
+      }
     }
   };
 
