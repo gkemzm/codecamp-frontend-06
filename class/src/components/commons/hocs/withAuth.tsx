@@ -7,7 +7,7 @@ export const withAuth = (Component: any) => (props: any) => {
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
-      router.push("/23-04-login-check");
+      router.push("/24-01-login-use-apollo-client");
       alert("로그인 후 이용 가능합니다!!!");
     }
   }, []);

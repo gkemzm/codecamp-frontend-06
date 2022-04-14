@@ -5,7 +5,7 @@ import {
   ApolloLink,
 } from "@apollo/client";
 import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../commons/store/index";
+import { accessTokenState, userInfoState } from "../../../commons/store/index";
 import { createUploadLink } from "apollo-upload-client";
 import { ReactNode, useEffect } from "react";
 
@@ -15,6 +15,8 @@ interface IAppProps {
 
 export default function ApolloSetting(props: IAppProps) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [, setUserInfo] = useRecoilState(userInfoState);
+
   // 1. 더 이상 지원되지 않음
   // if(process.browser){
 
@@ -29,13 +31,15 @@ export default function ApolloSetting(props: IAppProps) {
   }
 
   // 프리랜더링시 문제되는 코드
-  // const mylocalstorageAccessToken = localStorage.getItem("accessitem");
-  // setAccessToken(mylocalstorageAccessToken || "");
+  // const AccessToken = localStorage.getItem("accessitem");
+  // setAccessToken(AccessToken || "");
 
   // 3번째 방법!!!
   useEffect(() => {
-    const mylocalstorageAccessToken = localStorage.getItem("accessitem");
-    setAccessToken(mylocalstorageAccessToken || "");
+    const AccessToken = localStorage.getItem("accessToken");
+    const userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
+    setAccessToken(AccessToken || "");
+    setUserInfo(userInfo || "");
   }, []);
 
   const uploadLink = createUploadLink({

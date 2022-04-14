@@ -25,4 +25,4 @@ function LoginSuccessPage() {
   return <div>{data?.fetchUserLoggedIn.name}님 환영합니다!!!</div>;
 }
 
-export default withAuth(LoginSuccessPage);
+export default withAuth(LoginSuccessPage); // 이부분이 필요
