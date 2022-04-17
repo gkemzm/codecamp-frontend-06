@@ -1,4 +1,5 @@
 import { ChangeEvent, MouseEvent } from "react";
+import { number, string } from "yup";
 
 export interface BoardSignFunctionProps {
   isEdit: boolean;
@@ -10,6 +11,7 @@ export interface ISubmitButtonProps {
 }
 
 export interface IUpdateBoardInput {
+  images: string[];
   title?: string;
   contents?: string;
   youtubeUrl?: string;
@@ -38,6 +40,7 @@ export interface BoardSignHTMLProps {
   MoveDetailPage: () => any;
   MoveMain: () => any;
   data?: any;
-  imageUrl?: any;
-  setImageUrl: any;
+  fileUrls?: any;
+  // setImageUrl: any;
+  onChangeFileUrls: (fuleUrl: string, index: number) => void;
 }

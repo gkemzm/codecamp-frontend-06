@@ -2,6 +2,7 @@ import * as S from "../boardSign/BoardSign.styles";
 import { BoardSignHTMLProps } from "./BoardSing.types";
 import ImageSignPage from "../images/imageSign";
 import { useRouter } from "next/router";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardSignHTML(props: BoardSignHTMLProps) {
   const router = useRouter();
@@ -32,11 +33,14 @@ export default function BoardSignHTML(props: BoardSignHTMLProps) {
         <S.Bottom>
           {/* <S.TextDiv>사진첨부</S.TextDiv> */}
           <S.PostArea>
-            <ImageSignPage
-              imageUrl={props.imageUrl}
-              setImageUrl={props.setImageUrl}
-              data={props.data}
-            />
+            {props.fileUrls.map((el: string, index: number) => (
+              <ImageSignPage
+                key={uuidv4()}
+                index={index}
+                fileUrl={el}
+                onChangeFileUrls={props.onChangeFileUrls}
+              />
+            ))}
           </S.PostArea>
         </S.Bottom>
 

@@ -117,6 +117,21 @@ export const MiddleWrapper = styled.div`
   padding-bottom: 15px;
   align-items: center;
 `;
+
+export const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 1000px;
+  height: 300px;
+  margin-left: 30px;
+`;
+
+export const Image = styled.img`
+  width: 300px;
+  height: 200px;
+  margin-bottom: 30px;
+`;
+
 export const MiddleWrappertop = styled.div`
   width: 1000px;
   display: flex;

@@ -19,11 +19,16 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
             </S.TopWrapper>
             <S.MiddleWrapper>
               {props.data.fetchBoard.images?.[0] ? (
-                <S.ImageBox>
-                  <S.BoardImg
-                    src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[0]}`}
-                  />
-                </S.ImageBox>
+                <S.ImageWrapper>
+                  {props.data?.fetchBoard.images
+                    ?.filter((el: string) => el)
+                    .map((el: string) => (
+                      <S.Image
+                        key={el}
+                        src={`https://storage.googleapis.com/${el}`}
+                      />
+                    ))}
+                </S.ImageWrapper>
               ) : (
                 <></>
               )}

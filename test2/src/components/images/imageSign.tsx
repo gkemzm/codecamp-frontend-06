@@ -1,12 +1,8 @@
-import { ChangeEvent, useState, useRef } from "react";
 import { useMutation, gql } from "@apollo/client";
-import {
-  IMutation,
-  IMutationUploadFileArgs,
-} from "../../commons/types/generated/types";
-import { checkFileValidation } from "./validation";
+import { ChangeEvent, useRef } from "react";
+import { checkValidationImage } from "./validation";
+import { IUploads01Props } from "./imageSign.types";
 import ImageSignHTML from "./imageSign.presenter";
-// import * as S from "./imageSign.styles";
 
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
@@ -16,50 +12,33 @@ const UPLOAD_FILE = gql`
   }
 `;
 
-export default function ImageSignPage(props: any) {
+export default function ImageSignPage(props: IUploads01Props) {
   const fileRef = useRef<HTMLInputElement>(null);
-  // const [imageUrl, setImageUrl] = useState<string | undefined>("");
+  const [uploadFile] = useMutation(UPLOAD_FILE);
 
-  const [isActive, setIsActive] = useState(false);
-
-  const [uploadFile] = useMutation<
-    Pick<IMutation, "uploadFile">,
-    IMutationUploadFileArgs
-  >(UPLOAD_FILE);
-
-  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const myfile = event.target.files?.[0]; // myfile => file
-    console.log(myfile);
-
-    const isValid = checkFileValidation(myfile);
-    if (!isValid) return; // true면 아래 try실행
-
-    try {
-      const result = await uploadFile({
-        // 백엔드 스토리지에 저장하고 다시 가져온다.
-        variables: { file: myfile }, // { file: file } => { file }
-      });
-      console.log(result.data?.uploadFile.url);
-
-      props.setImageUrl(result.data?.uploadFile.url);
-
-      setIsActive(true);
-    } catch (error) {
-      console.log("error");
-    }
+  const onClickUpload = () => {
+    fileRef.current?.click();
   };
 
-  const onClickImage = () => {
-    fileRef.current?.click();
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = checkValidationImage(event.target.files?.[0]);
+    if (!file) return;
+
+    try {
+      const result = await uploadFile({ variables: { file } });
+      props.onChangeFileUrls(result.data.uploadFile.url, props.index);
+    } catch (error) {
+      alert("error");
+    }
   };
 
   return (
     <ImageSignHTML
       fileRef={fileRef}
-      imageUrl={props.imageUrl}
-      isActive={isActive}
+      fileUrl={props.fileUrl}
+      defaultFileUrl={props.defaultFileUrl}
+      onClickUpload={onClickUpload}
       onChangeFile={onChangeFile}
-      onClickImage={onClickImage}
     />
   );
 }

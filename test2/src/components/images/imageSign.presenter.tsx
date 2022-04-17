@@ -1,24 +1,29 @@
-import * as S from "./imageSign.styles";
-import { ImageSignProps } from "./imageSign.types";
+import {
+  UploadButton,
+  UploadFileHidden,
+  UploadImage,
+} from "./imageSign.styles";
+import { IUploads01UIProps } from "./imageSign.types";
 
-export default function ImageSignHTML(props: ImageSignProps) {
+export default function ImageSignHTML(props: IUploads01UIProps) {
   return (
-    <S.AreaColum>
-      <S.Btn>이미지 </S.Btn>
-      <input
-        style={{ display: "none" }}
+    <>
+      {props.fileUrl ? (
+        <UploadImage
+          onClick={props.onClickUpload}
+          src={`https://storage.googleapis.com/${props.fileUrl}`}
+        />
+      ) : (
+        <UploadButton onClick={props.onClickUpload}>
+          <>+</>
+          <>Upload</>
+        </UploadButton>
+      )}
+      <UploadFileHidden
         type="file"
-        onChange={props.onChangeFile}
         ref={props.fileRef}
+        onChange={props.onChangeFile}
       />
-      <S.AreaRow>
-        <S.ImgBtn onClick={props.onClickImage} isActive={props.isActive}>
-          +<br></br>
-        </S.ImgBtn>
-      </S.AreaRow>
-      <S.ImageBoard isActive={props.isActive}>
-        <S.Img src={`https://storage.googleapis.com/${props.imageUrl}`} />
-      </S.ImageBoard>
-    </S.AreaColum>
+    </>
   );
 }

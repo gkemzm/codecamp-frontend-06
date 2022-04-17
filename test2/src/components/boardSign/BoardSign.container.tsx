@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, MouseEvent } from "react";
+import { useState, ChangeEvent, MouseEvent, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardSignHTML from "./BoardSign.pressenter";
@@ -21,7 +21,8 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
   const [contentsError, setContentsError] = useState("");
   const [isChanged, setIsChanged] = useRecoilState(gIsChanged);
 
-  const [imageUrl, setImageUrl] = useState([""]);
+  // const [imageUrl, setImageUrl] = useState(["", "", ""]);
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
   // const [isOpen, setIsOpen] = useState(false);
 
   const [isActive, setIsActive] = useState(false);
@@ -35,6 +36,12 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
 
   const onToggleModal = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const onChangeFileUrls = (fileUrl: string, index: number) => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
   };
 
   const submit = async (event: MouseEvent<HTMLButtonElement>) => {
@@ -64,7 +71,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
             password: pw,
             title: title,
             contents: contents,
-            images: imageUrl,
+            images: fileUrls,
           },
         },
       });
@@ -83,8 +90,12 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
     }
   };
   const updateBoard = async () => {
-    if (!title && !contents) {
-      alert("error");
+    const currentFiles = JSON.stringify(fileUrls);
+    const defaultFiles = JSON.stringify(props.data.fetchBoard.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
+
+    if (!title && !contents && !isChangedFiles) {
+      alert("수정한 내용이 없습니다.");
       return;
     }
 
@@ -94,9 +105,12 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
       return;
     }
 
-    const updateBoardInput: IUpdateBoardInput = {};
+    const updateBoardInput: IUpdateBoardInput = {
+      images: [],
+    };
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
+    if (isChangedFiles) updateBoardInput.images = fileUrls;
 
     try {
       await callUpdateBoard({
@@ -104,7 +118,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
           updateBoardInput: {
             title: title,
             contents: contents,
-            images: imageUrl,
+            images: fileUrls,
           },
           password: pw,
           boardId: router.query.boardId,
@@ -120,6 +134,11 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
       }
     }
   };
+  useEffect(() => {
+    if (props.data?.fetchBoard.images?.length) {
+      setFileUrls([...props.data?.fetchBoard.images]);
+    }
+  }, [props.data]);
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
@@ -166,7 +185,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
       isOpen={isOpen}
       writerError={writerError}
       pwError={pwError}
-      imageUrl={imageUrl}
+      fileUrls={fileUrls}
       titleError={titleError}
       contentsError={contentsError}
       MoveMain={MoveMain}
@@ -179,7 +198,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
       onToggleModal={onToggleModal}
       submit={submit}
       data={props.data}
-      setImageUrl={setImageUrl}
+      onChangeFileUrls={onChangeFileUrls}
     ></BoardSignHTML>
   );
 }

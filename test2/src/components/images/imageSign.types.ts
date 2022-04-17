@@ -1,13 +1,16 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, RefObject } from "react";
 
-export interface ImageSignProps {
-  fileRef: any;
-  imageUrl?: String;
-  isActive: boolean;
-  onChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;
-  onClickImage: (event: MouseEvent<HTMLDivElement>) => void;
+export interface IUploads01Props {
+  index: number;
+  fileUrl: string;
+  defaultFileUrl?: string;
+  onChangeFileUrls: (fileUrl: string, index: number) => void;
 }
 
-export interface IImageBoard {
-  isActive: boolean;
+export interface IUploads01UIProps {
+  fileRef: RefObject<HTMLInputElement>;
+  fileUrl: string;
+  defaultFileUrl?: string;
+  onClickUpload: () => void;
+  onChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;
 }
