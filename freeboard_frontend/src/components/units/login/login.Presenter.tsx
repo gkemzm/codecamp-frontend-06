@@ -1,33 +1,33 @@
 import { ILoginEvent } from "./login.types";
 import * as S from "./login.styles";
-import { gEmailError, gPwError } from "../../commons/store/index";
-import { useRecoilState } from "recoil";
 
 export default function LoginPresenter(props: ILoginEvent) {
-  const [emailError] = useRecoilState(gEmailError);
-  const [pwError] = useRecoilState(gPwError);
   return (
     <S.Wrapper>
-      <S.LoginBox>
-        <S.Title>LOG-IN</S.Title>
-        <S.BasicRow>
-          <S.SmallDiv>E-Mail :</S.SmallDiv>{" "}
-          <S.LoginInput
-            onChange={props.onChangeId}
-            placeholder={" Insert Your E-MAIL "}
-          ></S.LoginInput>
-        </S.BasicRow>
-        <S.Error>{emailError}</S.Error>
-        <S.BasicRow>
-          <S.SmallDiv>PW:</S.SmallDiv>{" "}
-          <S.LoginInput
-            onChange={props.onChangePw}
-            placeholder={" Insert Your PW "}
-          ></S.LoginInput>
-        </S.BasicRow>
-        <S.Error>{pwError}</S.Error>
-        <S.LoginBtn onClick={props.onClickLogin}>LOGIN</S.LoginBtn>
-      </S.LoginBox>
+      <form onSubmit={props.handleSubmit(props.onClickLogin)}>
+        <S.LoginBox>
+          <S.Title>LOG-IN</S.Title>
+          <S.BasicRow>
+            <S.SmallDiv>E-Mail :</S.SmallDiv>{" "}
+            <S.LoginInput
+              {...props.register("email")}
+              // onChange={props.onChangeId}
+              placeholder={" Enter Your E-MAIL "}
+            ></S.LoginInput>
+          </S.BasicRow>
+          <S.Error>{props.formState.errors.email?.message}</S.Error>
+          <S.BasicRow>
+            <S.SmallDiv>PW:</S.SmallDiv>{" "}
+            <S.LoginInput
+              {...props.register("password")}
+              // onChange={props.onChangePw}
+              placeholder={" Enter Your PW "}
+            ></S.LoginInput>
+          </S.BasicRow>
+          <S.Error>{props.formState.errors.password?.message}</S.Error>
+          <S.LoginBtn isActive={props.formState.isValid}>LOGIN</S.LoginBtn>
+        </S.LoginBox>
+      </form>
       <S.BottomWrapper>
         <S.NomalBtn>Find-Password</S.NomalBtn>
         <S.NomalBtn onClick={props.MoveSignUp}>Sign-Up</S.NomalBtn>

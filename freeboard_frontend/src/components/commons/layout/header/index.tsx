@@ -83,12 +83,8 @@ export default function LayoutHeader() {
   const MoveFreeBoard = () => {
     router.push("/board");
   };
-  const Dogs = () => {
-    router.push("/dogs");
-  };
-
-  const Firebase = () => {
-    router.push("/firebase");
+  const MoveFreeMarket = () => {
+    router.push("/market");
   };
 
   const MoveLogin = () => {
@@ -108,8 +104,7 @@ export default function LayoutHeader() {
         <BasicRow>
           <HomeBtn onClick={MoveMainPage}>Home</HomeBtn>
           <HomeBtn onClick={MoveFreeBoard}>FreeBoard</HomeBtn>
-          <HomeBtn onClick={Dogs}>Dogs</HomeBtn>
-          <HomeBtn onClick={Firebase}>Firebase</HomeBtn>
+          <HomeBtn onClick={MoveFreeMarket}>Market</HomeBtn>
         </BasicRow>
         <BasicRow>
           <HomeBtn onClick={MoveMy}>MyPage</HomeBtn>

@@ -19,6 +19,10 @@ export default function Home() {
   const MoveFirebase = () => {
     router.push("/firebase");
   };
+
+  const MoveFreeMarket = () => {
+    router.push("/market");
+  };
   return (
     <S.Wrapper>
       <S.ShadowBox onClick={MoveFreeBoard}>
@@ -27,7 +31,7 @@ export default function Home() {
       </S.ShadowBox>
 
       <S.ShadowBox2>
-        <S.BasicBox>Free Market</S.BasicBox>
+        <S.BasicBox onClick={MoveFreeMarket}>Free Market</S.BasicBox>
         <S.MarketIcon />
       </S.ShadowBox2>
 

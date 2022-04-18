@@ -1,3 +1,7 @@
-export default function LoginPage() {
-  return()
+export default function MarketMainPage() {
+  return (
+    <>
+      <></>
+    </>
+  );
 }
