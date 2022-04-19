@@ -25,7 +25,7 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
             placeholder="판매 가격을 입력하세요"
           />
           <S.SubTitle>태그 입력</S.SubTitle>
-          <S.SubTitleInput placeholder="#태그" />
+          <S.SubTitleInput {...props.register("tags")} placeholder="#태그" />
           <S.SubTitle>거래 위치</S.SubTitle>
           <S.BasicRow>
             <S.TradeGpsBox></S.TradeGpsBox>
@@ -39,6 +39,7 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
             </S.TradeGpsBox>
           </S.BasicRow>
           <S.SubTitle>사진 첨부</S.SubTitle>
+          <S.ProductImg></S.ProductImg>
           <S.SubTitle>메인 사진 설정</S.SubTitle>
           <S.BasicRow>
             <S.Radio type="radio"></S.Radio>

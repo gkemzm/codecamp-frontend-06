@@ -11,7 +11,10 @@ export const BestBoard = styled.div`
   margin-bottom: 30px;
 `;
 
-export const Area = styled.div``;
+export const Area = styled.div`
+  margin-bottom: 30px;
+`;
+
 export const BestBoardList = styled.div`
   width: 200px;
   height: 200px;
@@ -24,8 +27,12 @@ export const ProductBox = styled.div`
   width: 1000px;
   display: flex;
   flex-direction: row;
-  border: 1px solid red;
+  border: none;
+  box-shadow: 0px 3px 15px skyblue;
+  border-radius: 20px;
+  padding: 10px;
   margin-top: 30px;
+  margin-left: 30px;
   justify-content: space-between;
 `;
 
@@ -33,6 +40,7 @@ export const ImageBox = styled.img`
   width: 150px;
   height: 150px;
   object-fit: cover;
+  border-radius: 20px;
 `;
 
 export const ProductDetail = styled.div`

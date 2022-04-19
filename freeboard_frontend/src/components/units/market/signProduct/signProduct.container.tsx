@@ -5,14 +5,13 @@ import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 
 const schema = yup.object({
-  name: yup
-    .string()
-    .matches(/^[a-zA-Z0-9]/, "The name condition is incorrect.")
-    .required("Name is required."),
-  remarks: yup.string().required("remarks is required."),
-  contents: yup.string().required("contents is required."),
+  name: yup.string().required("Name is required."),
+  remarks: yup.string().required("Remarks is required."),
+  contents: yup.string().required("Contents is required."),
+  price: yup.number().required("Price is required"),
 });
 
 export default function SignProductContainer(props: IBoardSignProps) {
@@ -22,7 +21,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-
+  const { onClickMoveToPage } = useMoveToPage();
   const createUsedItem = async (data: any) => {
     try {
       const result = await createItem({
@@ -32,12 +31,14 @@ export default function SignProductContainer(props: IBoardSignProps) {
             remarks: data.remarks,
             contents: data.contents,
             price: Number(data.price),
-            // tags: data.tags,
+            tags: data.tags,
             // images: data.images,
           },
         },
       });
       console.log(result);
+      alert("Sign Success");
+      onClickMoveToPage("/market");
     } catch {
       alert("Sign Failed");
     }

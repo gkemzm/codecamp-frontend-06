@@ -107,3 +107,5 @@ export const Area = styled.div`
   margin-left: 100px;
   padding: 30px 0px 50px 0px;
 `;
+
+export const ProductImg = styled.img``;
