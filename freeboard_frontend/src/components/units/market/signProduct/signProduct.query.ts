@@ -25,26 +25,16 @@ export const CREATE_USEDITEM = gql`
   }
 `;
 
-export const UPDATE_BOARD = gql`
-  mutation updateBoard(
-    $updateBoardInput: UpdateBoardInput!
-    $password: String
-    $boardId: ID!
-  ) {
-    updateBoard(
-      updateBoardInput: $updateBoardInput
-      password: $password
-      boardId: $boardId
-    ) {
+export const FETCH_USED_ITEM = gql`
+  query fetchUseditem($useditemId: ID!) {
+    fetchUseditem(useditemId: $useditemId) {
       _id
-      writer
-      title
+      name
+      remarks
       contents
-      youtubeUrl
-      likeCount
-      dislikeCount
+      price
+      tags
       images
-      createdAt
     }
   }
 `;

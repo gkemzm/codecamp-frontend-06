@@ -1,6 +1,8 @@
 import * as S from "./signProduct.styles";
 import SkyBlueButton from "../../../commons/buttons/skyBlueButton/index";
 import { ISignProductBoardHtmlProps } from "./signProduct.types";
+import { v4 as uuidv4 } from "uuid";
+import ProductImageSignPage from "../images/imageSign";
 export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
   return (
     <>
@@ -41,6 +43,16 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
           <S.SubTitle>사진 첨부</S.SubTitle>
           <S.ProductImg></S.ProductImg>
           <S.SubTitle>메인 사진 설정</S.SubTitle>
+          <S.BasicRow>
+            {props.productImageUrls.map((el: string, index: number) => (
+              <ProductImageSignPage
+                key={uuidv4()}
+                index={index}
+                productImageUrl={el}
+                onChangeProductImage={props.onChangeProductImage}
+              />
+            ))}
+          </S.BasicRow>
           <S.BasicRow>
             <S.Radio type="radio"></S.Radio>
             1번

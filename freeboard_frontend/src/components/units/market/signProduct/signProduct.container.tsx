@@ -1,11 +1,16 @@
 import SignProductHTML from "./signProduct.presenter";
 import { IBoardSignProps } from "./signProduct.types";
-import { CREATE_USEDITEM } from "./signProduct.query";
-import { useMutation } from "@apollo/client";
+import { CREATE_USEDITEM, FETCH_USED_ITEM } from "./signProduct.query";
+import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
+import { useState, useEffect } from "react";
+import {
+  IQuery,
+  IQueryFetchUseditemArgs,
+} from "../../../../commons/types/generated/types";
 
 const schema = yup.object({
   name: yup.string().required("Name is required."),
@@ -16,6 +21,24 @@ const schema = yup.object({
 
 export default function SignProductContainer(props: IBoardSignProps) {
   const [createItem] = useMutation(CREATE_USEDITEM);
+
+  const [productImageUrls, setProductImageUrls] = useState(["", ""]);
+
+  const onChangeProductImage = (fileUrl: string, index: number) => {
+    const newproductImageUrls = [...productImageUrls];
+    newproductImageUrls[index] = fileUrl;
+    setProductImageUrls(newproductImageUrls);
+  };
+  const { data } = useQuery<
+    Pick<IQuery, "fetchUseditem">,
+    IQueryFetchUseditemArgs
+  >(FETCH_USED_ITEM);
+
+  useEffect(() => {
+    if (data?.fetchUseditem.images?.length) {
+      setProductImageUrls([...data?.fetchUseditem.images]);
+    }
+  }, [data]);
 
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(schema),
@@ -32,7 +55,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
             contents: data.contents,
             price: Number(data.price),
             tags: data.tags,
-            // images: data.images,
+            images: productImageUrls,
           },
         },
       });
@@ -50,6 +73,8 @@ export default function SignProductContainer(props: IBoardSignProps) {
       register={register}
       handleSubmit={handleSubmit}
       formState={formState}
+      onChangeProductImage={onChangeProductImage}
+      productImageUrls={productImageUrls}
     />
   );
 }

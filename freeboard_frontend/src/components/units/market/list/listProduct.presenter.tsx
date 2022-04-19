@@ -5,10 +5,13 @@ import { IListProps } from "./listProduct.type";
 import InfiniteScroll from "react-infinite-scroller";
 import { useRouter } from "next/router";
 import BestProductContainer from "./bestList/bestList.container";
+import { useState } from "react";
 
 export default function ListBoardHTML(props: IListProps) {
   const { onClickMoveToPage } = useMoveToPage();
   const router = useRouter();
+
+  const [isHover, setIsHover] = useState(false);
   const onLoadMore = () => {
     if (!props.data) return; // 데이터가 없으면 요청하지말하라
 
@@ -31,15 +34,28 @@ export default function ListBoardHTML(props: IListProps) {
       },
     });
   };
+
+  const onClickBtnDisplay = () => {
+    if (isHover === false) {
+      setIsHover(true);
+    } else if (isHover === true) {
+      setIsHover(false);
+    }
+  };
   return (
     <>
       <S.Wrapper>
-        <BestProductContainer />
-        <S.BestBoard></S.BestBoard>
-        <S.Area onClick={onClickMoveToPage("/market/new")}>
-          <SkyBlueButton isActive={false} title={"Product Sign"} />
-        </S.Area>
-
+        <S.BestBoard>
+          <S.Area onClick={onClickMoveToPage("/market/new")}>
+            <SkyBlueButton isActive={false} title={"Product Sign"} />
+          </S.Area>
+          <S.Area onClick={onClickBtnDisplay}>
+            <SkyBlueButton isActive={false} title={"BEST"} />
+          </S.Area>
+        </S.BestBoard>
+        <S.Area2 isHover={isHover}>
+          <BestProductContainer />
+        </S.Area2>
         <div style={{ height: "730px", width: "1220px", overflow: "auto" }}>
           <InfiniteScroll
             pageStart={0}
@@ -54,9 +70,11 @@ export default function ListBoardHTML(props: IListProps) {
                   src={`https://storage.googleapis.com/${el.images[0]}`}
                 ></S.ImageBox>
                 <S.ProductDetail>
-                  <S.ProductName>{el.name}</S.ProductName>
-                  <S.ProductRemarks>{el.remarks}</S.ProductRemarks>
-                  <S.ProductTags>{el.tags}</S.ProductTags>
+                  <div>
+                    <S.ProductName>{el.name}</S.ProductName>
+                    <S.ProductRemarks>{el.remarks}</S.ProductRemarks>
+                  </div>
+                  <S.ProductTags>Tags: {el.tags}</S.ProductTags>
                 </S.ProductDetail>
                 <S.Price>Price: {el.price}</S.Price>
               </S.ProductBox>

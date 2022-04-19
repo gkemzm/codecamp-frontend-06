@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { IHoverPosition } from "./listProduct.type";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -12,7 +13,13 @@ export const BestBoard = styled.div`
 `;
 
 export const Area = styled.div`
+  width: 150px;
+  margin-right: 20px;
+`;
+
+export const Area2 = styled.div`
   margin-bottom: 30px;
+  display: ${(props: IHoverPosition) => (props.isHover ? "flex" : "none")};
 `;
 
 export const BestBoardList = styled.div`
@@ -24,13 +31,13 @@ export const BestBoardList = styled.div`
 `;
 
 export const ProductBox = styled.div`
-  width: 1000px;
+  width: 1100px;
   display: flex;
   flex-direction: row;
   border: none;
   box-shadow: 0px 3px 15px skyblue;
   border-radius: 20px;
-  padding: 10px;
+  padding: 20px;
   margin-top: 30px;
   margin-left: 30px;
   justify-content: space-between;
@@ -47,21 +54,23 @@ export const ProductDetail = styled.div`
   width: 660px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const ProductName = styled.div`
-  font-size: 20px;
-  font-weight: 700px;
-  border: 1px solid blue;
+  font-size: 23px;
+  font-weight: 700;
 `;
 
 export const ProductRemarks = styled.div`
   font-size: 16px;
-  font-weight: 700px;
-  border: 1px solid blue;
+  font-weight: 700;
 `;
 
-export const ProductTags = styled.div``;
+export const ProductTags = styled.div`
+  font-size: 16px;
+  color: gray;
+`;
 
 export const Price = styled.div`
   width: 170px;
@@ -70,5 +79,4 @@ export const Price = styled.div`
   font-size: 20px;
   font-weight: 700;
   justify-content: center;
-  border: 3px solid black;
 `;

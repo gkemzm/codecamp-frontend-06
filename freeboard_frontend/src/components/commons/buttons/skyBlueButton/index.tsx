@@ -14,6 +14,7 @@ const Button = styled.button`
   border: none;
   box-shadow: 0px 4px 10px skyblue;
   color: ${(props: Iprops) => (props.isActive ? "skyblue" : "white")};
+  font-weight: 700;
   border-radius: 20px;
   padding: 10px;
 

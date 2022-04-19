@@ -9,4 +9,6 @@ export interface ISignProductBoardHtmlProps {
   register: UseFormRegister<FieldValues>;
   handleSubmit: any;
   formState: any;
+  onChangeProductImage: (fileUrl: string, index: number) => void;
+  productImageUrls: any;
 }
