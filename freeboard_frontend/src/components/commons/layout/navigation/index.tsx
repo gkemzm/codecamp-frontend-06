@@ -1,34 +1,36 @@
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import * as S from "./navigation.styles";
+import { useMoveToPage } from "../../hooks/useMoveToPage";
 
 export default function LayoutNavigation() {
-  const router = useRouter();
+  const { onClickMoveToPage } = useMoveToPage();
+  // const router = useRouter();
 
-  const MoveMainPage = () => {
-    router.push("/");
-  };
-  const MoveFreeBoard = () => {
-    router.push("/board");
-  };
-  const Dogs = () => {
-    router.push("/dogs");
-  };
+  // const MoveMainPage = () => {
+  //   router.push("/");
+  // };
+  // const MoveFreeBoard = () => {
+  //   router.push("/board");
+  // };
+  // const Dogs = () => {
+  //   router.push("/dogs");
+  // };
 
-  const Firebase = () => {
-    router.push("/firebase");
-  };
+  // const Firebase = () => {
+  //   router.push("/firebase");
+  // };
 
-  const MoveFreeMarket = () => {
-    router.push("/market");
-  };
+  // const MoveFreeMarket = () => {
+  //   router.push("/market");
+  // };
   return (
     <>
       <S.Wrapper>
-        <S.HomeBtn onClick={MoveMainPage}>Home</S.HomeBtn>
-        <S.HomeBtn onClick={MoveFreeBoard}>FreeBoard</S.HomeBtn>
-        <S.HomeBtn onClick={Dogs}>Dogs</S.HomeBtn>
-        <S.HomeBtn onClick={Firebase}>Firebase</S.HomeBtn>
-        <S.HomeBtn onClick={MoveFreeMarket}>FreeMarket</S.HomeBtn>
+        <S.HomeBtn onClick={onClickMoveToPage("/")}>Home</S.HomeBtn>
+        <S.HomeBtn onClick={onClickMoveToPage("/board")}>FreeBoard</S.HomeBtn>
+        <S.HomeBtn onClick={onClickMoveToPage("/dogs")}>Dogs</S.HomeBtn>
+        <S.HomeBtn onClick={onClickMoveToPage("/firebase")}>Firebase</S.HomeBtn>
+        <S.HomeBtn onClick={onClickMoveToPage("/market")}>FreeMarket</S.HomeBtn>
       </S.Wrapper>
     </>
   );

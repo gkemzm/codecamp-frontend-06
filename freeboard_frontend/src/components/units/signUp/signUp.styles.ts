@@ -32,6 +32,7 @@ export const SignUpBox = styled.div`
   border-radius: 20px;
   margin: auto;
   padding-top: 30px;
+  padding-bottom: 30px;
 `;
 
 export const BasicRow = styled.div`

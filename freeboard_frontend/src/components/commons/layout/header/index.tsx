@@ -1,117 +1,22 @@
-import styled from "@emotion/styled";
-import { useRouter } from "next/router";
-
-const Wrapper = styled.div`
-  background-color: skyblue;
-  height: 80px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 40px;
-`;
-const LoginBtn = styled.button`
-  width: 100px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: skyblue;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  margin-right: 30px;
-  border: none;
-  cursor: pointer;
-
-  :hover {
-    background-color: #85a5e9;
-    border-color: #85a5e9;
-  }
-`;
-
-const SignBtn = styled.button`
-  width: 100px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: skyblue;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  margin-right: 30px;
-  border: none;
-  cursor: pointer;
-
-  :hover {
-    background-color: #85a5e9;
-    border-color: #85a5e9;
-  }
-`;
-
-const HomeBtn = styled.button`
-  width: 100px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: skyblue;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  margin-right: 30px;
-  border: none;
-  cursor: pointer;
-
-  :hover {
-    background-color: #85a5e9;
-    border-color: #85a5e9;
-  }
-`;
-
-const BasicRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  border: none;
-  background-color: skyblue;
-`;
+import * as S from "./header.styles";
+import { useMoveToPage } from "../../hooks/useMoveToPage";
 
 export default function LayoutHeader() {
-  const router = useRouter();
-
-  const MoveMainPage = () => {
-    router.push("/");
-  };
-  const MoveFreeBoard = () => {
-    router.push("/board");
-  };
-  const MoveFreeMarket = () => {
-    router.push("/market");
-  };
-
-  const MoveLogin = () => {
-    router.push("/Login");
-  };
-
-  const MoveSignUp = () => {
-    router.push("/signUp");
-  };
-
-  const MoveMy = () => {
-    router.push("/myPage");
-  };
+  const { onClickMoveToPage } = useMoveToPage();
   return (
     <>
-      <Wrapper>
-        <BasicRow>
-          <HomeBtn onClick={MoveMainPage}>Home</HomeBtn>
-          <HomeBtn onClick={MoveFreeBoard}>FreeBoard</HomeBtn>
-          <HomeBtn onClick={MoveFreeMarket}>Market</HomeBtn>
-        </BasicRow>
-        <BasicRow>
-          <HomeBtn onClick={MoveMy}>MyPage</HomeBtn>
-          <LoginBtn onClick={MoveLogin}>Login</LoginBtn>
-          <SignBtn onClick={MoveSignUp}>Sign Up</SignBtn>
-        </BasicRow>
-      </Wrapper>
+      <S.Wrapper>
+        <S.BasicRow>
+          <S.HomeBtn onClick={onClickMoveToPage("/")}>Home</S.HomeBtn>
+          <S.HomeBtn onClick={onClickMoveToPage("/board")}>FreeBoard</S.HomeBtn>
+          <S.HomeBtn onClick={onClickMoveToPage("/market")}>Market</S.HomeBtn>
+        </S.BasicRow>
+        <S.BasicRow>
+          <S.HomeBtn onClick={onClickMoveToPage("/myPage")}>MyPage</S.HomeBtn>
+          <S.LoginBtn onClick={onClickMoveToPage("/Login")}>Login</S.LoginBtn>
+          <S.SignBtn onClick={onClickMoveToPage("/signUp")}>Sign Up</S.SignBtn>
+        </S.BasicRow>
+      </S.Wrapper>
     </>
   );
 }

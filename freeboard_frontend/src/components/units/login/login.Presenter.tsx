@@ -1,5 +1,6 @@
 import { ILoginEvent } from "./login.types";
 import * as S from "./login.styles";
+import SkyBlueButton from "../../commons/buttons/skyBlueButton/index";
 
 export default function LoginPresenter(props: ILoginEvent) {
   return (
@@ -25,7 +26,8 @@ export default function LoginPresenter(props: ILoginEvent) {
             ></S.LoginInput>
           </S.BasicRow>
           <S.Error>{props.formState.errors.password?.message}</S.Error>
-          <S.LoginBtn isActive={props.formState.isValid}>LOGIN</S.LoginBtn>
+          {/* <S.LoginBtn isActive={props.formState.isValid}>LOGIN</S.LoginBtn> */}
+          <SkyBlueButton isActive={props.formState.isValid} title={"LOGIN"} />
         </S.LoginBox>
       </form>
       <S.BottomWrapper>
