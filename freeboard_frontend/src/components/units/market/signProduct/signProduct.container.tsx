@@ -5,8 +5,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import {
   IQuery,
   IQueryFetchUseditemArgs,
@@ -21,6 +21,8 @@ const schema = yup.object({
 
 export default function SignProductContainer(props: IBoardSignProps) {
   const [createItem] = useMutation(CREATE_USEDITEM);
+
+  const router = useRouter();
 
   const [productImageUrls, setProductImageUrls] = useState(["", ""]);
 
@@ -44,7 +46,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  const { onClickMoveToPage } = useMoveToPage();
+
   const createUsedItem = async (data: any) => {
     try {
       const result = await createItem({
@@ -61,7 +63,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
       });
       console.log(result);
       alert("Sign Success");
-      onClickMoveToPage("/market");
+      router.push("/market");
     } catch {
       alert("Sign Failed");
     }
