@@ -35,7 +35,9 @@ export default function LayoutHeader() {
             </>
           ) : (
             <>
-              <S.Area>{data?.fetchUserLoggedIn.name}님 환영합니다.</S.Area>
+              <S.ProfileArea>
+                {data?.fetchUserLoggedIn.name}님 환영합니다.
+              </S.ProfileArea>
               <S.HomeBtn onClick={onClickMoveToPage("/myPage")}>
                 MyPage
               </S.HomeBtn>

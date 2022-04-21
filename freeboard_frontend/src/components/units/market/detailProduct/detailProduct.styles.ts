@@ -13,6 +13,13 @@ export const Wrapper = styled.div`
 
 export const Area = styled.div``;
 
+export const Seller = styled.div`
+  font-size: 25px;
+  font-weight: 700;
+  color: purple;
+  padding-bottom: 10px;
+`;
+
 export const BasicRow = styled.div`
   display: flex;
   flex-direction: row;
@@ -98,6 +105,14 @@ export const BtnListRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+export const BtnListRow2 = styled.div`
+  width: 330px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 50px;
 `;
 
 export const BottonWrapper = styled.div`

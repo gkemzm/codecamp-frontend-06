@@ -71,9 +71,14 @@ export default function ListBoardHTML(props: IListProps) {
                 key={el._id}
                 onClick={onClickMoveToPage(`/market/${el._id}`)}
               >
-                <S.ImageBox
-                  src={`https://storage.googleapis.com/${el.images[0]}`}
-                ></S.ImageBox>
+                {el.images[0] ? (
+                  <S.ImageBox
+                    src={`https://storage.googleapis.com/${el.images[0]}`}
+                  ></S.ImageBox>
+                ) : (
+                  <S.ImageBox src="/NoImage.png"></S.ImageBox>
+                )}
+
                 <S.ProductDetail>
                   <div>
                     <S.ProductName>{el.name}</S.ProductName>
@@ -91,6 +96,7 @@ export default function ListBoardHTML(props: IListProps) {
                   <S.ProductTags>Tags: {el.tags}</S.ProductTags>
                 </S.ProductDetail>
                 <S.BasicColumn>
+                  <S.Price>Seller: {el.seller.name}</S.Price>
                   <S.Price>Price: {el.price}</S.Price>
                   <S.CreatedAt>{getDate(el.createdAt)}</S.CreatedAt>
                 </S.BasicColumn>

@@ -100,4 +100,5 @@ export const CreatedAt = styled.div`
   font-size: 17px;
   font-weight: 700;
   justify-content: center;
+  margin-top: 3px;
 `;

@@ -22,7 +22,7 @@ export const BasicRow = styled.div`
 
 export const BestProductList = styled.div`
   width: 220px;
-  height: 220px;
+  height: 240px;
   border: none;
   box-shadow: 0px 4px 15px skyblue;
   border-radius: 20px;
@@ -31,4 +31,30 @@ export const BestProductList = styled.div`
 export const Title = styled.div`
   font-size: 45px;
   font-weight: 700;
+`;
+
+export const Name = styled.div`
+  margin: 6px 0px 0px 20px;
+  font-size: 25px;
+  font-weight: 700;
+  color: skyblue;
+`;
+
+export const Contents = styled.div`
+  margin-top: 6px;
+  padding: 0px 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: skyblue;
+  border-radius: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const Img = styled.img`
+  width: 200px;
+  height: 120px;
+  margin-left: 10px;
+  object-fit: cover;
 `;

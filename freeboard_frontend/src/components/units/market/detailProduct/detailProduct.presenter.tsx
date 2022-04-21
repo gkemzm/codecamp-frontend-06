@@ -9,6 +9,7 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
   return (
     <S.BasicColumn>
       <S.Wrapper>
+        <S.Seller>Seller: {props.data?.fetchUseditem.seller.name}</S.Seller>
         <S.TextBox>ProductName</S.TextBox>
         <S.Title>{props.data?.fetchUseditem.name}</S.Title>
         <S.TextBox>Remarks</S.TextBox>
@@ -47,6 +48,14 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
             <></>
           )}
         </S.BasicRow>
+        <S.BtnListRow2>
+          <S.Area>
+            <SkyBlueButton isActive={false} title={"Now Buy"} />
+          </S.Area>
+          <S.Area>
+            <SkyBlueButton isActive={false} title={"Go Basket"} />
+          </S.Area>
+        </S.BtnListRow2>
       </S.Wrapper>
       <S.BottonWrapper>
         <S.BtnListRow>

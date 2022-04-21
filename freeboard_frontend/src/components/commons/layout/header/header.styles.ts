@@ -73,4 +73,11 @@ export const BasicRow = styled.div`
   background-color: skyblue;
 `;
 
-export const Area = styled.div``;
+export const ProfileArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  font-size: 20px;
+  font-weight: 700;
+`;

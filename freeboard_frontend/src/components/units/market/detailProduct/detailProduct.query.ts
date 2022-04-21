@@ -10,6 +10,20 @@ export const FETCH_USED_ITEM = gql`
       price
       tags
       images
+      buyer {
+        _id
+        email
+        name
+        createdAt
+        updatedAt
+      }
+      seller {
+        _id
+        email
+        name
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
