@@ -6,6 +6,11 @@ export const Wrapper = styled.div`
   flex-direction: column;
 `;
 
+export const BasicColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 export const BestBoard = styled.div`
   display: flex;
   flex-direction: row;
@@ -41,6 +46,7 @@ export const ProductBox = styled.div`
   margin-top: 30px;
   margin-left: 30px;
   justify-content: space-between;
+  cursor: pointer;
 `;
 
 export const ImageBox = styled.img`
@@ -65,6 +71,14 @@ export const ProductName = styled.div`
 export const ProductRemarks = styled.div`
   font-size: 16px;
   font-weight: 700;
+  box-shadow: 0px 1px 5px;
+  border: none;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ProductTags = styled.div`
@@ -77,6 +91,13 @@ export const Price = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 20px;
+  font-weight: 700;
+  justify-content: center;
+`;
+export const CreatedAt = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 17px;
   font-weight: 700;
   justify-content: center;
 `;

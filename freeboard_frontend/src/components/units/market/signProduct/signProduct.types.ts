@@ -11,4 +11,5 @@ export interface ISignProductBoardHtmlProps {
   formState: any;
   onChangeProductImage: (fileUrl: string, index: number) => void;
   productImageUrls: any;
+  onChangeContents: any;
 }

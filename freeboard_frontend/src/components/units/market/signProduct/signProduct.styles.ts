@@ -8,6 +8,13 @@ export const Wrapper = styled.div`
   box-shadow: 0px 4px 15px skyblue;
 `;
 
+export const Error = styled.div`
+  margin: 5px 0px 0px 110px;
+  font-size: 15px;
+  font-weight: 700;
+  color: red;
+`;
+
 export const Title = styled.div`
   width: 1200px;
   font-size: 30px;
@@ -42,14 +49,12 @@ export const SubTitleInput = styled.input`
   }
 `;
 
-export const TextArea = styled.textarea`
+export const TextArea = styled.div`
   width: 1000px;
-  height: 300px;
+  height: 400px;
+  max-height: 400px;
   margin-left: 100px;
   margin-top: 10px;
-  border: none;
-  border-radius: 20px;
-  box-shadow: 0px 4px 15px skyblue;
 `;
 
 export const TradeGpsBox = styled.div`
@@ -107,5 +112,20 @@ export const Area = styled.div`
   margin-left: 100px;
   padding: 30px 0px 50px 0px;
 `;
+export const SubmitBtn = styled.button`
+  width: 150px;
+  background-color: skyblue;
+  border: none;
+  box-shadow: 0px 4px 10px skyblue;
+  color: white;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 10px;
 
+  cursor: pointer;
+  :hover {
+    background-color: white;
+    color: skyblue;
+  }
+`;
 export const ProductImg = styled.img``;

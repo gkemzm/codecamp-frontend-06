@@ -14,5 +14,5 @@ export default function DetailProductContainer() {
     },
   });
 
-  return <DetailProductHTML />;
+  return <DetailProductHTML data={data} />;
 }

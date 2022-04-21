@@ -5,7 +5,6 @@ import { CREATE_USER } from "./signUp.query";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAuth } from "../../commons/hooks/useAuth";
 
 const schema = yup.object({
   email: yup
@@ -37,7 +36,6 @@ interface IFormValues {
 }
 
 export default function SignUpContainer() {
-  useAuth();
   const router = useRouter();
 
   const [signUpUser] = useMutation(CREATE_USER);

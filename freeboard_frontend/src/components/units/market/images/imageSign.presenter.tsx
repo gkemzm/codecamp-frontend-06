@@ -14,7 +14,7 @@ export default function ImageSignHTML(props: IUploads01UIProps) {
           src={`https://storage.googleapis.com/${props.productImageUrl}`}
         />
       ) : (
-        <UploadButton onClick={props.onClickUpload}>
+        <UploadButton onClick={props.onClickUpload} type="button">
           <>+</>
           <>Upload</>
         </UploadButton>

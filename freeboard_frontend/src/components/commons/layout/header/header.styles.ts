@@ -72,3 +72,5 @@ export const BasicRow = styled.div`
   border: none;
   background-color: skyblue;
 `;
+
+export const Area = styled.div``;

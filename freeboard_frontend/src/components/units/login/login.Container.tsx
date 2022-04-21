@@ -16,9 +16,10 @@ const schema = yup.object({
   password: yup
     .string()
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/,
+      /^[A-Za-z\d$@$!%*#?&]{8,20}$/,
       "The password condition is incorrect."
     )
+    // (?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])
     .required("Password is required."),
 });
 interface ILogin {

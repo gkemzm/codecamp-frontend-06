@@ -10,18 +10,18 @@ interface IButtonProps {
 const Button = styled.button`
   width: 150px;
   background-color: ${(props: Iprops) =>
-    props.isActive ? "white" : "skyblue"};
+    props.isActive ? "skyblue" : "white"};
   border: none;
   box-shadow: 0px 4px 10px skyblue;
-  color: ${(props: Iprops) => (props.isActive ? "skyblue" : "white")};
+  color: ${(props: Iprops) => (props.isActive ? "white" : "skyblue")};
   font-weight: 700;
   border-radius: 20px;
   padding: 10px;
 
   cursor: pointer;
   :hover {
-    background-color: white;
-    color: skyblue;
+    background-color: skyblue;
+    color: white;
   }
 `;
 

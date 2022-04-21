@@ -6,6 +6,8 @@ import InfiniteScroll from "react-infinite-scroller";
 import { useRouter } from "next/router";
 import BestProductContainer from "./bestList/bestList.container";
 import { useState } from "react";
+import DOMPurify from "dompurify";
+import { getDate } from "../../../../commons/utils";
 
 export default function ListBoardHTML(props: IListProps) {
   const { onClickMoveToPage } = useMoveToPage();
@@ -65,18 +67,33 @@ export default function ListBoardHTML(props: IListProps) {
             useWindow={false}
           >
             {props.data?.fetchUseditems.map((el: any) => (
-              <S.ProductBox key={el._id}>
+              <S.ProductBox
+                key={el._id}
+                onClick={onClickMoveToPage(`/market/${el._id}`)}
+              >
                 <S.ImageBox
                   src={`https://storage.googleapis.com/${el.images[0]}`}
                 ></S.ImageBox>
                 <S.ProductDetail>
                   <div>
                     <S.ProductName>{el.name}</S.ProductName>
-                    <S.ProductRemarks>{el.remarks}</S.ProductRemarks>
+                    <S.ProductRemarks>요약: {el.remarks}</S.ProductRemarks>
+                    {typeof window !== "undefined" ? (
+                      <S.ProductRemarks
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(`설명 : ${el.contents}`),
+                        }}
+                      ></S.ProductRemarks>
+                    ) : (
+                      <S.ProductRemarks></S.ProductRemarks>
+                    )}
                   </div>
                   <S.ProductTags>Tags: {el.tags}</S.ProductTags>
                 </S.ProductDetail>
-                <S.Price>Price: {el.price}</S.Price>
+                <S.BasicColumn>
+                  <S.Price>Price: {el.price}</S.Price>
+                  <S.CreatedAt>{getDate(el.createdAt)}</S.CreatedAt>
+                </S.BasicColumn>
               </S.ProductBox>
             ))}
           </InfiniteScroll>
