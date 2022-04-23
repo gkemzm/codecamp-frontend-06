@@ -68,7 +68,7 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
             <S.Area>
               <SkyBlueButton isActive={false} title={"수정하기"} />
             </S.Area>
-            <S.Area>
+            <S.Area onClick={props.deleteUseditemDetailBoard}>
               <SkyBlueButton isActive={false} title={"삭제하기"} />
             </S.Area>
           </S.BtnListRow>

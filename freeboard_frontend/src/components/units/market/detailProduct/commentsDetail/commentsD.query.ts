@@ -46,3 +46,9 @@ export const FETCH_USEDITEM_QUESTION_ANSWERS = gql`
     }
   }
 `;
+
+export const DELETE_USEDITEM_QUESTION = gql`
+  mutation deleteUseditemQuestion($useditemQuestionId: ID!) {
+    deleteUseditemQuestion(useditemQuestionId: $useditemQuestionId)
+  }
+`;

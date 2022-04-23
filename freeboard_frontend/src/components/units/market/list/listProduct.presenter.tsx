@@ -76,7 +76,7 @@ export default function ListBoardHTML(props: IListProps) {
                     src={`https://storage.googleapis.com/${el.images[0]}`}
                   ></S.ImageBox>
                 ) : (
-                  <S.ImageBox src="/NoImage.png"></S.ImageBox>
+                  <S.ImageBox src="/NoImage2.png"></S.ImageBox>
                 )}
 
                 <S.ProductDetail>

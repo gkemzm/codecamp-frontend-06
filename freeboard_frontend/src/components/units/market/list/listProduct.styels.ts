@@ -50,8 +50,8 @@ export const ProductBox = styled.div`
 `;
 
 export const ImageBox = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 170px;
+  height: 170px;
   object-fit: cover;
   border-radius: 20px;
 `;

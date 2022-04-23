@@ -38,29 +38,31 @@ export default function CommentDetailHTML(props: ICommentDetailHTMLProps) {
         <S.Area>
           <SkyBlueButton isActive={false} title={"수정하기"} />
         </S.Area>
-        <S.Area>
+        <S.Area onClick={props.deleteUseditemOneQuestion}>
           <SkyBlueButton isActive={false} title={"삭제하기"} />
         </S.Area>
       </S.BtnListRow>
-      <form onSubmit={props.handleSubmit(props.createUseditemCommentAnswer)}>
-        <S.AnswerBox isHover={isHover}>
-          <ReactQuill
-            onChange={props.onChangeContents}
-            style={{ height: "100px", width: "900px" }}
-            theme="snow"
-          />
-          <S.Btn>
-            <SkyBlueButton isActive={false} title={"답글달기"} />
-          </S.Btn>
-        </S.AnswerBox>
-      </form>
-      <S.BasicColumn>
-        {props.QAData?.fetchUseditemQuestionAnswers.map((el: any) => (
-          <>
-            <CommentAnswerList data={el} />
-          </>
-        ))}
-      </S.BasicColumn>
+      <S.HiddenArea isHover={isHover}>
+        <form onSubmit={props.handleSubmit(props.createUseditemCommentAnswer)}>
+          <S.AnswerBox>
+            <ReactQuill
+              onChange={props.onChangeContents}
+              style={{ height: "100px", width: "900px" }}
+              theme="snow"
+            />
+            <S.Btn>
+              <SkyBlueButton isActive={false} title={"답글달기"} />
+            </S.Btn>
+          </S.AnswerBox>
+        </form>
+        <S.BasicColumn>
+          {props.QAData?.fetchUseditemQuestionAnswers.map((el: any) => (
+            <>
+              <CommentAnswerList data={el} />
+            </>
+          ))}
+        </S.BasicColumn>
+      </S.HiddenArea>
     </S.Wrapper>
   );
 }

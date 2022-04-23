@@ -35,22 +35,23 @@ export const TextArea = styled.div`
 `;
 
 export const TextBox = styled.div`
+  display: flex;
+  align-items: center;
   width: 80%;
   display: flex;
-  font-size: 30px;
+  font-size: 17px;
   font-weight: 700;
   box-shadow: 0px 3px 10px skyblue;
   border-radius: 20px;
   margin-bottom: 10px;
   color: skyblue;
-  padding: 0px 0px 10px 10px;
+  padding-left: 15px;
 `;
 
 export const AnswerBox = styled.div`
   width: 900px;
   margin-top: 30px;
   margin-bottom: 50px;
-  display: ${(props: IHoverAnswer) => (props.isHover ? "flex" : "none")};
 `;
 
 export const Name = styled.div`
@@ -84,4 +85,11 @@ export const Btn = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 15px;
+  margin-top: 70px;
+`;
+
+export const HiddenArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  display: ${(props: IHoverAnswer) => (props.isHover ? "flex" : "none")};
 `;

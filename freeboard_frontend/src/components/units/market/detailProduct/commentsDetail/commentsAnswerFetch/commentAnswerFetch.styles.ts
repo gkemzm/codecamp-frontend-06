@@ -58,6 +58,7 @@ export const Date = styled.div`
   color: purple;
   font-size: 18px;
   font-weight: 700;
+  margin-right: 7px;
 `;
 
 export const BtnListRow = styled.div`
@@ -69,3 +70,7 @@ export const BtnListRow = styled.div`
 `;
 
 export const Area = styled.div``;
+
+export const CustomDiv = styled.div`
+  margin-right: 3px;
+`;
