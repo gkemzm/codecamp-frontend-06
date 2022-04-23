@@ -5,10 +5,18 @@ import { v4 as uuidv4 } from "uuid";
 import ProductImageSignPage from "../images/imageSign";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
+import KakaoMapPage from "../map/index";
+import { Address } from "../../../commons/store/index";
+import { useRecoilState } from "recoil";
+import DaumPostcode from "react-daum-postcode";
+import { Modal } from "antd";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
+  // const [gpsLatLng] = useRecoilState(gpsInfo);
+  const [address] = useRecoilState(Address);
+
   return (
     <>
       <S.Wrapper>
@@ -47,14 +55,38 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
           <S.SubTitleInput {...props.register("tags")} placeholder="#태그" />
           <S.SubTitle>거래 위치</S.SubTitle>
           <S.BasicRow>
-            <S.TradeGpsBox></S.TradeGpsBox>
+            <S.TradeGpsBox>
+              <KakaoMapPage />
+            </S.TradeGpsBox>
             <S.TradeGpsBox>
               <S.SubTitle>GPS</S.SubTitle>
-              <S.MapButton type="button">위도(LAT)</S.MapButton>
-              <S.MapButton type="button">경도(LNG)</S.MapButton>
+              {/* <S.MapInput placeholder="위도(LAT)">{gpsLatLng.Ma}</S.MapInput>
+              <S.MapInput placeholder="위도(LAT)">{gpsLatLng.La}</S.MapInput> */}
               <S.SubTitle>주소</S.SubTitle>
-              <S.AddressInput />
-              <S.AddressInput />
+              <S.PostBtn type="button" onClick={props.onToggleModal}>
+                Address Search
+              </S.PostBtn>
+              {props.isOpen && (
+                <Modal
+                  title="우편번호검색"
+                  visible={true}
+                  onOk={props.onToggleModal}
+                  onCancel={props.onToggleModal}
+                >
+                  <DaumPostcode onComplete={props.handleComplete} autoClose />
+                </Modal>
+              )}
+              <S.ZoneCode
+                readOnly
+                value={props.zipcode}
+                placeholder="Post Num"
+              />
+              <S.AddressInput readOnly value={address} placeholder="address" />
+              <S.AddressInput
+                value={props.addressDetail}
+                placeholder="addressDetail"
+                onChange={props.onChangeAddressDetail}
+              />
             </S.TradeGpsBox>
           </S.BasicRow>
           <S.SubTitle>사진 첨부</S.SubTitle>

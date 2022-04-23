@@ -1,25 +1,4 @@
 import { atom } from "recoil";
-
-// export const gIdError = atom({
-//   key: "gIdError",
-//   default: "",
-// });
-
-// export const gPwError = atom({
-//   key: "gPwError",
-//   default: "",
-// });
-
-// export const gPwCheckError = atom({
-//   key: "gPwCheckError",
-//   default: "",
-// });
-
-// export const gEmailError = atom({
-//   key: "gEmailError",
-//   default: "",
-// });
-
 export const aaa = atom({
   key: "aaa",
   default: true,
@@ -46,4 +25,14 @@ export const userInfoState = atom({
     email: "",
     name: "",
   },
+});
+
+export const gpsInfo = atom({
+  key: "gpsInfo",
+  default: { La: 0, Ma: 0 },
+});
+
+export const Address = atom({
+  key: "Address",
+  default: "",
 });

@@ -49,7 +49,7 @@ export default function CommentDetailCotainer(props: ICommentDetailProps) {
         },
       });
       console.log(result2);
-      alert("삭제가 성공하였습니다.");
+      alert("댓글을 삭제했습니다.");
       router.push("/market");
     } catch (error) {
       alert("삭제에 실패했습니다.");

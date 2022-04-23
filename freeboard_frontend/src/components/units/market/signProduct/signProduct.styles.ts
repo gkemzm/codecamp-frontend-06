@@ -33,6 +33,18 @@ export const SubTitle = styled.div`
   color: skyblue;
 `;
 
+export const PostBtn = styled.button`
+  width: 120px;
+  height: 35px;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  background-color: black;
+  margin-right: 10px;
+`;
+
 export const SubTitleInput = styled.input`
   width: 1000px;
   height: 40px;
@@ -59,8 +71,7 @@ export const TextArea = styled.div`
 
 export const TradeGpsBox = styled.div`
   width: 490px;
-  border: 1px solid black;
-  margin: 10px auto 50px auto;
+  margin: 30px auto 50px auto;
 `;
 
 export const BasicRow = styled.div`
@@ -79,14 +90,29 @@ export const AddressInput = styled.input`
   border-radius: 20px;
   box-shadow: 0px 2px 15px skyblue;
   margin: 10px 0px;
+  padding-left: 10px;
   ::placeholder {
     color: skyblue;
     padding-left: 10px;
   }
 `;
 
-export const MapButton = styled.button`
-  width: 130px;
+export const ZoneCode = styled.input`
+  width: 100px;
+  height: 35px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 2px 15px skyblue;
+  margin: 10px 0px;
+  padding-left: 10px;
+  ::placeholder {
+    color: skyblue;
+    padding-left: 10px;
+  }
+`;
+
+export const MapInput = styled.div`
+  width: 180px;
   height: 35px;
   border: none;
   border-radius: 20px;
@@ -96,6 +122,12 @@ export const MapButton = styled.button`
   font-size: 16px;
   font-weight: 700;
   margin: 10px 10px 0px 0px;
+  line-height: 35px;
+  text-align: center;
+
+  ::placeholder {
+    color: skyblue;
+  }
 `;
 
 export const Radio = styled.input`

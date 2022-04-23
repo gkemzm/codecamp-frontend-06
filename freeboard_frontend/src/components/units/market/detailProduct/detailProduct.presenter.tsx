@@ -31,6 +31,21 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
           )}
           <S.TextBox>Price</S.TextBox>
           <S.Price>{props.data?.fetchUseditem.price}</S.Price>
+          <S.TextBox>Trade Position</S.TextBox>
+          <S.PostNum>
+            {props.data?.fetchUseditem?.useditemAddress?.zipcode}
+          </S.PostNum>
+          <S.SubTitle>
+            {props.data?.fetchUseditem?.useditemAddress?.address}
+          </S.SubTitle>
+          {props.data?.fetchUseditem?.useditemAddress?.addressDetail ? (
+            <S.SubTitle>
+              {props.data?.fetchUseditem?.useditemAddress?.addressDetail}
+            </S.SubTitle>
+          ) : (
+            <></>
+          )}
+
           <S.TextBox>Tags</S.TextBox>
           <S.Tags>{props.data?.fetchUseditem.tags}</S.Tags>
           <S.BasicRow>
@@ -52,7 +67,7 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
             )}
           </S.BasicRow>
           <S.BtnListRow2>
-            <S.Area>
+            <S.Area onClick={props.buyingProductOnPoint}>
               <SkyBlueButton isActive={false} title={"Now Buy"} />
             </S.Area>
             <S.Area>

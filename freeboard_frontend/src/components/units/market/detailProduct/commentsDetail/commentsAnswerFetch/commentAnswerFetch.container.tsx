@@ -1,6 +1,5 @@
 import CommentAnswerListHTML from "./commentAnswerFetch.presenter";
 import { gql, useMutation } from "@apollo/client";
-import { useRouter } from "next/router";
 
 interface ICommentAnswerProps {
   data: any;

@@ -5,8 +5,10 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { Address } from "../../../commons/store/index";
 import {
   IQuery,
   IQueryFetchUseditemArgs,
@@ -36,8 +38,16 @@ const schema = yup.object({
 
 export default function SignProductContainer(props: IBoardSignProps) {
   const [createItem] = useMutation(CREATE_USEDITEM);
-
+  const [isOpen, setIsOpen] = useState(false);
+  // const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [zipcode, setZonecode] = useState("");
   const router = useRouter();
+  const [address, setAddress] = useRecoilState(Address);
+
+  const onToggleModal = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   const [productImageUrls, setProductImageUrls] = useState(["", ""]);
 
@@ -50,6 +60,12 @@ export default function SignProductContainer(props: IBoardSignProps) {
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
   >(FETCH_USED_ITEM);
+
+  const handleComplete = (mapData: any) => {
+    setAddress(mapData.address);
+    setZonecode(mapData.zonecode);
+    console.log(mapData.addressDetail);
+  };
 
   useEffect(() => {
     if (itemData?.fetchUseditem.images?.length) {
@@ -73,6 +89,11 @@ export default function SignProductContainer(props: IBoardSignProps) {
             price: Number(data.price),
             tags: data.tags,
             images: productImageUrls,
+            useditemAddress: {
+              zipcode,
+              address,
+              addressDetail,
+            },
           },
         },
       });
@@ -88,9 +109,15 @@ export default function SignProductContainer(props: IBoardSignProps) {
     setValue("contents", value === "<p><br></p>" ? "" : value);
     trigger("contents");
   };
+
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
   return (
     <SignProductHTML
       isEdit={props.isEdit}
+      isOpen={isOpen}
+      onToggleModal={onToggleModal}
       createUsedItem={createUsedItem}
       register={register}
       handleSubmit={handleSubmit}
@@ -98,6 +125,11 @@ export default function SignProductContainer(props: IBoardSignProps) {
       onChangeProductImage={onChangeProductImage}
       productImageUrls={productImageUrls}
       onChangeContents={onChangeContents}
+      handleComplete={handleComplete}
+      address={address}
+      addressDetail={addressDetail}
+      zipcode={zipcode}
+      onChangeAddressDetail={onChangeAddressDetail}
     />
   );
 }

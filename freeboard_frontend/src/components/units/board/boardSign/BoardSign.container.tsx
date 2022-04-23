@@ -42,6 +42,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
   };
 
   const handleComplete = (data: any) => {
+    console.log(data);
     setRegion(data.address);
     setZonecode(data.zonecode);
   };

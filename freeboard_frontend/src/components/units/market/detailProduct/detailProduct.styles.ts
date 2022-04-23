@@ -56,6 +56,7 @@ export const SubTitle = styled.div`
   border: none;
   border-radius: 20px;
   box-shadow: 0px 3px 10px #bebebe;
+  padding-left: 10px;
 `;
 
 export const Contents = styled.div`
@@ -81,12 +82,26 @@ export const Price = styled.div`
   box-shadow: 0px 3px 10px #bebebe;
 `;
 
+export const PostNum = styled.div`
+  width: 100px;
+  font-size: 18px;
+  font-weight: 700;
+  color: skyblue;
+  padding: 10px 5px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 3px 10px #bebebe;
+  line-height: 20px;
+  text-align: center;
+`;
+
 export const Tags = styled.div`
   height: 40px;
   font-size: 18px;
   font-weight: 700;
   color: skyblue;
-  padding: 10px 5px;
+  padding: 7px 0px 0px 10px;
   border: none;
   border-radius: 20px;
   box-shadow: 0px 3px 10px #bebebe;

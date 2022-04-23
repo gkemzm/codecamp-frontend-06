@@ -24,11 +24,24 @@ export const FETCH_USED_ITEM = gql`
         createdAt
         updatedAt
       }
+      useditemAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
 export const DELETE_USEDITEM = gql`
   mutation deleteUseditem($useditemId: ID!) {
     deleteUseditem(useditemId: $useditemId)
+  }
+`;
+export const CREATE_POINT_BUYING_SELLING = gql`
+  mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
+    createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
+      _id
+    }
   }
 `;

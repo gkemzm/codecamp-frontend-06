@@ -15,7 +15,6 @@ export const CREATE_USEDITEM = gql`
         zipcode
         address
         addressDetail
-        createdAt
       }
       soldAt
       createdAt

@@ -1,12 +1,17 @@
 import * as S from "./header.styles";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
 import { gql, useQuery } from "@apollo/client";
+import Payment from "../../../units/market/payMent/payMent.container";
 
 const FETCH_USER_LOGGED_IN = gql`
   query fetchUserLoggedIn {
     fetchUserLoggedIn {
       email
       name
+      userPoint {
+        _id
+        amount
+      }
     }
   }
 `;
@@ -36,10 +41,16 @@ export default function LayoutHeader() {
           ) : (
             <>
               <S.ProfileArea>
-                {data?.fetchUserLoggedIn.name}님 환영합니다.
+                UserName : {data?.fetchUserLoggedIn.name} /
+              </S.ProfileArea>
+              <S.ProfileArea>
+                Point: {data?.fetchUserLoggedIn.userPoint.amount}
               </S.ProfileArea>
               <S.HomeBtn onClick={onClickMoveToPage("/myPage")}>
                 MyPage
+              </S.HomeBtn>
+              <S.HomeBtn onClick={onClickMoveToPage("/payment")}>
+                Payment
               </S.HomeBtn>
             </>
           )}
