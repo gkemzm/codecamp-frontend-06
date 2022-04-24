@@ -5,8 +5,11 @@ export interface ICommentDetailProps {
 
 export interface ICommentDetailHTMLProps {
   data: any;
+  isHover2: boolean;
   createUseditemCommentAnswer: (event: MouseEvent<HTMLDivElement>) => void;
   deleteUseditemOneQuestion: (event: MouseEvent<HTMLDivElement>) => void;
+  updateUsedItemQuestion: (event: MouseEvent<HTMLDivElement>) => void;
+  onClickBtnUpdateDisplay: (event: MouseEvent<HTMLDivElement>) => void;
   handleSubmit: any;
   onChangeContents: any;
   QAData: any;

@@ -12,6 +12,7 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function CommentDetailHTML(props: ICommentDetailHTMLProps) {
   const [isHover, setIsHover] = useState(false);
+
   const onClickBtnDisplay = () => {
     if (isHover === false) {
       setIsHover(true);
@@ -26,16 +27,37 @@ export default function CommentDetailHTML(props: ICommentDetailHTMLProps) {
         <S.Name>{props.data.user.name}</S.Name>
         <S.Date>{getDate(props.data.createdAt)}</S.Date>
       </S.NameBox>
-      <S.TextBox
+      {props.isHover2 ? (
+        <form onSubmit={props.handleSubmit(props.updateUsedItemQuestion)}>
+          <S.AnswerBox>
+            <ReactQuill
+              onChange={props.onChangeContents}
+              style={{ height: "100px", width: "900px" }}
+              theme="snow"
+            />
+            <S.Btn>
+              <SkyBlueButton isActive={false} title={"댓글수정"} />
+            </S.Btn>
+          </S.AnswerBox>
+        </form>
+      ) : (
+        <S.TextBox
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(`${props.data.contents}`),
+          }}
+        ></S.TextBox>
+      )}
+      {/* <S.TextBox
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(`${props.data.contents}`),
         }}
-      ></S.TextBox>
+      ></S.TextBox> */}
       <S.BtnListRow>
         <S.Area onClick={onClickBtnDisplay}>
           <SkyBlueButton isActive={false} title={"답글달기"} />
         </S.Area>
-        <S.Area>
+        <S.Area onClick={props.onClickBtnUpdateDisplay}>
+          {/* onClick={props.updateUsedItemQuestion} */}
           <SkyBlueButton isActive={false} title={"수정하기"} />
         </S.Area>
         <S.Area onClick={props.deleteUseditemOneQuestion}>
@@ -58,7 +80,7 @@ export default function CommentDetailHTML(props: ICommentDetailHTMLProps) {
         <S.BasicColumn>
           {props.QAData?.fetchUseditemQuestionAnswers.map((el: any) => (
             <>
-              <CommentAnswerList data={el} />
+              <CommentAnswerList data={el} data2={props.data} />
             </>
           ))}
         </S.BasicColumn>

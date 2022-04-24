@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { Address } from "../../../commons/store/index";
 import styled from "@emotion/styled";
 
 declare const window: typeof globalThis & {
   kakao: any;
 };
 
+interface IMapProps {
+  address: string;
+}
 const PositionXY = styled.div`
   border: none;
   box-shadow: 0px 3px 10px skyblue;
@@ -20,9 +21,8 @@ const PositionXY = styled.div`
   left: 550px;
   bottom: 280px;
 `;
-export default function KakaoMapPage() {
+export default function KakaoMapPage(props: IMapProps) {
   // const [gpsLatLng, setGpsLatLng] = useRecoilState(gpsInfo);
-  const [address] = useRecoilState(Address);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -67,7 +67,7 @@ export default function KakaoMapPage() {
         //   image: markerImage,
         // });
         geocoder.addressSearch(
-          `${address}`,
+          `${props.address}`,
           function (result: { x: any; y: any }[], status: any) {
             // 정상적으로 검색이 완료됐으면
             if (status === window.kakao.maps.services.Status.OK) {
@@ -118,7 +118,7 @@ export default function KakaoMapPage() {
         // marker.setMap(map);
       });
     };
-  }, [address]);
+  }, [props.address]);
   return (
     <>
       <div>

@@ -5,9 +5,11 @@ import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import DOMPurify from "dompurify";
 import CommentSignContainer from "./comments/comments.container";
 import CommentListContainer from "./commentsList/commentsList.container";
+import { useRouter } from "next/router";
 
 export default function DetailProductHTML(props: IProductDetailHTMLProps) {
   const { onClickMoveToPage } = useMoveToPage();
+  const router = useRouter();
   return (
     <S.BasicColumn>
       <S.BasicColumn>
@@ -80,7 +82,11 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
             <S.Area onClick={onClickMoveToPage("/market")}>
               <SkyBlueButton isActive={false} title={"메인으로"} />
             </S.Area>
-            <S.Area>
+            <S.Area
+              onClick={onClickMoveToPage(
+                `/market/${router.query.marketId}/edit`
+              )}
+            >
               <SkyBlueButton isActive={false} title={"수정하기"} />
             </S.Area>
             <S.Area onClick={props.deleteUseditemDetailBoard}>

@@ -4,15 +4,19 @@ import { useMutation, useQuery } from "@apollo/client";
 import {
   CREATE_USEDITEM_QUESTION_ANSWER,
   FETCH_USEDITEM_QUESTION_ANSWERS,
+  FETCH_USED_ITEM_QUESTIONS,
   DELETE_USEDITEM_QUESTION,
+  UPDATE_USEDITEM_QUESTION,
 } from "./commentsD.query";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-// import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function CommentDetailCotainer(props: ICommentDetailProps) {
   const [questionAnswer] = useMutation(CREATE_USEDITEM_QUESTION_ANSWER);
   const [deleteUseditemQ] = useMutation(DELETE_USEDITEM_QUESTION);
+  const [updateQuestion] = useMutation(UPDATE_USEDITEM_QUESTION);
+  const [isHover2, setIsHover2] = useState(false);
 
   const router = useRouter();
   const { data: QAData } = useQuery(FETCH_USEDITEM_QUESTION_ANSWERS, {
@@ -41,6 +45,30 @@ export default function CommentDetailCotainer(props: ICommentDetailProps) {
     } catch {}
   };
 
+  const updateUsedItemQuestion = async (data: any) => {
+    try {
+      const updateResult = await updateQuestion({
+        variables: {
+          updateUseditemQuestionInput: {
+            contents: data.contents,
+          },
+          useditemQuestionId: String(props.data._id),
+        },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEM_QUESTIONS,
+            variables: { useditemId: router.query.marketId },
+          },
+        ],
+      });
+      setIsHover2(false);
+      console.log(updateResult);
+      alert("Update Success");
+    } catch {
+      alert("Update Failed");
+    }
+  };
+
   const deleteUseditemOneQuestion = async () => {
     try {
       const result2 = await deleteUseditemQ({
@@ -55,7 +83,13 @@ export default function CommentDetailCotainer(props: ICommentDetailProps) {
       alert("삭제에 실패했습니다.");
     }
   };
-
+  const onClickBtnUpdateDisplay = () => {
+    if (isHover2 === false) {
+      setIsHover2(true);
+    } else if (isHover2 === true) {
+      setIsHover2(false);
+    }
+  };
   // watch
   const { handleSubmit, setValue, trigger } = useForm({
     mode: "onChange",
@@ -71,10 +105,13 @@ export default function CommentDetailCotainer(props: ICommentDetailProps) {
     <CommentDetailHTML
       data={props.data}
       QAData={QAData}
+      isHover2={isHover2}
       createUseditemCommentAnswer={createUseditemCommentAnswer}
       deleteUseditemOneQuestion={deleteUseditemOneQuestion}
       onChangeContents={onChangeContents}
       handleSubmit={handleSubmit}
+      updateUsedItemQuestion={updateUsedItemQuestion}
+      onClickBtnUpdateDisplay={onClickBtnUpdateDisplay}
     />
   );
 }

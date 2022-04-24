@@ -6,8 +6,6 @@ import ProductImageSignPage from "../images/imageSign";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import KakaoMapPage from "../map/index";
-import { Address } from "../../../commons/store/index";
-import { useRecoilState } from "recoil";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
 
@@ -15,13 +13,20 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
   // const [gpsLatLng] = useRecoilState(gpsInfo);
-  const [address] = useRecoilState(Address);
 
   return (
     <>
       <S.Wrapper>
-        <form onSubmit={props.handleSubmit(props.createUsedItem)}>
-          <S.Title>상품 등록하기</S.Title>
+        <form
+          onSubmit={props.handleSubmit(
+            props.isEdit ? props.updateUsedItem : props.createUsedItem
+          )}
+        >
+          {props.isEdit ? (
+            <S.Title>상품 수정하기</S.Title>
+          ) : (
+            <S.Title>상품 등록하기</S.Title>
+          )}
           <S.SubTitle>상품명</S.SubTitle>
           <S.SubTitleInput
             {...props.register("name")}
@@ -56,7 +61,7 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
           <S.SubTitle>거래 위치</S.SubTitle>
           <S.BasicRow>
             <S.TradeGpsBox>
-              <KakaoMapPage />
+              <KakaoMapPage address={props.address} />
             </S.TradeGpsBox>
             <S.TradeGpsBox>
               <S.SubTitle>GPS</S.SubTitle>
@@ -81,7 +86,11 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
                 value={props.zipcode}
                 placeholder="Post Num"
               />
-              <S.AddressInput readOnly value={address} placeholder="address" />
+              <S.AddressInput
+                readOnly
+                value={props.address}
+                placeholder="address"
+              />
               <S.AddressInput
                 value={props.addressDetail}
                 placeholder="addressDetail"
@@ -109,12 +118,21 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
             <S.Radio type="radio"></S.Radio>
             2번
           </S.BasicRow>
-          <S.Area>
-            <SkyBlueButton
-              isActive={props.formState.isValid}
-              title={"등록하기"}
-            />
-          </S.Area>
+          {props.isEdit ? (
+            <S.Area>
+              <SkyBlueButton
+                isActive={props.formState.isValid}
+                title={"수정하기"}
+              />
+            </S.Area>
+          ) : (
+            <S.Area>
+              <SkyBlueButton
+                isActive={props.formState.isValid}
+                title={"등록하기"}
+              />
+            </S.Area>
+          )}
         </form>
       </S.Wrapper>
     </>

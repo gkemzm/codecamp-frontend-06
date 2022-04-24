@@ -3,23 +3,20 @@ export const CREATE_USEDITEM = gql`
   mutation createUseditem($createUseditemInput: CreateUseditemInput!) {
     createUseditem(createUseditemInput: $createUseditemInput) {
       _id
-      name
-      remarks
-      contents
-      price
-      tags
-      images
-      pickedCount
-      useditemAddress {
-        _id
-        zipcode
-        address
-        addressDetail
-      }
-      soldAt
-      createdAt
-      updatedAt
-      deletedAt
+    }
+  }
+`;
+
+export const UPDATE_USEDITEM = gql`
+  mutation updateUseditem(
+    $updateUseditemInput: UpdateUseditemInput!
+    $useditemId: ID!
+  ) {
+    updateUseditem(
+      updateUseditemInput: $updateUseditemInput
+      useditemId: $useditemId
+    ) {
+      _id
     }
   }
 `;

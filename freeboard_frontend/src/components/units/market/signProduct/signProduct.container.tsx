@@ -1,14 +1,16 @@
 import SignProductHTML from "./signProduct.presenter";
 import { IBoardSignProps } from "./signProduct.types";
-import { CREATE_USEDITEM, FETCH_USED_ITEM } from "./signProduct.query";
+import {
+  CREATE_USEDITEM,
+  FETCH_USED_ITEM,
+  UPDATE_USEDITEM,
+} from "./signProduct.query";
 import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState, useEffect, ChangeEvent } from "react";
 import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import { Address } from "../../../commons/store/index";
 import {
   IQuery,
   IQueryFetchUseditemArgs,
@@ -38,12 +40,12 @@ const schema = yup.object({
 
 export default function SignProductContainer(props: IBoardSignProps) {
   const [createItem] = useMutation(CREATE_USEDITEM);
+  const [updateItem] = useMutation(UPDATE_USEDITEM);
   const [isOpen, setIsOpen] = useState(false);
-  // const [address, setAddress] = useState("");
+  const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
   const [zipcode, setZonecode] = useState("");
   const router = useRouter();
-  const [address, setAddress] = useRecoilState(Address);
 
   const onToggleModal = () => {
     setIsOpen((prev) => !prev);
@@ -105,6 +107,34 @@ export default function SignProductContainer(props: IBoardSignProps) {
     }
   };
 
+  const updateUsedItem = async (data: any) => {
+    try {
+      const updateResult = await updateItem({
+        variables: {
+          updateUseditemInput: {
+            name: data.name,
+            remarks: data.remarks,
+            contents: data.contents,
+            price: Number(data.price),
+            tags: data.tags,
+            images: productImageUrls,
+            useditemAddress: {
+              zipcode,
+              address,
+              addressDetail,
+            },
+          },
+          useditemId: String(router.query.marketId),
+        },
+      });
+      console.log(updateResult);
+      alert("Update Success");
+      router.push(`/market/${router.query.marketId}`);
+    } catch {
+      alert("Update Failed");
+    }
+  };
+
   const onChangeContents = (value: string) => {
     setValue("contents", value === "<p><br></p>" ? "" : value);
     trigger("contents");
@@ -130,6 +160,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
       addressDetail={addressDetail}
       zipcode={zipcode}
       onChangeAddressDetail={onChangeAddressDetail}
+      updateUsedItem={updateUsedItem}
     />
   );
 }

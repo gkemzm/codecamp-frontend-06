@@ -43,6 +43,7 @@ export const PostBtn = styled.button`
   border-radius: 20px;
   background-color: black;
   margin-right: 10px;
+  cursor: pointer;
 `;
 
 export const SubTitleInput = styled.input`

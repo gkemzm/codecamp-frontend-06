@@ -73,4 +73,16 @@ export const Area = styled.div``;
 
 export const CustomDiv = styled.div`
   margin-right: 3px;
+  cursor: pointer;
+`;
+export const AnswerBox = styled.div`
+  width: 900px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+`;
+export const Btn = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  margin-top: 70px;
 `;
