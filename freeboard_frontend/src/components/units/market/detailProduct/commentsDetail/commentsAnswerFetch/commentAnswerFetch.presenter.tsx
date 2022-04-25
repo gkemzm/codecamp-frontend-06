@@ -32,6 +32,7 @@ export default function CommentAnswerListHTML(props: ICommentAnswerHTMLProps) {
               onChange={props.onChangeContents}
               style={{ height: "100px", width: "900px" }}
               theme="snow"
+              defaultValue={props.data.contents}
             />
             <S.Btn>
               <SkyBlueButton isActive={false} title={"답글수정"} />

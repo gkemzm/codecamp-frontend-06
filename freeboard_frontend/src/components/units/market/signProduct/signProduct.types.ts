@@ -10,6 +10,7 @@ export interface ISignProductBoardHtmlProps {
   addressDetail: string;
   address: string;
   zipcode: any;
+  itemData: any;
   createUsedItem: (data: any) => void;
   register: UseFormRegister<FieldValues>;
   handleSubmit: any;
@@ -21,4 +22,6 @@ export interface ISignProductBoardHtmlProps {
   handleComplete: (data: any) => void;
   onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   updateUsedItem: (event: MouseEvent<HTMLDivElement>) => void;
+  reset: any;
+  getValues: any;
 }

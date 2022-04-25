@@ -8,11 +8,14 @@ import dynamic from "next/dynamic";
 import KakaoMapPage from "../map/index";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
+import { useEffect } from "react";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
-  // const [gpsLatLng] = useRecoilState(gpsInfo);
+  useEffect(() => {
+    props.reset({ contents: props.itemData?.fetchUseditem.contents });
+  }, [props.itemData]);
 
   return (
     <>
@@ -31,12 +34,14 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
           <S.SubTitleInput
             {...props.register("name")}
             placeholder="상품명을 작성해주세요"
+            defaultValue={props.itemData?.fetchUseditem?.name}
           />
           <S.Error>{props.formState.errors.name?.message}</S.Error>
           <S.SubTitle>한줄 요약</S.SubTitle>
           <S.SubTitleInput
             {...props.register("remarks")}
             placeholder="설명을 요약해 입력하세요"
+            defaultValue={props.itemData?.fetchUseditem?.remarks}
           />
           <S.Error>{props.formState.errors.remarks?.message}</S.Error>
           <S.SubTitle>상품 설명</S.SubTitle>
@@ -46,7 +51,8 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
               onChange={props.onChangeContents}
               style={{ height: "350px" }}
               theme="snow"
-              // modules={{ toolbar: "#toolbar" }}
+              // defaultValue={props.itemData?.fetchUseditem?.contents}
+              value={props.getValues("contents") || ""}
             />
           </S.TextArea>
           <S.Error>{props.formState.errors.contents?.message}</S.Error>
@@ -54,10 +60,15 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
           <S.SubTitleInput
             {...props.register("price")}
             placeholder="판매 가격을 입력하세요"
+            defaultValue={props.itemData?.fetchUseditem?.price}
           />
           <S.Error>{props.formState.errors.price?.message}</S.Error>
           <S.SubTitle>태그 입력</S.SubTitle>
-          <S.SubTitleInput {...props.register("tags")} placeholder="#태그" />
+          <S.SubTitleInput
+            {...props.register("tags")}
+            placeholder="#태그"
+            defaultValue={props.itemData?.fetchUseditem?.tags[0]}
+          />
           <S.SubTitle>거래 위치</S.SubTitle>
           <S.BasicRow>
             <S.TradeGpsBox>
@@ -65,8 +76,6 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
             </S.TradeGpsBox>
             <S.TradeGpsBox>
               <S.SubTitle>GPS</S.SubTitle>
-              {/* <S.MapInput placeholder="위도(LAT)">{gpsLatLng.Ma}</S.MapInput>
-              <S.MapInput placeholder="위도(LAT)">{gpsLatLng.La}</S.MapInput> */}
               <S.SubTitle>주소</S.SubTitle>
               <S.PostBtn type="button" onClick={props.onToggleModal}>
                 Address Search
@@ -83,16 +92,29 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
               )}
               <S.ZoneCode
                 readOnly
-                value={props.zipcode}
+                value={
+                  props.zipcode ||
+                  props.itemData?.fetchUseditem?.useditemAddress?.zipcode ||
+                  ""
+                }
                 placeholder="Post Num"
               />
               <S.AddressInput
                 readOnly
-                value={props.address}
+                value={
+                  props.address ||
+                  props.itemData?.fetchUseditem?.useditemAddress?.address ||
+                  ""
+                }
                 placeholder="address"
               />
               <S.AddressInput
-                value={props.addressDetail}
+                value={
+                  props.addressDetail ||
+                  props.itemData?.fetchUseditem?.useditemAddress
+                    ?.addressDetail ||
+                  ""
+                }
                 placeholder="addressDetail"
                 onChange={props.onChangeAddressDetail}
               />

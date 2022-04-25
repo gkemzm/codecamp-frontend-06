@@ -23,6 +23,12 @@ export default function CommentAnswerList(props: ICommentAnswerProps) {
         variables: {
           useditemQuestionAnswerId: props.data._id,
         },
+        refetchQueries: [
+          {
+            query: FETCH_USEDITEM_QUESTION_ANSWERS,
+            variables: { useditemQuestionId: props.data2._id },
+          },
+        ],
       });
       console.log(result2);
       // alert("삭제가 성공하였습니다.");

@@ -23,11 +23,11 @@ export default function Payment() {
   };
   const Pay1000 = () => {
     setAmount(1000);
-    setProductName("100Point");
+    setProductName("1000Point");
   };
   const Pay2000 = () => {
     setAmount(2000);
-    setProductName("200Point");
+    setProductName("2000");
   };
   const Pay5000 = () => {
     setAmount(5000);

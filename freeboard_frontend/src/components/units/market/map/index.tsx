@@ -83,7 +83,6 @@ export default function KakaoMapPage(props: IMapProps) {
               if (resultDiv?.innerHTML) {
                 resultDiv.innerHTML = message;
               }
-              console.log(resultDiv);
 
               // 결과값으로 받은 위치를 마커로 표시합니다
               const marker = new window.kakao.maps.Marker({
@@ -93,8 +92,8 @@ export default function KakaoMapPage(props: IMapProps) {
 
               // 인포윈도우로 장소에 대한 설명을 표시합니다
               const infowindow = new window.kakao.maps.InfoWindow({
-                content:
-                  '<div style="width:150px;text-align:center;padding:6px 0;">Here!</div>',
+                content: `위치 : ${props.address}`,
+                // ,'<div style="width:150px;text-align:center;padding:6px 0;">Here!</div>',
               });
               infowindow.open(map, marker);
 

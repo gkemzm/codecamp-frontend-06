@@ -25,6 +25,17 @@ export default function CommentDetailCotainer(props: ICommentDetailProps) {
     },
   });
 
+  // watch
+  const { handleSubmit, setValue, trigger } = useForm({
+    mode: "onChange",
+  });
+
+  // const contents = watch().contents?.length // <==?
+
+  const onChangeContents = (value: string) => {
+    setValue("contents", value === "<p><br></p>" ? "" : value);
+    trigger("contents");
+  };
   const createUseditemCommentAnswer = async (data: any) => {
     try {
       const result = await questionAnswer({
@@ -75,10 +86,15 @@ export default function CommentDetailCotainer(props: ICommentDetailProps) {
         variables: {
           useditemQuestionId: props.data._id,
         },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEM_QUESTIONS,
+            variables: { useditemId: router.query.marketId },
+          },
+        ],
       });
       console.log(result2);
       alert("댓글을 삭제했습니다.");
-      router.push("/market");
     } catch (error) {
       alert("삭제에 실패했습니다.");
     }
@@ -90,17 +106,7 @@ export default function CommentDetailCotainer(props: ICommentDetailProps) {
       setIsHover2(false);
     }
   };
-  // watch
-  const { handleSubmit, setValue, trigger } = useForm({
-    mode: "onChange",
-  });
 
-  // const contents = watch().contents?.length // <==?
-
-  const onChangeContents = (value: string) => {
-    setValue("contents", value === "<p><br></p>" ? "" : value);
-    trigger("contents");
-  };
   return (
     <CommentDetailHTML
       data={props.data}

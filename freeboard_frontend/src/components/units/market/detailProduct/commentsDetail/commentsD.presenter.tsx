@@ -20,7 +20,6 @@ export default function CommentDetailHTML(props: ICommentDetailHTMLProps) {
       setIsHover(false);
     }
   };
-
   return (
     <S.Wrapper>
       <S.NameBox>
@@ -34,6 +33,7 @@ export default function CommentDetailHTML(props: ICommentDetailHTMLProps) {
               onChange={props.onChangeContents}
               style={{ height: "100px", width: "900px" }}
               theme="snow"
+              defaultValue={props.data?.contents}
             />
             <S.Btn>
               <SkyBlueButton isActive={false} title={"댓글수정"} />
@@ -56,10 +56,16 @@ export default function CommentDetailHTML(props: ICommentDetailHTMLProps) {
         <S.Area onClick={onClickBtnDisplay}>
           <SkyBlueButton isActive={false} title={"답글달기"} />
         </S.Area>
-        <S.Area onClick={props.onClickBtnUpdateDisplay}>
-          {/* onClick={props.updateUsedItemQuestion} */}
-          <SkyBlueButton isActive={false} title={"수정하기"} />
-        </S.Area>
+        {props.isHover2 ? (
+          <S.Area onClick={props.onClickBtnUpdateDisplay}>
+            <SkyBlueButton isActive={false} title={"수정취소"} />
+          </S.Area>
+        ) : (
+          <S.Area onClick={props.onClickBtnUpdateDisplay}>
+            <SkyBlueButton isActive={false} title={"수정하기"} />
+          </S.Area>
+        )}
+
         <S.Area onClick={props.deleteUseditemOneQuestion}>
           <SkyBlueButton isActive={false} title={"삭제하기"} />
         </S.Area>

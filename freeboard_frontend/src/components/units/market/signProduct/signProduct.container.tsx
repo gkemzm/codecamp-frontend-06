@@ -38,13 +38,20 @@ const schema = yup.object({
     .required("Price is required"),
 });
 
+const editSchema = yup.object({
+  name: yup.string(),
+  remarks: yup.string(),
+  contents: yup.string(),
+  price: yup.number(),
+});
+
 export default function SignProductContainer(props: IBoardSignProps) {
   const [createItem] = useMutation(CREATE_USEDITEM);
   const [updateItem] = useMutation(UPDATE_USEDITEM);
   const [isOpen, setIsOpen] = useState(false);
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
-  const [zipcode, setZonecode] = useState("");
+  const [zipcode, setZipcode] = useState("");
   const router = useRouter();
 
   const onToggleModal = () => {
@@ -61,11 +68,15 @@ export default function SignProductContainer(props: IBoardSignProps) {
   const { data: itemData } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
-  >(FETCH_USED_ITEM);
+  >(FETCH_USED_ITEM, {
+    variables: {
+      useditemId: String(router.query.marketId),
+    },
+  });
 
   const handleComplete = (mapData: any) => {
     setAddress(mapData.address);
-    setZonecode(mapData.zonecode);
+    setZipcode(mapData.zonecode);
     console.log(mapData.addressDetail);
   };
 
@@ -75,11 +86,18 @@ export default function SignProductContainer(props: IBoardSignProps) {
     }
   }, [itemData]);
 
-  const { register, handleSubmit, setValue, trigger, formState } = useForm({
-    resolver: yupResolver(schema),
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    trigger,
+    formState,
+    reset,
+    getValues,
+  } = useForm({
+    resolver: yupResolver(props.isEdit ? editSchema : schema),
     mode: "onChange",
   });
-
   const createUsedItem = async (data: any) => {
     try {
       const result = await createItem({
@@ -108,6 +126,47 @@ export default function SignProductContainer(props: IBoardSignProps) {
   };
 
   const updateUsedItem = async (data: any) => {
+    const currentFiles = JSON.stringify(productImageUrls);
+    const defaultFiles = JSON.stringify(itemData?.fetchUseditem.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
+
+    const updateUseditemInput: any = {};
+    if (data.name) updateUseditemInput.title = data.name;
+    if (data.remark) updateUseditemInput.remark = data.remark;
+    if (data.contents) updateUseditemInput.contents = data.contents;
+    if (data.price) updateUseditemInput.price = data.price;
+
+    if (zipcode || address || addressDetail) {
+      updateUseditemInput.useditemAddress = {};
+      if (zipcode) updateUseditemInput.useditemAddress.zipcode = zipcode;
+      if (address) {
+        updateUseditemInput.useditemAddress.address = address;
+      } else if (!address) {
+        const addressValue = itemData?.fetchUseditem.useditemAddress?.address;
+        console.log("이거봐");
+        console.log(addressValue);
+        setAddress(addressValue);
+      }
+      console.log(data);
+      if (addressDetail)
+        updateUseditemInput.useditemAddress.addressDetail = addressDetail;
+    }
+
+    if (isChangedFiles) updateUseditemInput.images = productImageUrls;
+
+    if (
+      !data.name &&
+      !data.remark &&
+      !data.contents &&
+      !data.price &&
+      !address &&
+      !addressDetail &&
+      !zipcode &&
+      !isChangedFiles
+    ) {
+      alert("수정한 내용이 없습니다.");
+      return;
+    }
     try {
       const updateResult = await updateItem({
         variables: {
@@ -161,6 +220,9 @@ export default function SignProductContainer(props: IBoardSignProps) {
       zipcode={zipcode}
       onChangeAddressDetail={onChangeAddressDetail}
       updateUsedItem={updateUsedItem}
+      itemData={itemData}
+      reset={reset}
+      getValues={getValues}
     />
   );
 }

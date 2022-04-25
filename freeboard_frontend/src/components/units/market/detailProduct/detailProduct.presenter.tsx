@@ -6,6 +6,7 @@ import DOMPurify from "dompurify";
 import CommentSignContainer from "./comments/comments.container";
 import CommentListContainer from "./commentsList/commentsList.container";
 import { useRouter } from "next/router";
+import KakaoMapPage from "../map/index";
 
 export default function DetailProductHTML(props: IProductDetailHTMLProps) {
   const { onClickMoveToPage } = useMoveToPage();
@@ -33,7 +34,7 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
           )}
           <S.TextBox>Price</S.TextBox>
           <S.Price>{props.data?.fetchUseditem.price}</S.Price>
-          <S.TextBox>Trade Position</S.TextBox>
+          <S.TextBox>Trade Location</S.TextBox>
           <S.PostNum>
             {props.data?.fetchUseditem?.useditemAddress?.zipcode}
           </S.PostNum>
@@ -47,6 +48,9 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
           ) : (
             <></>
           )}
+          <KakaoMapPage
+            address={props.data?.fetchUseditem?.useditemAddress?.address}
+          />
 
           <S.TextBox>Tags</S.TextBox>
           <S.Tags>{props.data?.fetchUseditem.tags}</S.Tags>
