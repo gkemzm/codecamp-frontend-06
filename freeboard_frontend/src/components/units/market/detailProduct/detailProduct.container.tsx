@@ -9,6 +9,7 @@ import {
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 // import { useAuth } from "../../../commons/hooks/useAuth";
+import { MouseEvent, useState } from "react";
 
 export default function DetailProductContainer() {
   const [deleteUseditem] = useMutation(DELETE_USEDITEM);
@@ -53,12 +54,29 @@ export default function DetailProductContainer() {
     }
   };
 
+  const [a, setA] = useState<string[]>([]);
+  const onClickBasket = (aaa: any) => (event: MouseEvent<HTMLDivElement>) => {
+    console.log(aaa);
+
+    const bucket = JSON.parse(localStorage.getItem("bucket") || "[]");
+
+    const temp = bucket.filter((basketEl: any) => basketEl._id === aaa._id);
+    if (temp.length === 1) {
+      return 200;
+    }
+    const { __typename, ...newAAA } = aaa;
+    bucket.push(newAAA);
+    localStorage.setItem("bucket", JSON.stringify(bucket));
+    setA([...a, (event.target as HTMLButtonElement).id]);
+  };
+
   console.log(data);
   return (
     <DetailProductHTML
       data={data}
       deleteUseditemDetailBoard={deleteUseditemDetailBoard}
       buyingProductOnPoint={buyingProductOnPoint}
+      onClickBasket={onClickBasket}
     />
   );
 }

@@ -36,3 +36,8 @@ export const Address = atom({
   key: "Address",
   default: "",
 });
+
+export const TodayItemList = atom({
+  key: "TodayItemList",
+  default: false,
+});

@@ -15,7 +15,6 @@ export default function CommentSignHTML(props: ICommentHTMLProps) {
           <ReactQuill
             onChange={props.onChangeContents}
             style={{ height: "150px" }}
-            theme="snow"
           />
         </S.TextArea>
         <S.SubmitBtn>

@@ -2,11 +2,14 @@ import ListBoardHTML from "./listProduct.presenter";
 import { FETCH_USED_ITEMS } from "./listProduct.query";
 import { useQuery } from "@apollo/client";
 import { useState, MouseEvent } from "react";
+import { useRecoilState } from "recoil";
+import { TodayItemList } from "../../../commons/store/index";
 
 export default function ListBoardContainer() {
   const { data, fetchMore } = useQuery(FETCH_USED_ITEMS);
-
+  const [deleteList, setDeleteList] = useRecoilState(TodayItemList);
   const [a, setA] = useState<string[]>([]);
+
   const onClickBasket = (aaa: any) => (event: MouseEvent<HTMLDivElement>) => {
     console.log(aaa);
 
@@ -25,6 +28,7 @@ export default function ListBoardContainer() {
     localStorage.setItem("todayWatchList", JSON.stringify(todayWatchList));
     setA([...a, (event.target as HTMLButtonElement).id]);
     console.log(a);
+    setDeleteList((prev) => !prev);
   };
 
   return (

@@ -1,8 +1,11 @@
 import * as S from "./commentAnswerFetch.styles";
 import DOMPurify from "dompurify";
 import { MouseEvent } from "react";
-import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
 import SkyBlueButton from "../../../../../commons/buttons/skyBlueButton/index";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface ICommentAnswerHTMLProps {
   data: any;

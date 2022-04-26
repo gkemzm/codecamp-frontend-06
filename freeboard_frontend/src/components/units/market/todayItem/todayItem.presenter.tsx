@@ -10,17 +10,18 @@ export default function TodayItemsHTML(props: IrecentlyWatchProps) {
   const { onClickMoveToPage } = useMoveToPage();
   return (
     <S.Wrapper>
-      {props.todayWatchList.map((el: any) => (
+      {props.todayWatchList?.map((el: any) => (
         <S.MyRow key={el._id}>
-          <S.MyColumn onClick={onClickMoveToPage(`/market/${el._id}`)}>
+          <S.MyColumn>
             <S.ListBox>
-              {/* <S.DeleteBtn onClick={props.onClickDeleteList(el)}>
+              <S.DeleteBtn onClick={props.onClickDeleteList(el)}>
                 ❌
-              </S.DeleteBtn> */}
+              </S.DeleteBtn>
               <S.Title>{el.name}</S.Title>
               {el.images[0] ? (
                 <S.Img
                   src={`https://storage.googleapis.com/${el.images[0]}`}
+                  onClick={onClickMoveToPage(`/market/${el._id}`)}
                 ></S.Img>
               ) : (
                 <S.Img src="/NoImage2.png"></S.Img>
