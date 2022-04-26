@@ -12,6 +12,7 @@ export const FETCH_USED_TIEM_OFTHEBEST = gql`
       price
       tags
       images
+      pickedCount
     }
   }
 `;

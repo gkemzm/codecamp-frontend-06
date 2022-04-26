@@ -5,6 +5,8 @@ import {
   FETCH_USED_ITEM,
   DELETE_USEDITEM,
   CREATE_POINT_BUYING_SELLING,
+  FETCH_USER_LOGGED_IN,
+  TOGGLE_USEDITEM_PICK,
 } from "./detailProduct.query";
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -14,6 +16,7 @@ import { MouseEvent, useState } from "react";
 export default function DetailProductContainer() {
   const [deleteUseditem] = useMutation(DELETE_USEDITEM);
   const [buyingProduct] = useMutation(CREATE_POINT_BUYING_SELLING);
+  const [pickedItem] = useMutation(TOGGLE_USEDITEM_PICK);
   const router = useRouter();
   // useAuth();
   const { data, refetch } = useQuery(FETCH_USED_ITEM, {
@@ -21,6 +24,8 @@ export default function DetailProductContainer() {
       useditemId: String(router.query.marketId),
     },
   });
+
+  const { data: userData } = useQuery(FETCH_USER_LOGGED_IN);
 
   const deleteUseditemDetailBoard = async () => {
     try {
@@ -54,6 +59,19 @@ export default function DetailProductContainer() {
     }
   };
 
+  const pickedUseditem = async () => {
+    try {
+      const pickResult = await pickedItem({
+        variables: {
+          useditemId: String(router.query.marketId),
+        },
+      });
+      console.log(pickResult);
+    } catch (error) {
+      alert("pick failed");
+    }
+  };
+
   const [a, setA] = useState<string[]>([]);
   const onClickBasket = (aaa: any) => (event: MouseEvent<HTMLDivElement>) => {
     console.log(aaa);
@@ -74,6 +92,8 @@ export default function DetailProductContainer() {
   return (
     <DetailProductHTML
       data={data}
+      userData={userData}
+      pickedUseditem={pickedUseditem}
       deleteUseditemDetailBoard={deleteUseditemDetailBoard}
       buyingProductOnPoint={buyingProductOnPoint}
       onClickBasket={onClickBasket}

@@ -20,6 +20,12 @@ export const BasicRow = styled.div`
   margin: 30px 0px 15px 0px;
 `;
 
+export const TrueBasicRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const BestProductList = styled.div`
   width: 220px;
   height: 240px;
@@ -37,7 +43,7 @@ export const Name = styled.div`
   margin: 6px 0px 0px 20px;
   font-size: 25px;
   font-weight: 700;
-  color: skyblue;
+  color: purple;
 `;
 
 export const Contents = styled.div`

@@ -18,6 +18,7 @@ export const Seller = styled.div`
   font-weight: 700;
   color: purple;
   padding-bottom: 10px;
+  margin-right: 30px;
 `;
 
 export const BasicRow = styled.div`
@@ -123,7 +124,7 @@ export const BtnListRow = styled.div`
 `;
 
 export const BtnListRow2 = styled.div`
-  width: 330px;
+  width: 500px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

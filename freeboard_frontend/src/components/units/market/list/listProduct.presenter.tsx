@@ -101,6 +101,7 @@ export default function ListBoardHTML(props: IListProps) {
                 <S.BasicColumn onClick={onClickMoveToPage(`/market/${el._id}`)}>
                   <S.Price>Seller: {el.seller.name}</S.Price>
                   <S.Price>Price: {el.price}</S.Price>
+                  <S.Price>Pick: {el.pickedCount}</S.Price>
                   <S.CreatedAt>{getDate(el.createdAt)}</S.CreatedAt>
                 </S.BasicColumn>
               </S.ProductBox>

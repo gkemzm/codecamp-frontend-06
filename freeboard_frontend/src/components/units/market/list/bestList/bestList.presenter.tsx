@@ -11,9 +11,12 @@ export default function BestProductHTML(props: IBestProductProps) {
       <S.BasicRow>
         {props.data?.fetchUseditemsOfTheBest.map((el: IUseditem) => (
           <S.BestProductList key={el._id}>
-            <S.Name onClick={onClickMoveToPage(`/market/${el._id}`)}>
-              {el.name}
-            </S.Name>
+            <S.TrueBasicRow>
+              <S.Name onClick={onClickMoveToPage(`/market/${el._id}`)}>
+                {el.name}
+              </S.Name>
+              <S.Contents>Pick: {el.pickedCount}</S.Contents>
+            </S.TrueBasicRow>
             <S.Contents>{el.remarks}</S.Contents>
             <S.Contents>Price: {el.price}</S.Contents>
             {el.images?.[0] ? (

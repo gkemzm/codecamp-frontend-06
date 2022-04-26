@@ -10,6 +10,7 @@ export const FETCH_USED_ITEM = gql`
       price
       tags
       images
+      pickedCount
       buyer {
         _id
         email
@@ -33,6 +34,20 @@ export const FETCH_USED_ITEM = gql`
     }
   }
 `;
+
+export const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      _id
+      email
+      name
+      userPoint {
+        _id
+        amount
+      }
+    }
+  }
+`;
 export const DELETE_USEDITEM = gql`
   mutation deleteUseditem($useditemId: ID!) {
     deleteUseditem(useditemId: $useditemId)
@@ -43,5 +58,11 @@ export const CREATE_POINT_BUYING_SELLING = gql`
     createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
       _id
     }
+  }
+`;
+
+export const TOGGLE_USEDITEM_PICK = gql`
+  mutation toggleUseditemPick($useditemId: ID!) {
+    toggleUseditemPick(useditemId: $useditemId)
   }
 `;

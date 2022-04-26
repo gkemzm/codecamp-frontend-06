@@ -7,12 +7,12 @@ import { TodayItemList } from "../../../commons/store/index";
 
 export default function ListBoardContainer() {
   const { data, fetchMore } = useQuery(FETCH_USED_ITEMS);
-  const [deleteList, setDeleteList] = useRecoilState(TodayItemList);
+  const [, setDeleteList] = useRecoilState(TodayItemList);
   const [a, setA] = useState<string[]>([]);
 
   const onClickBasket = (aaa: any) => (event: MouseEvent<HTMLDivElement>) => {
     console.log(aaa);
-
+    setDeleteList((prev: boolean) => !prev);
     const todayWatchList = JSON.parse(
       localStorage.getItem("todayWatchList") || "[]"
     );
@@ -28,7 +28,6 @@ export default function ListBoardContainer() {
     localStorage.setItem("todayWatchList", JSON.stringify(todayWatchList));
     setA([...a, (event.target as HTMLButtonElement).id]);
     console.log(a);
-    setDeleteList((prev) => !prev);
   };
 
   return (

@@ -11,12 +11,19 @@ import KakaoMapPage from "../map/index";
 export default function DetailProductHTML(props: IProductDetailHTMLProps) {
   const { onClickMoveToPage } = useMoveToPage();
   const router = useRouter();
-  console.log(props.data?.fetchuseditem);
+  console.log(props.data);
+  console.log(props.userData);
   return (
     <S.BasicColumn>
       <S.BasicColumn>
         <S.Wrapper>
-          <S.Seller>Seller: {props.data?.fetchUseditem.seller.name}</S.Seller>
+          <S.BasicRow>
+            <S.Seller>Seller: {props.data?.fetchUseditem.seller.name}</S.Seller>
+            <S.Seller>
+              {" "}
+              Picked: {props.data?.fetchUseditem.pickedCount}
+            </S.Seller>
+          </S.BasicRow>
           <S.TextBox>ProductName</S.TextBox>
           <S.Title>{props.data?.fetchUseditem.name}</S.Title>
           <S.TextBox>Remarks</S.TextBox>
@@ -75,32 +82,47 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
               <></>
             )}
           </S.BasicRow>
-          <S.BtnListRow2>
-            <S.Area onClick={props.buyingProductOnPoint}>
-              <SkyBlueButton isActive={false} title={"Now Buy"} />
-            </S.Area>
-            <S.Area
-            // onClick={() => props.onClickBasket(props.data?.fetchuseditem)}
-            >
-              <SkyBlueButton isActive={false} title={"Go Basket"} />
-            </S.Area>
-          </S.BtnListRow2>
+          {props.data?.fetchUseditem?.seller?._id !==
+          props.userData?.fetchUserLoggedIn._id ? (
+            <S.BtnListRow2>
+              <S.Area onClick={props.buyingProductOnPoint}>
+                <SkyBlueButton isActive={false} title={"Now Buy"} />
+              </S.Area>
+              <S.Area
+              // onClick={() => props.onClickBasket(props.data?.fetchuseditem)}
+              >
+                <SkyBlueButton isActive={false} title={"Go Basket"} />
+              </S.Area>
+              <S.Area onClick={props.pickedUseditem}>
+                <SkyBlueButton isActive={false} title={"Pick!"} />
+              </S.Area>
+            </S.BtnListRow2>
+          ) : (
+            <></>
+          )}
         </S.Wrapper>
         <S.BottonWrapper>
           <S.BtnListRow>
             <S.Area onClick={onClickMoveToPage("/market")}>
               <SkyBlueButton isActive={false} title={"메인으로"} />
             </S.Area>
-            <S.Area
-              onClick={onClickMoveToPage(
-                `/market/${router.query.marketId}/edit`
-              )}
-            >
-              <SkyBlueButton isActive={false} title={"수정하기"} />
-            </S.Area>
-            <S.Area onClick={props.deleteUseditemDetailBoard}>
-              <SkyBlueButton isActive={false} title={"삭제하기"} />
-            </S.Area>
+            {props.data?.fetchUseditem?.seller?._id ===
+            props.userData?.fetchUserLoggedIn._id ? (
+              <>
+                <S.Area
+                  onClick={onClickMoveToPage(
+                    `/market/${router.query.marketId}/edit`
+                  )}
+                >
+                  <SkyBlueButton isActive={false} title={"수정하기"} />
+                </S.Area>
+                <S.Area onClick={props.deleteUseditemDetailBoard}>
+                  <SkyBlueButton isActive={false} title={"삭제하기"} />
+                </S.Area>
+              </>
+            ) : (
+              <></>
+            )}
           </S.BtnListRow>
         </S.BottonWrapper>
       </S.BasicColumn>
