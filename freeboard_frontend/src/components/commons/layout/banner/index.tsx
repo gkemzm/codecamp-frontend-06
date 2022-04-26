@@ -1,5 +1,6 @@
 import Slider from "react-slick";
 import * as S from "./layoutStyle";
+import TodayItems from "../../../units/market/todayItem/todayItem.container";
 
 const settings = {
   dots: true,
@@ -45,6 +46,7 @@ export default function LayoutBanner() {
             <S.SlickD2>preparing Slick666</S.SlickD2>
           </S.Slick1>
         </Slider>
+        <TodayItems />
       </S.Wrapper>
     </>
   );

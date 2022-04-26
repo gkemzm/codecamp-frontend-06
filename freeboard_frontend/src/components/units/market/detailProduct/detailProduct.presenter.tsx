@@ -46,7 +46,9 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
               {props.data?.fetchUseditem?.useditemAddress?.addressDetail}
             </S.SubTitle>
           ) : (
-            <></>
+            <S.SubTitle>
+              {props.data?.fetchUseditem?.useditemAddress?.addressDetail}
+            </S.SubTitle>
           )}
           <KakaoMapPage
             address={props.data?.fetchUseditem?.useditemAddress?.address}

@@ -9,12 +9,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import {
-  IQuery,
-  IQueryFetchUseditemArgs,
-} from "../../../../commons/types/generated/types";
 
 const schema = yup.object({
   name: yup
@@ -43,6 +39,7 @@ const editSchema = yup.object({
   remarks: yup.string(),
   contents: yup.string(),
   price: yup.number(),
+  addressDetail: yup.string(),
 });
 
 export default function SignProductContainer(props: IBoardSignProps) {
@@ -50,7 +47,6 @@ export default function SignProductContainer(props: IBoardSignProps) {
   const [updateItem] = useMutation(UPDATE_USEDITEM);
   const [isOpen, setIsOpen] = useState(false);
   const [address, setAddress] = useState("");
-  const [addressDetail, setAddressDetail] = useState("");
   const [zipcode, setZipcode] = useState("");
   const router = useRouter();
 
@@ -65,19 +61,19 @@ export default function SignProductContainer(props: IBoardSignProps) {
     newproductImageUrls[index] = fileUrl;
     setProductImageUrls(newproductImageUrls);
   };
-  const { data: itemData } = useQuery<
-    Pick<IQuery, "fetchUseditem">,
-    IQueryFetchUseditemArgs
-  >(FETCH_USED_ITEM, {
+  const { data: itemData } = useQuery(FETCH_USED_ITEM, {
     variables: {
       useditemId: String(router.query.marketId),
     },
   });
+  console.log(itemData);
 
-  const handleComplete = (mapData: any) => {
-    setAddress(mapData.address);
-    setZipcode(mapData.zonecode);
-    console.log(mapData.addressDetail);
+  const handleComplete = (data: any) => {
+    setAddress(data.address);
+    setValue("useditemAddress.address", data.address);
+    setZipcode(data.zonecode);
+    setValue("useditemAddress.zipcode", data.zonecode);
+    console.log(data);
   };
 
   useEffect(() => {
@@ -103,17 +99,9 @@ export default function SignProductContainer(props: IBoardSignProps) {
       const result = await createItem({
         variables: {
           createUseditemInput: {
-            name: data.name,
-            remarks: data.remarks,
-            contents: data.contents,
+            ...data,
             price: Number(data.price),
-            tags: data.tags,
             images: productImageUrls,
-            useditemAddress: {
-              zipcode,
-              address,
-              addressDetail,
-            },
           },
         },
       });
@@ -136,20 +124,15 @@ export default function SignProductContainer(props: IBoardSignProps) {
     if (data.contents) updateUseditemInput.contents = data.contents;
     if (data.price) updateUseditemInput.price = data.price;
 
-    if (zipcode || address || addressDetail) {
+    if (data.zipcode || data.address || data.addressDetail) {
       updateUseditemInput.useditemAddress = {};
-      if (zipcode) updateUseditemInput.useditemAddress.zipcode = zipcode;
-      if (address) {
-        updateUseditemInput.useditemAddress.address = address;
-      } else if (!address) {
-        const addressValue = itemData?.fetchUseditem.useditemAddress?.address;
-        console.log("이거봐");
-        console.log(addressValue);
-        setAddress(addressValue);
-      }
+      if (data.zipcode)
+        updateUseditemInput.useditemAddress.zipcode = data.zipcode;
+      if (data.address)
+        updateUseditemInput.useditemAddress.address = data.address;
       console.log(data);
-      if (addressDetail)
-        updateUseditemInput.useditemAddress.addressDetail = addressDetail;
+      if (data.addressDetail)
+        updateUseditemInput.useditemAddress.addressDetail = data.addressDetail;
     }
 
     if (isChangedFiles) updateUseditemInput.images = productImageUrls;
@@ -159,9 +142,9 @@ export default function SignProductContainer(props: IBoardSignProps) {
       !data.remark &&
       !data.contents &&
       !data.price &&
-      !address &&
-      !addressDetail &&
-      !zipcode &&
+      !data.address &&
+      !data.addressDetail &&
+      !data.zipcode &&
       !isChangedFiles
     ) {
       alert("수정한 내용이 없습니다.");
@@ -171,17 +154,9 @@ export default function SignProductContainer(props: IBoardSignProps) {
       const updateResult = await updateItem({
         variables: {
           updateUseditemInput: {
-            name: data.name,
-            remarks: data.remarks,
-            contents: data.contents,
+            ...data,
             price: Number(data.price),
-            tags: data.tags,
             images: productImageUrls,
-            useditemAddress: {
-              zipcode,
-              address,
-              addressDetail,
-            },
           },
           useditemId: String(router.query.marketId),
         },
@@ -199,9 +174,21 @@ export default function SignProductContainer(props: IBoardSignProps) {
     trigger("contents");
   };
 
-  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddressDetail(event.target.value);
-  };
+  useEffect(() => {
+    console.log(itemData);
+    setValue("name", itemData?.fetchUseditem?.name);
+    setValue("remarks", itemData?.fetchUseditem?.remarks);
+    setValue("contents", itemData?.fetchUseditem?.contents);
+    setValue("price", itemData?.fetchUseditem?.price);
+    setValue("tags", itemData?.fetchUseditem?.tags);
+    setValue(
+      "useditemAddress.addressDetail",
+      itemData?.fetchUseditem?.useditemAddress?.addressDetail
+    );
+    setAddress(itemData?.fetchUseditem?.useditemAddress?.address);
+    setZipcode(itemData?.fetchUseditem?.useditemAddress?.zipcode);
+  }, [itemData]);
+
   return (
     <SignProductHTML
       isEdit={props.isEdit}
@@ -216,9 +203,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
       onChangeContents={onChangeContents}
       handleComplete={handleComplete}
       address={address}
-      addressDetail={addressDetail}
       zipcode={zipcode}
-      onChangeAddressDetail={onChangeAddressDetail}
       updateUsedItem={updateUsedItem}
       itemData={itemData}
       reset={reset}

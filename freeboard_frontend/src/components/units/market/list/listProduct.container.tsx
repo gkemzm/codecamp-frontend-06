@@ -1,17 +1,39 @@
 import ListBoardHTML from "./listProduct.presenter";
 import { FETCH_USED_ITEMS } from "./listProduct.query";
 import { useQuery } from "@apollo/client";
+import { useState, MouseEvent } from "react";
 
 export default function ListBoardContainer() {
   const { data, fetchMore } = useQuery(FETCH_USED_ITEMS);
-  console.log(data);
 
-  // const MoveToProductDetail = (event: MouseEvent<HTMLDivElement>) => {
-  //   router.push(`/market/${(event.target as HTMLDivElement).id}`);
-  // };
+  const [a, setA] = useState<string[]>([]);
+  const onClickBasket = (aaa: any) => (event: MouseEvent<HTMLDivElement>) => {
+    console.log(aaa);
+
+    const todayWatchList = JSON.parse(
+      localStorage.getItem("todayWatchList") || "[]"
+    );
+
+    const temp = todayWatchList.filter(
+      (basketEl: any) => basketEl._id === aaa._id
+    );
+    if (temp.length === 1) {
+      return 200;
+    }
+    const { __typename, ...newAAA } = aaa;
+    todayWatchList.push(newAAA);
+    localStorage.setItem("todayWatchList", JSON.stringify(todayWatchList));
+    setA([...a, (event.target as HTMLButtonElement).id]);
+    console.log(a);
+  };
+
   return (
     <>
-      <ListBoardHTML data={data} fetchMore={fetchMore} />
+      <ListBoardHTML
+        data={data}
+        fetchMore={fetchMore}
+        onClickBasket={onClickBasket}
+      />
     </>
   );
 }

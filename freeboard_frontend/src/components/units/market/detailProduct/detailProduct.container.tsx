@@ -8,13 +8,13 @@ import {
 } from "./detailProduct.query";
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useAuth } from "../../../commons/hooks/useAuth";
+// import { useAuth } from "../../../commons/hooks/useAuth";
 
 export default function DetailProductContainer() {
   const [deleteUseditem] = useMutation(DELETE_USEDITEM);
   const [buyingProduct] = useMutation(CREATE_POINT_BUYING_SELLING);
   const router = useRouter();
-  useAuth();
+  // useAuth();
   const { data, refetch } = useQuery(FETCH_USED_ITEM, {
     variables: {
       useditemId: String(router.query.marketId),

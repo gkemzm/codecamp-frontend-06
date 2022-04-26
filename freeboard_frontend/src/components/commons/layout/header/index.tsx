@@ -1,7 +1,7 @@
 import * as S from "./header.styles";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
 import { gql, useQuery } from "@apollo/client";
-import { userInfoState } from "../../store/index";
+import { accessTokenState } from "../../store/index";
 import { useRecoilState } from "recoil";
 
 const FETCH_USER_LOGGED_IN = gql`
@@ -20,7 +20,7 @@ const FETCH_USER_LOGGED_IN = gql`
 export default function LayoutHeader() {
   const { onClickMoveToPage } = useMoveToPage();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [accessToken] = useRecoilState(accessTokenState);
 
   return (
     <>
@@ -31,7 +31,7 @@ export default function LayoutHeader() {
           <S.HomeBtn onClick={onClickMoveToPage("/market")}>Market</S.HomeBtn>
         </S.BasicRow>
         <S.BasicRow>
-          {!userInfo?.name ? (
+          {!accessToken ? (
             <>
               <S.LoginBtn onClick={onClickMoveToPage("/Login")}>
                 Login

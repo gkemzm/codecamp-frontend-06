@@ -67,19 +67,22 @@ export default function ListBoardHTML(props: IListProps) {
             useWindow={false}
           >
             {props.data?.fetchUseditems.map((el: any) => (
-              <S.ProductBox
-                key={el._id}
-                onClick={onClickMoveToPage(`/market/${el._id}`)}
-              >
+              <S.ProductBox key={el._id} onClick={props.onClickBasket(el)}>
                 {el.images[0] ? (
                   <S.ImageBox
                     src={`https://storage.googleapis.com/${el.images[0]}`}
+                    onClick={onClickMoveToPage(`/market/${el._id}`)}
                   ></S.ImageBox>
                 ) : (
-                  <S.ImageBox src="/NoImage2.png"></S.ImageBox>
+                  <S.ImageBox
+                    src="/NoImage2.png"
+                    onClick={onClickMoveToPage(`/market/${el._id}`)}
+                  ></S.ImageBox>
                 )}
 
-                <S.ProductDetail>
+                <S.ProductDetail
+                  onClick={onClickMoveToPage(`/market/${el._id}`)}
+                >
                   <div>
                     <S.ProductName>{el.name}</S.ProductName>
                     <S.ProductRemarks>요약: {el.remarks}</S.ProductRemarks>
@@ -95,7 +98,7 @@ export default function ListBoardHTML(props: IListProps) {
                   </div>
                   <S.ProductTags>Tags: {el.tags}</S.ProductTags>
                 </S.ProductDetail>
-                <S.BasicColumn>
+                <S.BasicColumn onClick={onClickMoveToPage(`/market/${el._id}`)}>
                   <S.Price>Seller: {el.seller.name}</S.Price>
                   <S.Price>Price: {el.price}</S.Price>
                   <S.CreatedAt>{getDate(el.createdAt)}</S.CreatedAt>

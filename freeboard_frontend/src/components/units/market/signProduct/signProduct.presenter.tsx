@@ -92,31 +92,20 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
               )}
               <S.ZoneCode
                 readOnly
-                value={
-                  props.zipcode ||
-                  props.itemData?.fetchUseditem?.useditemAddress?.zipcode ||
-                  ""
-                }
                 placeholder="Post Num"
+                defaultValue={props.zipcode}
               />
               <S.AddressInput
                 readOnly
-                value={
-                  props.address ||
-                  props.itemData?.fetchUseditem?.useditemAddress?.address ||
-                  ""
-                }
                 placeholder="address"
+                defaultValue={props.address}
               />
               <S.AddressInput
-                value={
-                  props.addressDetail ||
-                  props.itemData?.fetchUseditem?.useditemAddress
-                    ?.addressDetail ||
-                  ""
+                {...props.register("useditemAddress.addressDetail")}
+                defaultValue={
+                  props.itemData?.fetchUseditem.useditemAddress.addressDetail
                 }
                 placeholder="addressDetail"
-                onChange={props.onChangeAddressDetail}
               />
             </S.TradeGpsBox>
           </S.BasicRow>
