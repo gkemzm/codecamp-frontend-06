@@ -60,8 +60,8 @@ export default function LoginContainer() {
       const userInfo = resultUserInfo.data.fetchUserLoggedIn;
       setAccessToken(accessToken);
       setUserInfo(userInfo);
-      localStorage.setItem("accessToken", accessToken); // 임시저장
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      // localStorage.setItem("accessToken", accessToken); // 임시저장
       console.log(accessToken);
       alert("Login Success");
       router.push("/");

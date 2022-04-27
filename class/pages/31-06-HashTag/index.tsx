@@ -1,7 +1,7 @@
 import { KeyboardEvent, useState } from "react";
 
 const HashTagPage = () => {
-  const [hashtag, setHashtag] = useState("");
+  // const [hashtag, setHashtag] = useState("");
   const [hashArr, setHashArr] = useState<string[]>([]);
 
   const onKeyUphash = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -12,6 +12,7 @@ const HashTagPage = () => {
       setHashArr([...hashArr, "#" + (event.target as HTMLInputElement).value]);
       (event.target as HTMLInputElement).value = "";
     }
+    console.log(hashArr);
   };
   return (
     <>

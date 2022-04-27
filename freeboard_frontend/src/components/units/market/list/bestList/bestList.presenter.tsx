@@ -21,12 +21,12 @@ export default function BestProductHTML(props: IBestProductProps) {
             <S.Contents>Price: {el.price}</S.Contents>
             {el.images?.[0] ? (
               <>
-                <S.Img src="/NoImage2.png"></S.Img>
+                <S.Img
+                  src={`https://storage.googleapis.com/${el?.images?.[0]}`}
+                ></S.Img>
               </>
             ) : (
-              <S.Img
-                src={`https://storage.googleapis.com/${el?.images?.[0]}`}
-              ></S.Img>
+              <S.Img src="/NoImage2.png"></S.Img>
             )}
           </S.BestProductList>
         ))}

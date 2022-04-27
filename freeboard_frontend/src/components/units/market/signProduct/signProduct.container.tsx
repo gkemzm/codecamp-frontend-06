@@ -66,14 +66,12 @@ export default function SignProductContainer(props: IBoardSignProps) {
       useditemId: String(router.query.marketId),
     },
   });
-  console.log(itemData);
 
   const handleComplete = (data: any) => {
     setAddress(data.address);
     setValue("useditemAddress.address", data.address);
     setZipcode(data.zonecode);
     setValue("useditemAddress.zipcode", data.zonecode);
-    console.log(data);
   };
 
   useEffect(() => {

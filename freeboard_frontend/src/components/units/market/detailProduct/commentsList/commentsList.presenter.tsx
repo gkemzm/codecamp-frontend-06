@@ -42,9 +42,9 @@ export default function CommentListHTML(props: ICommentListHTMLProps) {
       >
         {props.commentListData?.fetchUseditemQuestions.map((el: any) => (
           <>
-            <CommentDetailCotainer data={el} />
+            <CommentDetailCotainer key={el._id} data={el} />
           </>
-        ))}
+        )) || <div></div>}
       </InfiniteScroll>
       {/* </div> */}
     </S.Wrapper>

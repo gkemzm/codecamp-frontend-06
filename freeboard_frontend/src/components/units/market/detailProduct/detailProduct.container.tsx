@@ -1,5 +1,4 @@
 import DetailProductHTML from "./detailProduct.presenter";
-
 // import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import {
   FETCH_USED_ITEM,
@@ -10,15 +9,15 @@ import {
 } from "./detailProduct.query";
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-// import { useAuth } from "../../../commons/hooks/useAuth";
+import { useAuth } from "../../../commons/hooks/useAuth";
 import { MouseEvent, useState } from "react";
 
 export default function DetailProductContainer() {
+  useAuth();
   const [deleteUseditem] = useMutation(DELETE_USEDITEM);
   const [buyingProduct] = useMutation(CREATE_POINT_BUYING_SELLING);
   const [pickedItem] = useMutation(TOGGLE_USEDITEM_PICK);
   const router = useRouter();
-  // useAuth();
   const { data, refetch } = useQuery(FETCH_USED_ITEM, {
     variables: {
       useditemId: String(router.query.marketId),
@@ -100,3 +99,5 @@ export default function DetailProductContainer() {
     />
   );
 }
+
+// export default withAuth(DetailProductContainer);

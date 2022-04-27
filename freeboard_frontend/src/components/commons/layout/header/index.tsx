@@ -1,8 +1,9 @@
 import * as S from "./header.styles";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
 import { accessTokenState } from "../../store/index";
 import { useRecoilState } from "recoil";
+import { useRouter } from "next/router";
 
 const FETCH_USER_LOGGED_IN = gql`
   query fetchUserLoggedIn {
@@ -17,10 +18,35 @@ const FETCH_USER_LOGGED_IN = gql`
   }
 `;
 
+const LOGOUT_USER = gql`
+  mutation logoutUser {
+    logoutUser
+  }
+`;
+
 export default function LayoutHeader() {
   const { onClickMoveToPage } = useMoveToPage();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
   const [accessToken] = useRecoilState(accessTokenState);
+  const [logoutUser] = useMutation(LOGOUT_USER);
+  const router = useRouter();
+
+  const logoutUserName = async () => {
+    try {
+      const result = await logoutUser({
+        refetchQueries: [
+          {
+            query: FETCH_USER_LOGGED_IN,
+          },
+        ],
+      });
+      console.log(result, "로그아웃결과");
+      location.reload();
+      router.push("/market");
+    } catch (error) {
+      alert("logoutFailed");
+    }
+  };
 
   return (
     <>
@@ -54,6 +80,7 @@ export default function LayoutHeader() {
               <S.HomeBtn onClick={onClickMoveToPage("/payment")}>
                 Payment
               </S.HomeBtn>
+              <S.HomeBtn onClick={logoutUserName}>logout</S.HomeBtn>
             </>
           )}
         </S.BasicRow>

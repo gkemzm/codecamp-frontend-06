@@ -47,7 +47,7 @@ export default function SignUpContainer() {
 
   const onClickSignUp = async (data: IFormValues) => {
     try {
-      const result = await signUpUser({
+      await signUpUser({
         variables: {
           createUserInput: {
             email: data.email,
@@ -56,12 +56,10 @@ export default function SignUpContainer() {
           },
         },
       });
-      console.log(result);
-      console.log(result?.data.createUser.name);
       alert("Congratulation! Sign-Up Success!");
       router.push("/Login");
-    } catch {
-      console.log("Faild Sign Up");
+    } catch (error) {
+      alert("Faild Sign Up");
     }
     // }
   };

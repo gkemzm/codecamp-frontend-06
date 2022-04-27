@@ -15,7 +15,7 @@ export default function ListBoardHTML(props: IListProps) {
 
   const [isHover, setIsHover] = useState(false);
   const onLoadMore = () => {
-    if (!props.data) return; // 데이터가 없으면 요청하지말하라
+    if (!props.data?.fetchUseditems) return; // 데이터가 없으면 요청하지말하라
 
     props.fetchMore({
       variables: {
