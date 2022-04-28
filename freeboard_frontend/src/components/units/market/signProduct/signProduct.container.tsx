@@ -9,7 +9,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useState, useEffect } from "react";
+import { useState, useEffect, KeyboardEvent } from "react";
 import { useRouter } from "next/router";
 
 const schema = yup.object({
@@ -43,11 +43,13 @@ const editSchema = yup.object({
 });
 
 export default function SignProductContainer(props: IBoardSignProps) {
+  // console.warn = console.error = () => {};
   const [createItem] = useMutation(CREATE_USEDITEM);
   const [updateItem] = useMutation(UPDATE_USEDITEM);
   const [isOpen, setIsOpen] = useState(false);
   const [address, setAddress] = useState("");
   const [zipcode, setZipcode] = useState("");
+  const [hashArr, setHashArr] = useState<string[]>([]);
   const router = useRouter();
 
   const onToggleModal = () => {
@@ -61,6 +63,23 @@ export default function SignProductContainer(props: IBoardSignProps) {
     newproductImageUrls[index] = fileUrl;
     setProductImageUrls(newproductImageUrls);
   };
+
+  const onKeyUphash = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (
+      event.keyCode === 32 &&
+      (event.target as HTMLInputElement).value !== " "
+    ) {
+      setHashArr([...hashArr, "#" + (event.target as HTMLInputElement).value]);
+      (event.target as HTMLInputElement).value = "";
+    }
+    console.log(hashArr);
+  };
+
+  const onClikDeleteTags = (event: any) => {
+    hashArr.splice(Number(event.target.id), 1);
+    setHashArr([...hashArr]);
+  };
+
   const { data: itemData } = useQuery(FETCH_USED_ITEM, {
     variables: {
       useditemId: String(router.query.marketId),
@@ -77,6 +96,12 @@ export default function SignProductContainer(props: IBoardSignProps) {
   useEffect(() => {
     if (itemData?.fetchUseditem.images?.length) {
       setProductImageUrls([...itemData?.fetchUseditem.images]);
+    }
+  }, [itemData]);
+
+  useEffect(() => {
+    if (itemData?.fetchUseditem.tags?.length) {
+      setHashArr([...itemData?.fetchUseditem.tags]);
     }
   }, [itemData]);
 
@@ -98,6 +123,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
         variables: {
           createUseditemInput: {
             ...data,
+            tags: hashArr,
             price: Number(data.price),
             images: productImageUrls,
           },
@@ -121,6 +147,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
     if (data.remark) updateUseditemInput.remark = data.remark;
     if (data.contents) updateUseditemInput.contents = data.contents;
     if (data.price) updateUseditemInput.price = data.price;
+    if (hashArr) updateUseditemInput.tags = hashArr;
 
     if (data.zipcode || data.address || data.addressDetail) {
       updateUseditemInput.useditemAddress = {};
@@ -143,7 +170,8 @@ export default function SignProductContainer(props: IBoardSignProps) {
       !data.address &&
       !data.addressDetail &&
       !data.zipcode &&
-      !isChangedFiles
+      !isChangedFiles &&
+      !hashArr
     ) {
       alert("수정한 내용이 없습니다.");
       return;
@@ -153,6 +181,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
         variables: {
           updateUseditemInput: {
             ...data,
+            tags: hashArr,
             price: Number(data.price),
             images: productImageUrls,
           },
@@ -178,7 +207,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
     setValue("remarks", itemData?.fetchUseditem?.remarks);
     setValue("contents", itemData?.fetchUseditem?.contents);
     setValue("price", itemData?.fetchUseditem?.price);
-    setValue("tags", itemData?.fetchUseditem?.tags);
+    // setValue("tags", itemData?.fetchUseditem?.tags);
     setValue(
       "useditemAddress.addressDetail",
       itemData?.fetchUseditem?.useditemAddress?.addressDetail
@@ -206,6 +235,9 @@ export default function SignProductContainer(props: IBoardSignProps) {
       itemData={itemData}
       reset={reset}
       getValues={getValues}
+      onKeyUphash={onKeyUphash}
+      hashArr={hashArr}
+      onClikDeleteTags={onClikDeleteTags}
     />
   );
 }

@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { Btn } from "../../../../commons/libraries/images/imageSign.styles";
+import { Button } from "../../firebase/list/MyfirebaseList.styles";
 
 export const Wrapper = styled.div`
   display: felx;
@@ -31,6 +33,43 @@ export const SubTitle = styled.div`
   font-weight: 700;
   margin: 30px auto 0px auto;
   color: skyblue;
+`;
+
+export const TagList = styled.div`
+  width: 90%;
+  display: flex;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 30px auto 0px auto;
+  color: skyblue;
+  overflow: scroll;
+  height: 100px;
+`;
+
+export const TagDel = styled.div`
+  height: 40px;
+  font-size: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+`;
+
+export const Tag = styled.div`
+  border: none;
+  color: purple;
+`;
+
+export const TagBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  box-shadow: 0px 3px 10px skyblue;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  color: purple;
+  padding: 5px 15px;
+  margin-right: 10px;
+  cursor: pointer;
 `;
 
 export const PostBtn = styled.button`

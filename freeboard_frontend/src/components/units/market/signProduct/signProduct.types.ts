@@ -1,5 +1,5 @@
 import { FieldValues, UseFormRegister } from "react-hook-form";
-import { MouseEvent } from "react";
+import { KeyboardEvent, MouseEvent } from "react";
 export interface IBoardSignProps {
   isEdit: boolean;
 }
@@ -22,6 +22,9 @@ export interface ISignProductBoardHtmlProps {
   handleComplete: (data: any) => void;
   // onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   updateUsedItem: (event: MouseEvent<HTMLDivElement>) => void;
+  onKeyUphash: (event: KeyboardEvent<HTMLInputElement>) => void;
+  onClikDeleteTags: (event: MouseEvent<HTMLDivElement>) => void;
   reset: any;
   getValues: any;
+  hashArr: any;
 }

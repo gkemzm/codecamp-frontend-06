@@ -33,13 +33,7 @@ export default function LayoutHeader() {
 
   const logoutUserName = async () => {
     try {
-      const result = await logoutUser({
-        refetchQueries: [
-          {
-            query: FETCH_USER_LOGGED_IN,
-          },
-        ],
-      });
+      const result = await logoutUser({});
       console.log(result, "로그아웃결과");
       location.reload();
       router.push("/market");

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
 declare const window: typeof globalThis & {
@@ -22,19 +22,19 @@ const PositionXY = styled.div`
   bottom: 280px;
 `;
 export default function KakaoMapPage(props: IMapProps) {
-  // const [gpsLatLng, setGpsLatLng] = useRecoilState(gpsInfo);
+  const [isLoad, setIsLoad] = useState(false);
+  useEffect(() => {
+    setIsLoad(true);
+  }, [props.address]);
 
   useEffect(() => {
+    if (!isLoad) return;
     const script = document.createElement("script");
     script.src =
       "//dapi.kakao.com/v2/maps/sdk.js?appkey=733d0a29ec73b8803266c00fc97055a5&autoload=false&libraries=services";
     document.head.appendChild(script);
     script.onload = () => {
       window.kakao.maps.load(function () {
-        // const imageSrc =
-        //   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"; // 마커이미지의 주소입니다
-        // const imageSize = new window.kakao.maps.Size(40, 45); // 마커이미지의 크기입니다
-        // const imageOption = { offset: new window.kakao.maps.Point(27, 69) };
         const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
         const options = {
           // 지도를 생성할 때 필요한 기본 옵션
@@ -52,20 +52,6 @@ export default function KakaoMapPage(props: IMapProps) {
         );
         const zoomControl = new window.kakao.maps.ZoomControl();
         map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
-        // const markerPosition = new window.kakao.maps.LatLng(
-        //   37.4906332,
-        //   126.9071741
-        // );
-
-        // const markerImage = new window.kakao.maps.MarkerImage(
-        //   imageSrc,
-        //   imageSize,
-        //   imageOption
-        // );
-        // const marker = new window.kakao.maps.Marker({
-        //   position: markerPosition,
-        //   image: markerImage,
-        // });
         geocoder.addressSearch(
           `${props.address}`,
           function (result: { x: any; y: any }[], status: any) {
@@ -99,22 +85,9 @@ export default function KakaoMapPage(props: IMapProps) {
 
               // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
               map.setCenter(coords);
-
-              // window.kakao.maps.event.addListener(
-              //   map,
-              //   "click",
-              //   function (changeEvent: { latLng: any }) {
-              //     // 클릭한 위도, 경도 정보를 가져옵니다
-              //     const latLng = changeEvent.latLng;
-              //     setGpsLatLng(latLng);
-              //     // 마커 위치를 클릭한 위치로 옮깁니다
-              //     marker.setPosition(latLng);
-              //   }
-              // );
             }
           }
         );
-        // marker.setMap(map);
       });
     };
   }, [props.address]);

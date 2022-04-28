@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useQuery, gql } from "@apollo/client";
+import Head from "next/head";
 // 게시글 상세
 const FETCH_BOARD = gql`
   query fetchBoard($number: Int) {
@@ -24,6 +25,14 @@ export default function StaticRoutedPage() {
   console.log(data);
   return (
     <div>
+      <Head>
+        <meta property="og:title" content={data?.fetchBoard.title}></meta>
+        <meta
+          property="og:description"
+          content={data?.fetchBoard.content}
+        ></meta>
+        <meta property="og:image" content={data?.fetchBoard.image}></meta>
+      </Head>
       <div>{data?.fetchBoard?.number}번 게시글에 오신것을 환영합니다.</div>
       <div>작성지: {data?.fetchBoard?.writer}</div>
       <div>제목: {data?.fetchBoard?.title}</div>

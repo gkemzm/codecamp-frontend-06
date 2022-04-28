@@ -8,7 +8,8 @@ import dynamic from "next/dynamic";
 import KakaoMapPage from "../map/index";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
-import { useEffect } from "react";
+// eslint-disable-next-line no-use-before-define
+import React, { useEffect } from "react";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -63,12 +64,22 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
             defaultValue={props.itemData?.fetchUseditem?.price}
           />
           <S.Error>{props.formState.errors.price?.message}</S.Error>
-          <S.SubTitle>태그 입력</S.SubTitle>
+          <S.SubTitle>태그 입력(space로 입력, 클릭해서 삭제)</S.SubTitle>
           <S.SubTitleInput
-            {...props.register("tags")}
+            type="text"
+            onKeyUp={props.onKeyUphash}
             placeholder="#태그"
-            defaultValue={props.itemData?.fetchUseditem?.tags[0]}
           />
+          <S.TagList>
+            {props.hashArr.map((el: any, index: any) => (
+              <S.TagBox key={index}>
+                <S.Tag>{el}</S.Tag>
+                <S.TagDel id={index} onClick={props.onClikDeleteTags}>
+                  ❌
+                </S.TagDel>
+              </S.TagBox>
+            ))}
+          </S.TagList>
           <S.SubTitle>거래 위치</S.SubTitle>
           <S.BasicRow>
             <S.TradeGpsBox>

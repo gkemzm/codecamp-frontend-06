@@ -105,7 +105,7 @@ export default function ListBoardHTML(props: IListProps) {
                   <S.CreatedAt>{getDate(el.createdAt)}</S.CreatedAt>
                 </S.BasicColumn>
               </S.ProductBox>
-            ))}
+            )) || <div></div>}
           </InfiniteScroll>
         </div>
       </S.Wrapper>

@@ -4,6 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import CommentDetailCotainer from "../commentsDetail/commentsD.container";
 import InfiniteScroll from "react-infinite-scroller";
 import { useRouter } from "next/router";
+import { v4 as uuidv4 } from "uuid";
 
 export default function CommentListHTML(props: ICommentListHTMLProps) {
   const router = useRouter();
@@ -37,13 +38,13 @@ export default function CommentListHTML(props: ICommentListHTMLProps) {
         pageStart={0}
         loadMore={onLoadMore}
         hasMore={true}
-        loader={<div className="loader" key={0}></div>}
+        loader={<div className="loader" key={uuidv4()}></div>}
         useWindow={false}
       >
         {props.commentListData?.fetchUseditemQuestions.map((el: any) => (
-          <>
-            <CommentDetailCotainer key={el._id} data={el} />
-          </>
+          <div key={uuidv4()}>
+            <CommentDetailCotainer data={el} />
+          </div>
         )) || <div></div>}
       </InfiniteScroll>
       {/* </div> */}

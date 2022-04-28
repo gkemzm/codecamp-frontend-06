@@ -7,6 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import CommentAnswerList from "./commentsAnswerFetch/commentAnswerFetch.container";
+import { v4 as uuidv4 } from "uuid";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -47,11 +48,6 @@ export default function CommentDetailHTML(props: ICommentDetailHTMLProps) {
           }}
         ></S.TextBox>
       )}
-      {/* <S.TextBox
-        dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(`${props.data.contents}`),
-        }}
-      ></S.TextBox> */}
       <S.BtnListRow>
         <S.Area onClick={onClickBtnDisplay}>
           <SkyBlueButton isActive={false} title={"답글달기"} />
@@ -86,7 +82,7 @@ export default function CommentDetailHTML(props: ICommentDetailHTMLProps) {
         <S.BasicColumn>
           {props.QAData?.fetchUseditemQuestionAnswers.map((el: any) => (
             <>
-              <CommentAnswerList data={el} data2={props.data} />
+              <CommentAnswerList key={uuidv4()} data={el} data2={props.data} />
             </>
           ))}
         </S.BasicColumn>

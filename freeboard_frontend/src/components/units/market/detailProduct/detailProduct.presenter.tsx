@@ -58,9 +58,13 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
               {props.data?.fetchUseditem?.useditemAddress?.addressDetail}
             </S.SubTitle>
           )}
-          <KakaoMapPage
-            address={props.data?.fetchUseditem?.useditemAddress?.address}
-          />
+          {props.data?.fetchUseditem?.useditemAddress?.address ? (
+            <KakaoMapPage
+              address={props.data?.fetchUseditem?.useditemAddress?.address}
+            />
+          ) : (
+            <></>
+          )}
 
           <S.TextBox>Tags</S.TextBox>
           <S.Tags>{props.data?.fetchUseditem.tags}</S.Tags>

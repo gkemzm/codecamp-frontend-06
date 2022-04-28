@@ -64,6 +64,14 @@ export default function DetailProductContainer() {
         variables: {
           useditemId: String(router.query.marketId),
         },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEM,
+            variables: {
+              useditemId: router.query.marketId,
+            },
+          },
+        ],
       });
       console.log(pickResult);
     } catch (error) {
