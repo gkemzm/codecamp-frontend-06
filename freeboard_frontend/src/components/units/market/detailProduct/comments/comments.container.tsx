@@ -6,6 +6,7 @@ import {
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function CommentSignContainer() {
   const [createProductComment] = useMutation(CREATE_USEDITEM_QUESTION);
@@ -14,6 +15,12 @@ export default function CommentSignContainer() {
   const { register, handleSubmit, setValue, trigger, formState } = useForm({
     mode: "onChange",
   });
+
+  // useEffect(() => {
+
+  //   setValue("contents", itemData?.fetchUseditem?.contents);
+
+  // }, []);
 
   const createUseditemComment = async (data: any) => {
     try {
@@ -31,7 +38,7 @@ export default function CommentSignContainer() {
           },
         ],
       });
-
+      setValue("contents", "");
       console.log(result);
       alert("댓글등록에 성공했습니다.");
     } catch (error) {

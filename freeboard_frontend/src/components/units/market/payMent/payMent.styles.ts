@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 export const Wrapper = styled.div`
-  width: 1200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,6 +43,5 @@ export const PriceInput = styled.input`
 export const ListBox = styled.div`
   width: 600px;
   border: none;
-  box-shadow: 0px 3px 10px skyblue;
   padding: 50px 20px;
 `;

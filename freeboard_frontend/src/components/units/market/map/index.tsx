@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "@emotion/styled";
 
 declare const window: typeof globalThis & {
@@ -22,13 +22,15 @@ const PositionXY = styled.div`
   bottom: 280px;
 `;
 export default function KakaoMapPage(props: IMapProps) {
-  const [isLoad, setIsLoad] = useState(false);
-  useEffect(() => {
-    setIsLoad(true);
-  }, [props.address]);
+  // const [isLoad, setIsLoad] = useState(false);
+  // useEffect(() => {
+  //   if (props.address) {
+  //     setIsLoad(true);
+  //   }
+  // }, [props.address]);
 
   useEffect(() => {
-    if (!isLoad) return;
+    // if (!isLoad) return;
     const script = document.createElement("script");
     script.src =
       "//dapi.kakao.com/v2/maps/sdk.js?appkey=733d0a29ec73b8803266c00fc97055a5&autoload=false&libraries=services";

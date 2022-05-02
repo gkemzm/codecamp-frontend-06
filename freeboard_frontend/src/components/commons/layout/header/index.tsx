@@ -4,6 +4,9 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 import { accessTokenState } from "../../store/index";
 import { useRecoilState } from "recoil";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { Modal } from "antd";
+import Payment from "../../../units/market/payMent/payMent.container";
 
 const FETCH_USER_LOGGED_IN = gql`
   query fetchUserLoggedIn {
@@ -29,7 +32,12 @@ export default function LayoutHeader() {
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
   const [accessToken] = useRecoilState(accessTokenState);
   const [logoutUser] = useMutation(LOGOUT_USER);
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
+  const onToggleModal = () => {
+    setIsOpen((prev: boolean) => !prev);
+  };
 
   const logoutUserName = async () => {
     try {
@@ -71,9 +79,20 @@ export default function LayoutHeader() {
               <S.HomeBtn onClick={onClickMoveToPage("/myPage")}>
                 MyPage
               </S.HomeBtn>
-              <S.HomeBtn onClick={onClickMoveToPage("/payment")}>
+              {isOpen && (
+                <Modal
+                  title="Payment"
+                  visible={true}
+                  onOk={onToggleModal}
+                  onCancel={onToggleModal}
+                >
+                  <Payment />
+                </Modal>
+              )}
+              <S.HomeBtn onClick={onToggleModal}>Payment</S.HomeBtn>
+              {/* <S.HomeBtn onClick={onClickMoveToPage("/payment")}>
                 Payment
-              </S.HomeBtn>
+              </S.HomeBtn> */}
               <S.HomeBtn onClick={logoutUserName}>logout</S.HomeBtn>
             </>
           )}
