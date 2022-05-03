@@ -11,8 +11,7 @@ import KakaoMapPage from "../map/index";
 export default function DetailProductHTML(props: IProductDetailHTMLProps) {
   const { onClickMoveToPage } = useMoveToPage();
   const router = useRouter();
-  console.log(props.data);
-  console.log(props.userData);
+  console.log(props.data, "데이터");
   return (
     <S.BasicColumn>
       <S.BasicColumn>
@@ -92,9 +91,8 @@ export default function DetailProductHTML(props: IProductDetailHTMLProps) {
               <S.Area onClick={props.buyingProductOnPoint}>
                 <SkyBlueButton isActive={false} title={"Now Buy"} />
               </S.Area>
-              <S.Area
-              // onClick={() => props.onClickBasket(props.data?.fetchuseditem)}
-              >
+              <S.Area onClick={props.onClickBasket(props.data)}>
+                {/* <S.Area onClick={props.onClickBasket}> */}
                 <SkyBlueButton isActive={false} title={"Go Basket"} />
               </S.Area>
               <S.Area onClick={props.pickedUseditem}>

@@ -28,6 +28,7 @@ export default function BucketList() {
       setIsOpen(false);
     }
     console.log(isOpen);
+    console.log(bucketItem);
   };
 
   useEffect(() => {

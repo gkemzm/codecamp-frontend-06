@@ -11,12 +11,15 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useAuth } from "../../../commons/hooks/useAuth";
 import { MouseEvent, useState } from "react";
+import { TodayItemList } from "../../../commons/store/index";
+import { useRecoilState } from "recoil";
 
 export default function DetailProductContainer() {
   useAuth();
   const [deleteUseditem] = useMutation(DELETE_USEDITEM);
   const [buyingProduct] = useMutation(CREATE_POINT_BUYING_SELLING);
   const [pickedItem] = useMutation(TOGGLE_USEDITEM_PICK);
+  const [, setDeleteList] = useRecoilState(TodayItemList);
   const router = useRouter();
   const { data, refetch } = useQuery(FETCH_USED_ITEM, {
     variables: {
@@ -80,19 +83,22 @@ export default function DetailProductContainer() {
   };
 
   const [a, setA] = useState<string[]>([]);
-  const onClickBasket = (aaa: any) => (event: MouseEvent<HTMLDivElement>) => {
-    console.log(aaa);
-
+  const onClickBasket = (data: any) => (event: MouseEvent<HTMLDivElement>) => {
     const bucket = JSON.parse(localStorage.getItem("bucket") || "[]");
-
-    const temp = bucket.filter((basketEl: any) => basketEl._id === aaa._id);
+    const temp = bucket.filter(
+      (el: any) => el.fetchUseditem?._id === data.fetchUseditem?._id
+    );
     if (temp.length === 1) {
+      alert("이미담은 상품입니다.");
       return 200;
     }
-    const { __typename, ...newAAA } = aaa;
+    const { __typename, ...newAAA } = data;
     bucket.push(newAAA);
     localStorage.setItem("bucket", JSON.stringify(bucket));
     setA([...a, (event.target as HTMLButtonElement).id]);
+    setDeleteList((prev) => !prev);
+    alert("장바구니에 담았습니다!");
+    console.log(data);
   };
 
   console.log(data);
