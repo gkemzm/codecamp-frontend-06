@@ -40,7 +40,7 @@ export const getServerSideProps = async (context) => {
     "https://backend06.codebootcamp.co.kr/graphql",
     FETCH_BOARD,
     {
-      boardId: context.query.boardId,
+      boardId: context?.query.boardId,
     }
   );
   //   const { data } = useQuery(FETCH_BOARD); // 서버에서는 useQuery 사용불가
@@ -48,9 +48,9 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       myboardData: {
-        title: result.fetchBoard.title,
-        contents: result.fetchBoard.contents,
-        images: result.fetchBoard.images,
+        title: result?.fetchBoard.title,
+        contents: result?.fetchBoard.contents,
+        images: result?.fetchBoard.images,
       },
     },
   };
