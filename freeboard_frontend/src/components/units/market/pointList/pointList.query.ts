@@ -14,30 +14,12 @@ export const FETCH_POINT_TRANSACTIONS = gql`
   }
 `;
 
-export const FETCH_POINT_TRANSACTIONS_BUYING = gql`
-  query fetchPointTransactionsOfBuying($search: String) {
-    fetchPointTransactionsOfBuying(search: $search) {
-      _id
-      impUid
-      amount
-      balance
-      status
-      statusDetail
-      balance
-    }
-  }
-`;
-
-export const FETCH_POINT_TRANSACTIONS_SELLING = gql`
-  query fetchPointTransactionsOfSelling($search: String) {
-    fetchPointTransactionsOfSelling(search: $search) {
-      _id
-      impUid
-      amount
-      balance
-      status
-      statusDetail
-      balance
+export const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      email
+      name
+      createdAt
     }
   }
 `;

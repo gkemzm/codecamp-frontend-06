@@ -30,7 +30,11 @@ const FETCH_USEDITEMS_IPICKED = gql`
     }
   }
 `;
-export default function PickedList() {
+
+interface IPickListProps {
+  isOpenPick: boolean;
+}
+export default function PickedList(props: IPickListProps) {
   const { data } = useQuery(FETCH_USEDITEMS_IPICKED, {
     variables: {
       search: "",
@@ -38,5 +42,5 @@ export default function PickedList() {
   });
   console.log(data);
 
-  return <PickedListHTML data={data} />;
+  return <PickedListHTML data={data} isOpenPick={props.isOpenPick} />;
 }

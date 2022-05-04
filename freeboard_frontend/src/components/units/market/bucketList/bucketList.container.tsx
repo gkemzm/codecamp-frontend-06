@@ -6,13 +6,13 @@ import DOMPurify from "dompurify";
 import { useRecoilState } from "recoil";
 import { TodayItemList } from "../../../commons/store/index";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
-import SkyBlueButton from "../../../commons/buttons/skyBlueButton/index";
-
-export default function BucketList() {
+interface IPropsBucket {
+  // isOpenBucket: boolean;
+  isOpenBucket: boolean;
+}
+export default function BucketList(props: IPropsBucket) {
   const [bucketItem, setBucketItems] = useState([]);
   const [deleteList, setDeleteList] = useRecoilState(TodayItemList);
-  const [isOpen, setIsOpen] = useState(true);
-  // const [iPicked, setIPicked] = useState([]);
   const { onClickMoveToPage } = useMoveToPage();
 
   useEffect(() => {
@@ -20,16 +20,6 @@ export default function BucketList() {
     setBucketItems(bucket);
     console.log(bucketItem, "이거");
   }, []);
-
-  const OpenBucket = () => {
-    if (isOpen === false) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-    console.log(isOpen);
-    console.log(bucketItem);
-  };
 
   useEffect(() => {
     const bucket = JSON.parse(localStorage.getItem("bucket") || "[]");
@@ -48,13 +38,11 @@ export default function BucketList() {
 
   return (
     <S.Wrapper>
-      <div onClick={OpenBucket}>
-        <SkyBlueButton isActive={false} title={"장바구니"} />
-      </div>
-      {isOpen ? (
+      {props.isOpenBucket ? (
         <></>
       ) : (
         <div>
+          <S.TextDiv>장바구니</S.TextDiv>
           {bucketItem.map((el: any) => (
             <S.BasicRow key={el.fetchUseditem?._id}>
               <S.Bucket>

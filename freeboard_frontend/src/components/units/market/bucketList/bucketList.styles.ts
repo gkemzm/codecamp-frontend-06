@@ -3,20 +3,25 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 30px;
+  margin-left: 50px;
+  width: 1000px;
+  margin-right: 330px;
+  position: relative;
+  bottom: 30px;
 `;
 export const BasicColumn = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
 `;
 
 export const BasicRow = styled.div`
   display: flex;
   flex-direction: row;
-  margin-left: 50px;
 `;
 
 export const BasicRow2 = styled.div`
+  width: 500px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -26,7 +31,7 @@ export const DelBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0px 0px 30px;
+  margin-top: 10px;
   width: 100px;
   height: 50px;
   font-size: 18px;
@@ -37,27 +42,36 @@ export const DelBtn = styled.div`
   cursor: pointer;
 `;
 export const TextDiv = styled.div`
+  width: 750px;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   font-size: 25px;
+  align-items: center;
   font-weight: 700px;
   margin-bottom: 10px;
+  color: black;
+  background-color: white;
+  border: 2px solid skyblue;
+  border-radius: 20px;
 `;
 export const Img = styled.img`
-  width: 180px;
-  height: 180px;
-  border-radius: 15px;
+  width: 190px;
+  height: 190px;
+  border-radius: 20px;
   margin-right: 10px;
-  object-fit: cover;
+  padding: 10px;
   cursor: pointer;
 `;
 
 export const Bucket = styled.div`
   display: flex;
   flex-direction: row;
-  width: 750px;
+  width: 70%;
   border-radius: 20px;
-  background-color: beige;
+  border: none;
+  box-shadow: 0px 3px 15px skyblue;
+  width: 750px;
+  margin-bottom: 30px;
 `;
 
 export const Name = styled.div`
@@ -74,7 +88,6 @@ export const Tags = styled.div`
   font-weight: 700;
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
 `;
 
 export const Tag = styled.div`
