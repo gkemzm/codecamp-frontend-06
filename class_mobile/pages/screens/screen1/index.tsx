@@ -7,6 +7,7 @@ import {
   TextInputChangeEventData,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { WebView } from "react-native-webview";
 
 const ViewContainer = styled.View`
   width: 100%;
@@ -72,18 +73,19 @@ export default function Screen1({ navigation }) {
     }
   };
   return (
-    <ViewContainer>
-      <Title>프론트엔드 6기</Title>
-      <SubTitle>리액트 네이티브 2일차</SubTitle>
-      <Input onChange={onChangeInput} />
-      <MoveScreen
-        onPress={() => navigation.navigate("screen2", { isEdit: true })}
-      >
-        <TouchableTitle>스택 이동</TouchableTitle>
-      </MoveScreen>
-      <Storage onPress={storeDate}>
-        <Text>스토리지 저장</Text>
-      </Storage>
-    </ViewContainer>
+    <WebView source={{ uri: "https://codebootcamp.co.kr/home" }} /> 
+    // <ViewContainer>
+    //   <Title>프론트엔드 6기</Title>
+    //   <SubTitle>리액트 네이티브 2일차</SubTitle>
+    //   <Input onChange={onChangeInput} />
+    //   <MoveScreen
+    //     onPress={() => navigation.navigate("screen2", { isEdit: true })}
+    //   >
+    //     <TouchableTitle>스택 이동</TouchableTitle>
+    //   </MoveScreen>
+    //   <Storage onPress={storeDate}>
+    //     <Text>스토리지 저장</Text>
+    //   </Storage>
+    // </ViewContainer>
   );
 }

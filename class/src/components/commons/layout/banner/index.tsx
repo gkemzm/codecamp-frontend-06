@@ -1,10 +1,6 @@
-import styled from "@emotion/styled";
 import Slider from "react-slick";
-
-const Wrapper = styled.div`
-  background-color: yellow;
-  height: 400px;
-`;
+import * as S from "./layoutStyle";
+import TodayItems from "../../../units/market/todayItem/todayItem.container";
 
 const settings = {
   dots: true,
@@ -17,28 +13,41 @@ const settings = {
 export default function LayoutBanner() {
   return (
     <>
-      <Wrapper>
+      <S.Wrapper>
         <Slider {...settings}>
-          <div>
-            {/* <img src="/aaa/example.jpg" height="300px" width="300px"></img> */}
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
+          <S.Slick1>
+            <S.SlickD>Carousel Design</S.SlickD>
+            <S.SlickD2>Carousel Design not yet</S.SlickD2>
+            <S.SlickD2>preparing Slick111</S.SlickD2>
+          </S.Slick1>
+          <S.Slick1>
+            <S.SlickD>Carousel Design</S.SlickD>
+            <S.SlickD2>Carousel Design not yet</S.SlickD2>
+            <S.SlickD2>preparing Slick222</S.SlickD2>
+          </S.Slick1>
+          <S.Slick1>
+            <S.SlickD>Carousel Design</S.SlickD>
+            <S.SlickD2>Carousel Design not yet</S.SlickD2>
+            <S.SlickD2>preparing Slick333</S.SlickD2>
+          </S.Slick1>
+          <S.Slick1>
+            <S.SlickD>Carousel Design</S.SlickD>
+            <S.SlickD2>Carousel Design not yet</S.SlickD2>
+            <S.SlickD2>preparing Slick444</S.SlickD2>
+          </S.Slick1>
+          <S.Slick1>
+            <S.SlickD>Carousel Design</S.SlickD>
+            <S.SlickD2>Carousel Design not yet</S.SlickD2>
+            <S.SlickD2>preparing Slick555</S.SlickD2>
+          </S.Slick1>
+          <S.Slick1>
+            <S.SlickD>Carousel Design</S.SlickD>
+            <S.SlickD2>Carousel Design not yet</S.SlickD2>
+            <S.SlickD2>preparing Slick666</S.SlickD2>
+          </S.Slick1>
         </Slider>
-      </Wrapper>
+        <TodayItems />
+      </S.Wrapper>
     </>
   );
 }

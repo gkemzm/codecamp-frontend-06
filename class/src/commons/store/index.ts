@@ -29,3 +29,4 @@ export const visitedPageState = atom({
   key: "visitedPageState",
   default: "/",
 });
+

@@ -3,7 +3,7 @@ import {
   CREATE_USEDITEM_QUESTION,
   FETCH_USED_ITEM_QUESTIONS,
 } from "./comments.query";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
@@ -11,15 +11,23 @@ export default function CommentSignContainer() {
   const [createProductComment] = useMutation(CREATE_USEDITEM_QUESTION);
   const router = useRouter();
 
-  const { register, handleSubmit, setValue, trigger, formState } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    trigger,
+    formState,
+    getValues,
+    reset,
+  } = useForm({
     mode: "onChange",
   });
 
-  // useEffect(() => {
-
-  //   setValue("contents", itemData?.fetchUseditem?.contents);
-
-  // }, []);
+  const { data } = useQuery(FETCH_USED_ITEM_QUESTIONS, {
+    variables: {
+      useditemId: String(router.query.marketId),
+    },
+  });
 
   const createUseditemComment = async (data: any) => {
     try {
@@ -55,6 +63,10 @@ export default function CommentSignContainer() {
       register={register}
       handleSubmit={handleSubmit}
       formState={formState}
+      data={data}
+      getValues={getValues}
+      setValue={setValue}
+      reset={reset}
     />
   );
 }

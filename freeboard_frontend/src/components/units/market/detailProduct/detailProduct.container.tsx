@@ -13,6 +13,10 @@ import { useAuth } from "../../../commons/hooks/useAuth";
 import { MouseEvent, useState } from "react";
 import { TodayItemList } from "../../../commons/store/index";
 import { useRecoilState } from "recoil";
+import {
+  IQuery,
+  IQueryFetchUseditemArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function DetailProductContainer() {
   useAuth();
@@ -21,7 +25,10 @@ export default function DetailProductContainer() {
   const [pickedItem] = useMutation(TOGGLE_USEDITEM_PICK);
   const [, setDeleteList] = useRecoilState(TodayItemList);
   const router = useRouter();
-  const { data, refetch } = useQuery(FETCH_USED_ITEM, {
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchUseditem">,
+    IQueryFetchUseditemArgs
+  >(FETCH_USED_ITEM, {
     variables: {
       useditemId: String(router.query.marketId),
     },

@@ -207,7 +207,6 @@ export default function SignProductContainer(props: IBoardSignProps) {
     setValue("remarks", itemData?.fetchUseditem?.remarks);
     setValue("contents", itemData?.fetchUseditem?.contents);
     setValue("price", itemData?.fetchUseditem?.price);
-    // setValue("tags", itemData?.fetchUseditem?.tags);
     setValue(
       "useditemAddress.addressDetail",
       itemData?.fetchUseditem?.useditemAddress?.addressDetail

@@ -5,4 +5,8 @@ export interface ICommentHTMLProps {
   register: UseFormRegister<FieldValues>;
   handleSubmit: any;
   formState: any;
+  data: any;
+  getValues: any;
+  setValue: any;
+  reset: any;
 }

@@ -7,7 +7,7 @@ interface IFormValues {
 }
 
 export default function ReactHoockFormPage() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState } = useForm();
 
   const onClickSubmit = (data: IFormValues) => {
     // handleSubmit 사용사  우리가 14 16 18번줄에 선언한 ...register("~~~")내용을 onClickSubmit 안에 넣어준다.
@@ -27,7 +27,7 @@ export default function ReactHoockFormPage() {
         <input type="text" {...register("myContents")} />
         내용:
         {/* <input type="text" {...register("boardAddress.addressDetail")} />  */}
-        <button>등록하기</button>
+        <button disabled={formState.isSubmitting}>등록하기</button>
       </form>
     </>
   );
