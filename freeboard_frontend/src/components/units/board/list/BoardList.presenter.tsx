@@ -2,6 +2,7 @@ import { getDate } from "../../../../commons/utils";
 import * as S from "./BoardList.styles";
 import { BoardListUIProps } from "./BoardList.types";
 import { v4 as uuidv4 } from "uuid";
+import { IBoard } from "../../../../commons/types/generated/types";
 
 export default function BoardListUI(props: BoardListUIProps) {
   console.log(props.data);
@@ -14,7 +15,7 @@ export default function BoardListUI(props: BoardListUIProps) {
         <S.ColumnHeaderBasic>작성자</S.ColumnHeaderBasic>
         <S.ColumnHeaderBasic>날짜</S.ColumnHeaderBasic>
       </S.Row>
-      {props.data?.fetchBoards.map((el: any) => (
+      {props.data?.fetchBoards.map((el: IBoard) => (
         <S.Row key={el._id}>
           <S.ColumnBasic>
             {String(el._id).slice(-4).toUpperCase()}
@@ -23,7 +24,7 @@ export default function BoardListUI(props: BoardListUIProps) {
             {el.title
               .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
               .split("#$%")
-              .map((el: any) => (
+              .map((el: string) => (
                 <S.Word key={uuidv4()} isMatched={props.keyword === el}>
                   {el}
                 </S.Word>

@@ -2,38 +2,35 @@ import * as S from "../boardDetail/BoardDetail.styles";
 import { BoardDetailHTMLProps } from "./BoardDetail.types";
 import ReactPlayer from "react-player";
 import { Rate, Modal } from "antd";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { StarNumber } from "./BoardDetail.styles";
 import InfiniteScroll from "react-infinite-scroller";
 import { useRouter } from "next/router";
+import { IBoardComment } from "../../../../commons/types/generated/types";
 
 export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
   const router = useRouter();
-  // console.log(props.data);
-  // console.log(props.dataComment);
-  // const [value, setValue] = useState(3);
   const [starValue, setStarValue] = useState(3);
-  // console.log(props.dataComment);
   const handleChange = () => {
     setStarValue(starValue);
   };
 
-  const onClickAlert = (event: any) => {
+  const onClickAlert = (event: MouseEvent<HTMLDivElement>) => {
     alert(`${event.currentTarget.id}님이 작성한 댓글입니다.`);
-    // console.log(value);
   };
 
   const onLoadMore = () => {
-    if (!props.dataComment) return; // 데이터가 없으면 요청하지말하라
+    if (!props.dataComment) return;
 
     props.fetchMore({
       variables: {
-        // boaddId: props.data?.fetchBoard._id,
         page: Math.ceil(props.dataComment?.fetchBoardComments.length / 10) + 1,
-        // boadrId: props.dataComment._id,
         boardId: router.query.boardId,
       },
-      updateQuery: (prev: any, { fetchMoreResult }: any) => {
+      updateQuery: (
+        prev: { fetchBoardComments: Array<IBoardComment> },
+        { fetchMoreResult }: any
+      ) => {
         if (!fetchMoreResult.fetchBoardComments)
           return { fetchBoardComments: [...prev.fetchBoardComments] };
         return {
@@ -103,12 +100,13 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
                 <S.Title>
                   <div>{props.data?.fetchBoard.title}</div>
                 </S.Title>
-                <S.ImageBox>
-                  <S.BoardImg
-                    src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[0]}`}
-                  />
-                </S.ImageBox>
-
+                {props.data?.fetchBoard?.images?.[0] && (
+                  <S.ImageBox>
+                    <S.BoardImg
+                      src={`https://storage.googleapis.com/${props.data?.fetchBoard?.images[0]}`}
+                    />
+                  </S.ImageBox>
+                )}
                 <S.Contents>
                   <div>{props.data?.fetchBoard.contents}</div>
                 </S.Contents>
@@ -116,7 +114,7 @@ export default function BoardDetailHTML(props: BoardDetailHTMLProps) {
               <S.MiddleWrapperBottom>
                 <S.Vidio>
                   <ReactPlayer
-                    url={props.data?.fetchBoard.youtubeUrl}
+                    url={props.data?.fetchBoard?.youtubeUrl?.[0]}
                     width="560px"
                     height="315px"
                     controls={true}

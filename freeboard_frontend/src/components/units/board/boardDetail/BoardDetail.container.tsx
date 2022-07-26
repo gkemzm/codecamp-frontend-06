@@ -31,7 +31,7 @@ export default function BoardDetailFunction() {
 
   const [writer, setWriter] = useState("");
   const [pw, setPw] = useState("");
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState<number>(3);
   const [contents, setContents] = useState("");
   const [display, setDisplay] = useState("");
   const [isActive, setIsActive] = useState(false);
@@ -52,34 +52,12 @@ export default function BoardDetailFunction() {
     IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENT, {
     variables: {
-      // page: Number(router.query.page),
       boardId: String(router.query.boardId),
     },
   });
-  // const onLoadMore = () => {
-  //   if (dataComment) return; // 데이터가 없으면 요청하지말하라
 
-  //   fetchMore({
-  //     variables: {
-  //       page: Math.ceil(dataComment?.fetchBoardComments.length / 10),
-  //       boadrId: router.query.boardId,
-  //     },
-  //     updateQuery: (prev, { fetchMoreResult }) => {
-  //       if (!fetchMoreResult.fetchBoardComments)
-  //         return { fetchBoardComments: [...prev.fetchBoardComments] };
-  //       return {
-  //         fetchBoardComments: [
-  //           ...prev.fetchBoardComments,
-  //           ...fetchMoreResult.fetchBoardComments,
-  //         ],
-  //       };
-  //     },
-  //   });
-  // };
   const DisplayOnOff = (event: MouseEvent<HTMLButtonElement>) => {
     setDisplay((event.target as Element).id);
-    // console.log((event.target as any).id);
-    // console.log(isActive);
     if (isActive === false) {
       setIsActive(true);
     }
@@ -98,25 +76,9 @@ export default function BoardDetailFunction() {
     setIsOpen(true);
   };
 
-  // const handleOk = () => {
-  //   setIsOpen(false);
-  // };
-
   const handleCancel = () => {
     setIsOpen(false);
   };
-
-  // const DisplayOnOff = (event: MouseEvent<HTMLButtonElement>) => {
-  //   setDisplay((event.target as any).id);
-  //   console.log((event.target as any).id);
-  //   if (isActive === false) {
-  //     setIsActive(true);
-  //   }
-
-  //   if (isActive === true) {
-  //     setIsActive(false);
-  //   }
-  // };
 
   const PositionHover = () => {
     if (isHover === false) {
@@ -234,7 +196,6 @@ export default function BoardDetailFunction() {
           },
         ],
       });
-      // console.log(dataComment);
       setWriter("");
       setPw("");
       setContents("");
@@ -269,8 +230,6 @@ export default function BoardDetailFunction() {
           },
         ],
       });
-      // console.log(dataComment);
-      // eslint-disable-next-line no-unused-expressions
     } catch (error) {
       if (error instanceof Error) {
         Modal.error({
@@ -297,8 +256,6 @@ export default function BoardDetailFunction() {
           },
         ],
       });
-      // console.log(id);
-      // console.log(dataComment);
     } catch (error) {
       if (error instanceof Error) {
         Modal.error({
@@ -307,9 +264,6 @@ export default function BoardDetailFunction() {
         });
       }
     }
-    // finally {
-    //   location.reload();
-    // }
   };
 
   const onChangeCommentWriter = (event: ChangeEvent<HTMLInputElement>) => {
@@ -324,10 +278,10 @@ export default function BoardDetailFunction() {
     setContents(event.target.value);
   };
 
-  const onChangeCommentRating = (event: ChangeEvent<HTMLInputElement>) => {
-    setRating(event.target.value);
-  };
-  const handleChange = (value: any) => {
+  // const onChangeCommentRating = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setRating(event.target.value);
+  // };
+  const handleChange = (value: number) => {
     setRating(value);
   };
   return (
@@ -338,7 +292,6 @@ export default function BoardDetailFunction() {
       isHover={isHover}
       isOpen={isOpen}
       display={display}
-      // onLoadMore={onLoadMore}
       fetchMore={fetchMore}
       upLike={upLike}
       upDisLike={upDisLike}
@@ -351,11 +304,10 @@ export default function BoardDetailFunction() {
       onChangeCommentContents={onChangeCommentContents}
       deleteOneComment={deleteOneComment}
       UpdateCommentBoard={UpdateCommentBoard}
-      onChangeCommentRating={onChangeCommentRating}
+      // onChangeCommentRating={onChangeCommentRating}
       DisplayOnOff={DisplayOnOff}
       PositionHover={PositionHover}
       handleChange={handleChange}
-      // handleOk={handleOk}
       handleCancel={handleCancel}
       showModal={showModal}
       writer={writer}

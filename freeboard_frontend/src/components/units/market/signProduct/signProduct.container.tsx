@@ -9,8 +9,12 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useState, useEffect, KeyboardEvent } from "react";
+import { useState, useEffect, KeyboardEvent, MouseEvent } from "react";
 import { useRouter } from "next/router";
+import {
+  IUpdateUseditemInput,
+  IUseditem,
+} from "../../../../commons/types/generated/types";
 
 const schema = yup.object({
   name: yup
@@ -75,8 +79,8 @@ export default function SignProductContainer(props: IBoardSignProps) {
     console.log(hashArr);
   };
 
-  const onClikDeleteTags = (event: any) => {
-    hashArr.splice(Number(event.target.id), 1);
+  const onClikDeleteTags = (event: MouseEvent<HTMLDivElement>) => {
+    hashArr.splice(Number((event.target as HTMLDivElement).id), 1);
     setHashArr([...hashArr]);
   };
 
@@ -86,7 +90,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
     },
   });
 
-  const handleComplete = (data: any) => {
+  const handleComplete = (data: { address: string; zonecode: string }) => {
     setAddress(data.address);
     setValue("useditemAddress.address", data.address);
     setZipcode(data.zonecode);
@@ -117,7 +121,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
     resolver: yupResolver(props.isEdit ? editSchema : schema),
     mode: "onChange",
   });
-  const createUsedItem = async (data: any) => {
+  const createUsedItem = async (data: IUseditem) => {
     try {
       const result = await createItem({
         variables: {
@@ -142,7 +146,7 @@ export default function SignProductContainer(props: IBoardSignProps) {
     const defaultFiles = JSON.stringify(itemData?.fetchUseditem.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
-    const updateUseditemInput: any = {};
+    const updateUseditemInput: IUpdateUseditemInput = {};
     if (data.name) updateUseditemInput.title = data.name;
     if (data.remark) updateUseditemInput.remark = data.remark;
     if (data.contents) updateUseditemInput.contents = data.contents;

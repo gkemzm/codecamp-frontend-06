@@ -5,6 +5,7 @@ import { CREATE_USER } from "./signUp.query";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { IFormValues } from "./signUp.types";
 
 const schema = yup.object({
   email: yup
@@ -27,13 +28,6 @@ const schema = yup.object({
     .oneOf([yup.ref("password"), null], "Passwords do not match. or Empty")
     .required("PW Check is required."),
 });
-
-interface IFormValues {
-  email: string;
-  name: string;
-  password: string;
-  passwordCheck: string;
-}
 
 export default function SignUpContainer() {
   const router = useRouter();

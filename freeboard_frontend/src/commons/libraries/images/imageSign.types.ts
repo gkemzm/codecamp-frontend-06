@@ -1,7 +1,7 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, MouseEvent, RefObject } from "react";
 
 export interface ImageSignProps {
-  fileRef: any;
+  fileRef: RefObject<HTMLInputElement>;
   imageUrl?: String;
   isActive: boolean;
   onChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;

@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import { IUseditem } from "../../../../commons/types/generated/types";
 import * as S from "./soldList.stylels";
 
 const FETCH_USEDITEM_ISOLD = gql`
@@ -41,7 +42,7 @@ export default function SoldList(props: ISoldListProps) {
                 <S.Point>가격</S.Point>
               </S.Navbar>
             </S.TextDiv2>
-            {sellData?.fetchUseditemsISold?.map((el: any) => (
+            {sellData?.fetchUseditemsISold?.map((el: IUseditem) => (
               <S.BasicRow key={el._id}>
                 <S.Bucket>
                   <S.BasicRow2>

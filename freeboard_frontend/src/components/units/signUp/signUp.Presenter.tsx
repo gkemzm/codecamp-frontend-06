@@ -1,23 +1,15 @@
 import * as S from "./signUp.styles";
-// import { useRecoilState } from "recoil";
-// import {
-//   gIdError,
-//   gPwError,
-//   gPwCheckError,
-//   gEmailError,
-// } from "../../commons/store/index";
 import { IChangeSignUp } from "./signUp.types";
 import SkyBlueButton from "../../commons/buttons/skyBlueButton/index";
 
 export default function SignUpPresenter(props: IChangeSignUp) {
-  // const [idError] = useRecoilState(gIdError);
-  // const [pwError] = useRecoilState(gPwError);
-  // const [pwCheckError] = useRecoilState(gPwCheckError);
-  // const [emailError] = useRecoilState(gEmailError);
-
   return (
     <S.Wrapper>
-      <form onSubmit={props.handleSubmit(props.onClickSignUp)}>
+      <form
+        onSubmit={props.handleSubmit(
+          props.onClickSignUp as unknown as () => void
+        )}
+      >
         <S.SignUpBox>
           <S.Title>SIGN-UP</S.Title>
           <S.BasicRow>

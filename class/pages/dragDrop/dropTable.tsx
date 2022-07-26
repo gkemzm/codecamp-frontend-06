@@ -37,7 +37,7 @@ export default function DropTable(props: data) {
   console.log(props.el);
   return (
     <>
-      <Draggable draggableId={props.el.writer} index={props.index}>
+      <Draggable draggableId={props.el._id} index={props.index}>
         {(provided) => (
           <div
             ref={provided.innerRef}

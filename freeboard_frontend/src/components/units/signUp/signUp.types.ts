@@ -1,13 +1,21 @@
 // import { ChangeEvent, MouseEvent } from "react";
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import {
+  FieldValues,
+  FormState,
+  UseFormHandleSubmit,
+  UseFormRegister,
+} from "react-hook-form";
+
+export interface IFormValues {
+  email: string;
+  name: string;
+  password: string;
+  passwordCheck: string;
+}
 
 export interface IChangeSignUp {
-  // onChangeId: (event: ChangeEvent<HTMLInputElement>) => void;
-  // onChangePw: (event: ChangeEvent<HTMLInputElement>) => void;
-  // onChangePwCheck: (event: ChangeEvent<HTMLInputElement>) => void;
-  // onChangeEmail: (event: ChangeEvent<HTMLInputElement>) => void;
-  onClickSignUp: (data: any) => void;
+  onClickSignUp: (data: IFormValues) => void;
   register: UseFormRegister<FieldValues>;
-  handleSubmit: any;
-  formState: any;
+  handleSubmit: UseFormHandleSubmit<FieldValues>;
+  formState: FormState<FieldValues>;
 }

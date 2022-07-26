@@ -416,6 +416,8 @@ export type IUpdateBoardInput = {
 };
 
 export type IUpdateUseditemInput = {
+  title?: InputMaybe<Scalars["String"]>;
+  remark?: InputMaybe<Scalars["String"]>;
   contents?: InputMaybe<Scalars["String"]>;
   images?: InputMaybe<Array<Scalars["String"]>>;
   name?: InputMaybe<Scalars["String"]>;

@@ -106,7 +106,7 @@ export default function StaticRoutedPage() {
     <Wrapper>
       {isLoading && (
         <DragDropContext onDragEnd={handleDragEnd}>
-          {boardData.map((el: any, index: number) => (
+          {boardData?.map((el: any, index: number) => (
             <Droppable key={el._id} droppableId={String(index)}>
               {(provided, snapshot) => (
                 <div

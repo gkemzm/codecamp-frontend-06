@@ -1,4 +1,8 @@
 import { ChangeEvent, MouseEvent } from "react";
+import {
+  IBoard,
+  IBoardComment,
+} from "../../../../commons/types/generated/types";
 export interface IdisplayOnOff {
   isActive: boolean;
 }
@@ -14,22 +18,20 @@ export interface Idisplay {
 }
 
 export interface BoardDetailHTMLProps {
-  data?: any;
-  dataComment?: any;
+  data?: { fetchBoard: IBoard };
+  dataComment?: { fetchBoardComments: Array<IBoardComment> };
   isActive: boolean;
   isHover: boolean;
-  writer: any;
-  pw: any;
-  contents: any;
-  rating: any;
-  handleChange: any;
-  isOpen: any;
-  display: any;
+  writer: string;
+  pw: string;
+  contents: string;
+  rating: number;
+  handleChange: (value: number) => void;
+  isOpen: boolean;
+  display: string;
   fetchMore: any;
-  // onLoadMore: () => any;
-  showModal: () => any;
-  // handleOk: () => any;
-  handleCancel: () => any;
+  showModal: () => void;
+  handleCancel: () => void;
   upLike: () => void;
   upDisLike: () => void;
   MoveMainpage: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -39,9 +41,9 @@ export interface BoardDetailHTMLProps {
   onChangeCommentWriter: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeCommentPw: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeCommentContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-  deleteOneComment: (id: any) => void;
+  deleteOneComment: (id: string) => void;
   UpdateCommentBoard: (event: MouseEvent<HTMLButtonElement>) => void;
   DisplayOnOff: (event: MouseEvent<HTMLButtonElement>) => void;
-  onChangeCommentRating: (event: ChangeEvent<HTMLInputElement>) => void;
+  // onChangeCommentRating: (event: ChangeEvent<HTMLInputElement>) => void;
   PositionHover: (event: MouseEvent<HTMLDivElement>) => void;
 }

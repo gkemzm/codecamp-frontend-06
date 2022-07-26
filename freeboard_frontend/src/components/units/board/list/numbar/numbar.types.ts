@@ -3,9 +3,9 @@ export interface PageListProps {
   isActive2: boolean;
   refetch: any;
   lastPage: any;
-  setIsActive: any;
-  setIsActive2: any;
-  btnColor: String;
+  setIsActive: boolean;
+  setIsActive2: boolean;
+  btnColor: string;
   setBtnColor: any;
 }
 

@@ -23,7 +23,9 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
       <S.Wrapper>
         <form
           onSubmit={props.handleSubmit(
-            props.isEdit ? props.updateUsedItem : props.createUsedItem
+            props.isEdit
+              ? (props.updateUsedItem as unknown as () => void)
+              : (props.createUsedItem as unknown as () => void)
           )}
         >
           {props.isEdit ? (
@@ -71,10 +73,10 @@ export default function SignProductHTML(props: ISignProductBoardHtmlProps) {
             placeholder="#태그"
           />
           <S.TagList>
-            {props.hashArr.map((el: any, index: any) => (
+            {props.hashArr.map((el: string, index: number) => (
               <S.TagBox key={index}>
                 <S.Tag>{el}</S.Tag>
-                <S.TagDel id={index} onClick={props.onClikDeleteTags}>
+                <S.TagDel id={String(index)} onClick={props.onClikDeleteTags}>
                   ❌
                 </S.TagDel>
               </S.TagBox>

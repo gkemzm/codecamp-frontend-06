@@ -24,15 +24,10 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
 
   const [imageUrl, setImageUrl] = useState(["", "", ""]);
 
-  // const [isOpen, setIsOpen] = useState(false);
-
   const [isActive, setIsActive] = useState(false);
   const [callApi] = useMutation(SIGN_BOARD);
   const [callUpdateBoard] = useMutation(UPDATE_BOARD);
 
-  // const onToggleModal = () => {
-  //   setIsOpen((prev) => !prev);
-  // };
   const [isOpen, setIsOpen] = useState(false);
   const [region, setRegion] = useState("");
   const [zonecode, setZonecode] = useState("");
@@ -41,8 +36,7 @@ export default function BoardSignFunction(props: BoardSignFunctionProps) {
     setIsOpen((prev) => !prev);
   };
 
-  const handleComplete = (data: any) => {
-    console.log(data);
+  const handleComplete = (data: { address: string; zonecode: string }) => {
     setRegion(data.address);
     setZonecode(data.zonecode);
   };

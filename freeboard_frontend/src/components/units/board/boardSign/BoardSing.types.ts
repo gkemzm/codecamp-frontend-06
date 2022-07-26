@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
 
 export interface BoardSignFunctionProps {
   isEdit: boolean;
@@ -24,14 +24,14 @@ export interface BoardSignHTMLProps {
   isEdit: boolean;
   isActive: boolean;
   isOpen: boolean;
-  region: any;
-  zonecode: any;
+  region: string;
+  zonecode: string;
   writerError: string;
   pwError: string;
   titleError: string;
   contentsError: string;
-  address: any;
-  handleComplete: (data: any) => void;
+  address: string;
+  handleComplete: (data: { address: string; zonecode: string }) => void;
   onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangePw: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -40,9 +40,9 @@ export interface BoardSignHTMLProps {
   onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   updateBoard: () => void;
-  onToggleModal: () => any;
+  onToggleModal: () => void;
   submit: (event: MouseEvent<HTMLButtonElement>) => void;
   data?: any;
   imageUrl?: object;
-  setImageUrl: any;
+  setImageUrl: Dispatch<SetStateAction<string[]>>;
 }

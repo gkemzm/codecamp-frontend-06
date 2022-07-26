@@ -1,5 +1,13 @@
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import {
+  FieldValues,
+  UseFormGetValues,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormReset,
+  UseFormStateReturn,
+} from "react-hook-form";
 import { KeyboardEvent, MouseEvent } from "react";
+import { IUseditem } from "../../../../commons/types/generated/types";
 export interface IBoardSignProps {
   isEdit: boolean;
 }
@@ -7,24 +15,22 @@ export interface IBoardSignProps {
 export interface ISignProductBoardHtmlProps {
   isEdit: boolean;
   isOpen: boolean;
-  // addressDetail: string;
   address: string;
-  zipcode: any;
+  zipcode: string;
   itemData: any;
-  createUsedItem: (data: any) => void;
+  createUsedItem: (data: IUseditem) => void;
   register: UseFormRegister<FieldValues>;
-  handleSubmit: any;
-  formState: any;
+  handleSubmit: UseFormHandleSubmit<FieldValues>;
+  formState: UseFormStateReturn<FieldValues>;
   onChangeProductImage: (fileUrl: string, index: number) => void;
-  productImageUrls: any;
-  onChangeContents: any;
-  onToggleModal: () => any;
-  handleComplete: (data: any) => void;
-  // onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
+  productImageUrls: Array<string>;
+  onChangeContents: (value: string) => void;
+  onToggleModal: () => void;
+  handleComplete: (data: { address: string; zonecode: string }) => void;
   updateUsedItem: (event: MouseEvent<HTMLDivElement>) => void;
   onKeyUphash: (event: KeyboardEvent<HTMLInputElement>) => void;
   onClikDeleteTags: (event: MouseEvent<HTMLDivElement>) => void;
-  reset: any;
-  getValues: any;
-  hashArr: any;
+  reset: UseFormReset<FieldValues>;
+  getValues: UseFormGetValues<FieldValues>;
+  hashArr: Array<string>;
 }
