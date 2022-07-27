@@ -1,4 +1,6 @@
+import { IUseditemQuestion } from "../../../../../commons/types/generated/types";
+
 export interface ICommentListHTMLProps {
-  commentListData: any;
+  commentListData: { fetchUseditemQuestions: Array<IUseditemQuestion> };
   fetchMore: any;
 }

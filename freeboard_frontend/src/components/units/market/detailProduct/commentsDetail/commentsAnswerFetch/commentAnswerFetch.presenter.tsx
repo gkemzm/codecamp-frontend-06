@@ -4,6 +4,7 @@ import { MouseEvent } from "react";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import SkyBlueButton from "../../../../../commons/buttons/skyBlueButton/index";
+import { FieldValues, UseFormHandleSubmit } from "react-hook-form";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -14,7 +15,7 @@ interface ICommentAnswerHTMLProps {
     event: MouseEvent<HTMLFormElement> | undefined
   ) => void;
   onChangeContents: (event: any) => void;
-  handleSubmit: any;
+  handleSubmit: UseFormHandleSubmit<FieldValues>;
   displayOnoff: (event: MouseEvent<HTMLDivElement>) => void;
   isOpen: boolean;
 }
@@ -29,7 +30,11 @@ export default function CommentAnswerListHTML(props: ICommentAnswerHTMLProps) {
         <S.CustomDiv onClick={props.deleteUseditemOneQuestion}>❌</S.CustomDiv>
       </S.NameBox>
       {props.isOpen ? (
-        <form onSubmit={props.handleSubmit(props.updateUsedItemQuestionAnswer)}>
+        <form
+          onSubmit={props.handleSubmit(
+            props.updateUsedItemQuestionAnswer as unknown as () => void
+          )}
+        >
           <S.AnswerBox>
             <ReactQuill
               onChange={props.onChangeContents}

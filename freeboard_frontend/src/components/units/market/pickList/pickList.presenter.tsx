@@ -4,8 +4,12 @@ import DOMPurify from "dompurify";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import { useState } from "react";
 import SkyBlueButton from "../../../commons/buttons/skyBlueButton/index";
+import { IUseditem } from "../../../../commons/types/generated/types";
 
-export default function PickedListHTML(props: any) {
+interface IPickedListHTMLProps {
+  data: { fetchUseditemsIPicked: Array<IUseditem> };
+}
+export default function PickedListHTML(props: IPickedListHTMLProps) {
   const { onClickMoveToPage } = useMoveToPage();
   const [isOpen, setIsOpen] = useState(true);
 
@@ -25,11 +29,11 @@ export default function PickedListHTML(props: any) {
         <></>
       ) : (
         <div>
-          {props.data?.fetchUseditemsIPicked?.map((el: any) => (
+          {props.data?.fetchUseditemsIPicked?.map((el: IUseditem) => (
             <S.BasicRow key={el._id}>
               <S.Bucket>
                 <S.Img
-                  src={`https://storage.googleapis.com/${el.images[0]}`}
+                  src={`https://storage.googleapis.com/${el.images?.[0]}`}
                   onClick={onClickMoveToPage(`/market/${el._id}`)}
                 ></S.Img>
                 <S.BasicColumn>
@@ -44,11 +48,12 @@ export default function PickedListHTML(props: any) {
                     }}
                   ></S.Contents>
                   <S.Tags>
-                    {el.tags.map((el: any) => (
-                      <S.BasicRow key={uuidv4()}>
-                        <S.Tag>{el}</S.Tag>
-                      </S.BasicRow>
-                    ))}
+                    {el.tags &&
+                      el.tags.map((el: string) => (
+                        <S.BasicRow key={uuidv4()}>
+                          <S.Tag>{el}</S.Tag>
+                        </S.BasicRow>
+                      ))}
                   </S.Tags>
                 </S.BasicColumn>
               </S.Bucket>

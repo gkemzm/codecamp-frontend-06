@@ -1,8 +1,12 @@
+import {
+  IPointTransaction,
+  IUser,
+} from "../../../../commons/types/generated/types";
 import * as S from "./pointList.styles";
 
 interface IPointListHTML {
-  data: any;
-  userData: any;
+  data: { fetchPointTransactionsOfLoading: Array<IPointTransaction> };
+  userData: { fetchUserLoggedIn: IUser };
   isOpenInfo: boolean;
 }
 export default function PointListHTML(props: IPointListHTML) {
@@ -33,19 +37,21 @@ export default function PointListHTML(props: IPointListHTML) {
                 <S.Point>잔액</S.Point>
               </S.Navbar>
             </S.TextDiv2>
-            {props.data?.fetchPointTransactionsOfLoading?.map((el: any) => (
-              <S.BasicRow key={el._id}>
-                <S.Bucket>
-                  <S.BasicRow2>
-                    <S.Contents>{el.status}</S.Contents>
-                    <S.Navbar>
-                      <S.Amount>{el.amount}</S.Amount>
-                      <S.Contents>{el.balance}</S.Contents>
-                    </S.Navbar>
-                  </S.BasicRow2>
-                </S.Bucket>
-              </S.BasicRow>
-            ))}
+            {props.data?.fetchPointTransactionsOfLoading?.map(
+              (el: IPointTransaction) => (
+                <S.BasicRow key={el._id}>
+                  <S.Bucket>
+                    <S.BasicRow2>
+                      <S.Contents>{el.status}</S.Contents>
+                      <S.Navbar>
+                        <S.Amount>{el.amount}</S.Amount>
+                        <S.Contents>{el.balance}</S.Contents>
+                      </S.Navbar>
+                    </S.BasicRow2>
+                  </S.Bucket>
+                </S.BasicRow>
+              )
+            )}
           </div>
           )
         </S.Wrapper>

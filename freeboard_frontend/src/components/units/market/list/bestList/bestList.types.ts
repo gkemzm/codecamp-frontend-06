@@ -1,3 +1,5 @@
+import { IUseditem } from "../../../../../commons/types/generated/types";
+
 export interface IBestProductProps {
-  data: any;
+  data: { fetchUseditemsOfTheBest: Array<IUseditem> };
 }

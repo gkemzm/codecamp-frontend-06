@@ -8,6 +8,7 @@ import BestProductContainer from "./bestList/bestList.container";
 import { useState } from "react";
 import DOMPurify from "dompurify";
 import { getDate } from "../../../../commons/utils";
+import { IUseditem } from "../../../../commons/types/generated/types";
 
 export default function ListBoardHTML(props: IListProps) {
   const { onClickMoveToPage } = useMoveToPage();
@@ -24,7 +25,10 @@ export default function ListBoardHTML(props: IListProps) {
         // boadrId: props.dataComment._id,
         boardId: router.query.boardId,
       },
-      updateQuery: (prev: any, { fetchMoreResult }: any) => {
+      updateQuery: (
+        prev: { fetchUseditems: Array<IUseditem> },
+        { fetchMoreResult }: any
+      ) => {
         if (!fetchMoreResult.fetchUseditems)
           return { fetchUseditems: [...prev.fetchUseditems] };
         return {
@@ -66,9 +70,9 @@ export default function ListBoardHTML(props: IListProps) {
             loader={<div className="loader" key={0}></div>}
             useWindow={false}
           >
-            {props.data?.fetchUseditems.map((el: any) => (
+            {props.data?.fetchUseditems.map((el: IUseditem) => (
               <S.ProductBox key={el._id} onClick={props.onClickBasket(el)}>
-                {el.images[0] ? (
+                {el.images?.[0] ? (
                   <S.ImageBox
                     src={`https://storage.googleapis.com/${el.images[0]}`}
                     onClick={onClickMoveToPage(`/market/${el._id}`)}
@@ -99,7 +103,7 @@ export default function ListBoardHTML(props: IListProps) {
                   <S.ProductTags>Tags: {el.tags}</S.ProductTags>
                 </S.ProductDetail>
                 <S.BasicColumn onClick={onClickMoveToPage(`/market/${el._id}`)}>
-                  <S.Price>Seller: {el.seller.name}</S.Price>
+                  <S.Price>Seller: {el.seller?.name}</S.Price>
                   <S.Price>Price: {el.price}</S.Price>
                   <S.Price>Pick: {el.pickedCount}</S.Price>
                   <S.CreatedAt>{getDate(el.createdAt)}</S.CreatedAt>

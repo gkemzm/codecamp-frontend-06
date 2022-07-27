@@ -1,12 +1,15 @@
 import PointListHTML from "./pointList.presenter";
 import { useQuery } from "@apollo/client";
-
 import {
   FETCH_POINT_TRANSACTIONS,
   FETCH_USER_LOGGED_IN,
 } from "./pointList.query";
 
-export default function PointList(props: any) {
+interface IPointListProps {
+  isOpenInfo: boolean;
+}
+
+export default function PointList(props: IPointListProps) {
   const { data } = useQuery(FETCH_POINT_TRANSACTIONS, {
     variables: {
       search: "",

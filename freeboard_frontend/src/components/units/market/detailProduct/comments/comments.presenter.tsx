@@ -16,7 +16,11 @@ export default function CommentSignHTML(props: ICommentHTMLProps) {
   return (
     <S.Wrapper>
       <S.TextBox>댓글 작성</S.TextBox>
-      <form onSubmit={props.handleSubmit(props.createUseditemComment)}>
+      <form
+        onSubmit={props.handleSubmit(
+          props.createUseditemComment as unknown as () => void
+        )}
+      >
         <S.TextArea>
           <ReactQuill
             onChange={props.onChangeContents}

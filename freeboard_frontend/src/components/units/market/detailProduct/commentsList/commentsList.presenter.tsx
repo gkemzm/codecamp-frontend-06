@@ -5,6 +5,7 @@ import CommentDetailCotainer from "../commentsDetail/commentsD.container";
 import InfiniteScroll from "react-infinite-scroller";
 import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
+import { IUseditemQuestion } from "../../../../../commons/types/generated/types";
 
 export default function CommentListHTML(props: ICommentListHTMLProps) {
   const router = useRouter();
@@ -19,7 +20,10 @@ export default function CommentListHTML(props: ICommentListHTMLProps) {
         // boadrId: props.dataComment._id,
         useditemId: router.query.marketId,
       },
-      updateQuery: (prev: any, { fetchMoreResult }: any) => {
+      updateQuery: (
+        prev: { fetchUseditemQuestions: Array<IUseditemQuestion> },
+        { fetchMoreResult }: any
+      ) => {
         if (!fetchMoreResult.fetchUseditemQuestions)
           return { fetchUseditemQuestions: [...prev.fetchUseditemQuestions] };
         return {
@@ -41,11 +45,13 @@ export default function CommentListHTML(props: ICommentListHTMLProps) {
         loader={<div className="loader" key={uuidv4()}></div>}
         useWindow={false}
       >
-        {props.commentListData?.fetchUseditemQuestions.map((el: any) => (
-          <div key={uuidv4()}>
-            <CommentDetailCotainer data={el} />
-          </div>
-        )) || <div></div>}
+        {props.commentListData?.fetchUseditemQuestions.map(
+          (el: IUseditemQuestion) => (
+            <div key={uuidv4()}>
+              <CommentDetailCotainer data={el} />
+            </div>
+          )
+        ) || <div></div>}
       </InfiniteScroll>
       {/* </div> */}
     </S.Wrapper>

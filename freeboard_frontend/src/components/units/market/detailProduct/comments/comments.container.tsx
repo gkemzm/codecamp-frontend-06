@@ -6,6 +6,7 @@ import {
 import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import { IUseditemQuestion } from "../../../../../commons/types/generated/types";
 
 export default function CommentSignContainer() {
   const [createProductComment] = useMutation(CREATE_USEDITEM_QUESTION);
@@ -29,7 +30,7 @@ export default function CommentSignContainer() {
     },
   });
 
-  const createUseditemComment = async (data: any) => {
+  const createUseditemComment = async (data: IUseditemQuestion) => {
     try {
       const result = await createProductComment({
         variables: {
