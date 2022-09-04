@@ -24,6 +24,7 @@ export default function SignUpPresenter(props: IChangeSignUp) {
           <S.BasicRow>
             <S.SmallDiv>PW:</S.SmallDiv>{" "}
             <S.LoginInput
+              type={"password"}
               {...props.register("password")}
               // onChange={props.onChangePw}
               placeholder={" 8~20 Word (Only Word & Number)"}
@@ -33,6 +34,7 @@ export default function SignUpPresenter(props: IChangeSignUp) {
           <S.BasicRow>
             <S.SmallDiv>PW CHECK:</S.SmallDiv>{" "}
             <S.LoginInput
+              type={"password"}
               {...props.register("passwordCheck")}
               // onChange={props.onChangePwCheck}
               placeholder={" One more insert PW "}

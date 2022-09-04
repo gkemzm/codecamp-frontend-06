@@ -11,7 +11,7 @@ import KakaoMapPage from "../map/index";
 export default function DetailProductHTML(props: IProductDetailHTMLProps) {
   const { onClickMoveToPage } = useMoveToPage();
   const router = useRouter();
-  console.log(props.data, "데이터");
+  // console.log(props.data, "데이터");
   return (
     <S.BasicColumn>
       <S.BasicColumn>

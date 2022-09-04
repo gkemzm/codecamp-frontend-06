@@ -54,12 +54,13 @@ export const BasicColumn = styled.div`
   justify-content: center;
 `;
 export const LoginInput = styled.input`
-  width: 300px;
+  width: 320px;
   height: 40px;
   margin-left: 10px;
   border: none;
   border-radius: 20px;
   box-shadow: 0px 2px 10px skyblue;
+  padding-left: 15px;
 
   ::placeholder {
     color: skyblue;

@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   background-color: beige;
   height: 400px;
+  width: 100%;
+  max-width: 2400px;
   cursor: pointer;
   .slick-prev:before {
     opacity: 1;
@@ -20,7 +22,7 @@ export const Slick1 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 370px;
+  /* height: 370px; */
 `;
 
 export const SlickD = styled.div`
@@ -46,4 +48,12 @@ export const SlickN = styled.div`
   align-items: center;
   font-size: 20px;
   font-weight: 700;
+`;
+
+export const CarouselImg = styled.img`
+  height: 400px;
+  width: 100%;
+  max-width: 2400px;
+  position: relative;
+  bottom: 260px;
 `;

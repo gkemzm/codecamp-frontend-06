@@ -18,6 +18,10 @@ export const BasicRow = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin: 30px 0px 15px 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 10px;
 `;
 
 export const TrueBasicRow = styled.div`
@@ -28,7 +32,7 @@ export const TrueBasicRow = styled.div`
 
 export const BestProductList = styled.div`
   width: 220px;
-  height: 240px;
+  height: 270px;
   border: none;
   box-shadow: 0px 4px 15px skyblue;
   border-radius: 20px;
@@ -44,6 +48,9 @@ export const Name = styled.div`
   font-size: 25px;
   font-weight: 700;
   color: purple;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Contents = styled.div`

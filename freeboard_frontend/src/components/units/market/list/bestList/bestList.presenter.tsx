@@ -15,8 +15,8 @@ export default function BestProductHTML(props: IBestProductProps) {
               <S.Name onClick={onClickMoveToPage(`/market/${el._id}`)}>
                 {el.name}
               </S.Name>
-              <S.Contents>Pick: {el.pickedCount}</S.Contents>
             </S.TrueBasicRow>
+            <S.Contents>Pick: {el.pickedCount}</S.Contents>
             <S.Contents>{el.remarks}</S.Contents>
             <S.Contents>Price: {el.price}</S.Contents>
             {el.images?.[0] ? (

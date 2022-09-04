@@ -29,7 +29,14 @@ export default function BestPage(props: BestPageProps) {
           <S.Writer onClick={MoveBestPage} id={el._id}>
             {el.writer}
           </S.Writer>
-          <S.BoardImg src={`https://storage.googleapis.com/${el.images}`} />
+          {el.images?.[0] ? (
+            <S.BoardImg
+              src={`https://storage.googleapis.com/${el.images?.[0]}`}
+            />
+          ) : (
+            <div></div>
+          )}
+
           <S.Info>{el.title}</S.Info>
           <S.BasicRow>
             <S.LikeIcon />

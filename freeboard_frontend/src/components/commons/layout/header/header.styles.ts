@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   background-color: skyblue;
   height: 80px;
+  width: 100%;
+  max-width: 2400px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

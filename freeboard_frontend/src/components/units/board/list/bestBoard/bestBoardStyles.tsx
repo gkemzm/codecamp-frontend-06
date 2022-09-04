@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 
 export const BestBoardTable = styled.div`
   width: 250px;
-  height: 230px;
+  max-height: 230px;
   display: flex;
   flex-direction: column;
   align-items: center;

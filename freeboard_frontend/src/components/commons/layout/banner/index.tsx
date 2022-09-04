@@ -3,7 +3,7 @@ import * as S from "./layoutStyle";
 import TodayItems from "../../../units/market/todayItem/todayItem.container";
 
 const settings = {
-  dots: true,
+  // dots: true,
   infinite: true,
   speed: 500,
   slidesToShow: 1,
@@ -19,6 +19,7 @@ export default function LayoutBanner() {
             <S.SlickD>Carousel Design</S.SlickD>
             <S.SlickD2>Carousel Design not yet</S.SlickD2>
             <S.SlickD2>preparing Slick111</S.SlickD2>
+            <S.CarouselImg src="/carouselImg.jpg"></S.CarouselImg>
           </S.Slick1>
           <S.Slick1>
             <S.SlickD>Carousel Design</S.SlickD>

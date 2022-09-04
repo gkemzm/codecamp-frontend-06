@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useRef } from "react";
+import { ChangeEvent, useState, useRef, Dispatch, SetStateAction } from "react";
 import { useMutation, gql } from "@apollo/client";
 import {
   IMutation,
@@ -8,6 +8,11 @@ import { checkFileValidation } from "./validation";
 import ImageSignHTML from "./imageSign.presenter";
 // import * as S from "./imageSign.styles";
 
+interface IImageSignPageProps {
+  setImageUrl: Dispatch<SetStateAction<string | undefined>>;
+  imageUrl: string;
+}
+
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
     uploadFile(file: $file) {
@@ -16,7 +21,7 @@ const UPLOAD_FILE = gql`
   }
 `;
 
-export default function ImageSignPage(props: any) {
+export default function ImageSignPage(props: IImageSignPageProps) {
   const fileRef = useRef<HTMLInputElement>(null);
   // const [imageUrl, setImageUrl] = useState<string | undefined>("");
 
@@ -40,8 +45,7 @@ export default function ImageSignPage(props: any) {
         variables: { file: myfile }, // { file: file } => { file }
       });
       console.log(result.data?.uploadFile.url);
-
-      props.setImageUrl(result.data?.uploadFile.url);
+      props.setImageUrl(result.data?.uploadFile?.url);
 
       setIsActive(true);
     } catch (error) {
